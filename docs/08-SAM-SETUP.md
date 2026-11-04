@@ -36,7 +36,7 @@ are doing it.
 | 1 | **Entitlement + plugin** for SAM (Foundation vs Professional differ substantially) | No plugin, no tables; no entitlement, no production use | `All > System Applications > All Available Applications`; probe `v_plugin` |
 | 2 | **Roles**: asset manager, SAM admin/user, plus an **integration user** for data feeds | Configuring as admin then deploying without roles = instant support tickets | Probe `sys_user_role` for `sam*` / `asset*` |
 | 3 | **Discovery data source** — SCCM, Intune, Jamf, Agent Client Collector, or Service Graph Connector | SAM's entire value is observed installs; hand-entered data proves nothing | Probe for Service Graph Connector / discovery plugins; check a sample CI has `discovery_source` |
-| 4 | **CMDB identification rules** for computer CIs | Duplicate CIs double-count installs and destroy the compliance number | `All > Configuration Management > CI Identifiers` |
+| 4 | **CMDB identification rules** for computer CI classes (a CMDB/IRE prerequisite, *not* SAM configuration — see §4) | Duplicate CIs double-count installs and destroy the compliance number | `All > Configuration Management > CI Identifiers` |
 | 5 | **Content library / publisher packs** reachable | Normalisation and publisher licence rules come from downloaded content, not from your typing | SAM admin menu → content library status; probe for content tables |
 | 6 | **Licence metric decisions** written down | Per-user vs per-device vs per-core changes the answer by millions; it is a commercial decision, not a config choice | A signed one-pager from the licence owner. Not optional |
 | 7 | **Contract and purchase-order data** (or a plan for it) | Entitlement without a PO trail fails audit | `ast_contract`, purchase records |
@@ -111,7 +111,39 @@ assumes it.
 
 ---
 
-## 4. Fields: critical vs useful vs optional
+## 4. Identity: identification rules, normalisation, metrics — three different things
+
+People say "we need identification rules for Adobe" and mean normalisation. That confusion
+costs weeks, so keep the layers apart:
+
+| Mechanism | Question it answers | Where it is configured | Applies to |
+|---|---|---|---|
+| **CI identification rules** (Identification and Reconciliation Engine, IRE) | Is this incoming CI new, or the one I already have? | CI Class Manager / CI Identifiers, per CI class | **CMDB → every CI**, including all hardware: servers, laptops, network gear. This is what **HAM** relies on |
+| **Asset↔CI reconciliation** (HAM) | Which asset record is this CI? | HAM asset sync, matched on **serial number** | Hardware assets ↔ hardware CIs — related to identification, but a separate mechanism |
+| **Software normalisation / recognition** | Is "Microsoft 365 Apps for enterprise" the same product as "Office 365 ProPlus"? | SAM normalisation, content library / publisher packs | **SAM** — this is SAM's real "identification" problem |
+| **Licence metric** | How are rights counted: per user, device, core, processor? | Entitlement record | **SAM** — commercial decision, not a technical one |
+| **Licence reconciliation** | Rights vs installs → compliance position | SAM reconciliation | **SAM** — the output you defend |
+
+**So: does it apply to SAM, HAM, or both?**
+
+- **HAM: yes, directly.** Hardware identity is the whole game: one laptop seen by SCCM, Intune
+  and a manual import must resolve to one CI, and the serial number is usually the anchor. Bad
+  identification rules give you three laptops, three assets, and an asset register nobody trusts.
+- **SAM: not directly, but fatally exposed.** There are no identification rules for software
+  products — you normalise instead. However every software install record hangs off a CI, so
+  duplicate CIs duplicate installs, and duplicate installs inflate the compliance gap. Fix CI
+  identification for the computer classes **before** you reconcile, or you will spend a week
+  explaining a shortage that is really a duplicate.
+- **Both** depend on the same underlying data quality, which is why it belongs in the SAM
+  prerequisites as a **CMDB** item — the fix is in the CMDB, not in SAM.
+
+> Practical test: if the thing you are deduplicating is *a machine*, it is IRE and lives in the
+> CMDB. If it is *a software title*, it is normalisation and lives in SAM. If it is *a quantity
+> of rights*, it is a licence metric and is a commercial decision.
+
+---
+
+## 5. Fields: critical vs useful vs optional
 
 Field names below are the conventional ones; **verify on your instance** — SAM Foundation
 and Pro differ, and admins add mandatory fields.
@@ -146,7 +178,7 @@ and Pro differ, and admins add mandatory fields.
 
 ---
 
-## 5. Metrics and dashboards that matter (and the ones that lie)
+## 6. Metrics and dashboards that matter (and the ones that lie)
 
 | Metric | Use it? | Caution |
 |---|---|---|
@@ -162,7 +194,7 @@ renewal calendar. Four is plenty; add the fifth only when someone asks.
 
 ---
 
-## 6. Guided Setup, OOB content and Success Packs — what to expect
+## 7. Guided Setup, OOB content and Success Packs — what to expect
 
 | Thing | Status | Note |
 |---|---|---|
@@ -184,7 +216,7 @@ Do not skip from Crawl to Fly because a vendor demo looked good.
 
 ---
 
-## 7. Ten mistakes that cost real money
+## 8. Ten mistakes that cost real money
 
 1. **Installing SAM and calling it done.** The plugin is 5% of the work; discovery and
    normalisation are the other 95%.
@@ -203,7 +235,7 @@ Do not skip from Crawl to Fly because a vendor demo looked good.
 
 ---
 
-## 8. Your first lab
+## 9. Your first lab
 
 `labs/LAB-03-SAM-BASELINE.md` — build a three-product baseline, reconcile it, then break it
 by changing a licence metric and watch the position flip. That last step is the one that
@@ -211,7 +243,7 @@ teaches SAM; the rest is typing.
 
 ---
 
-## 9. "Is our SAM actually set up?" — verification checklist
+## 10. "Is our SAM actually set up?" — verification checklist
 
 - [ ] Plugin active, entitlement documented
 - [ ] One discovery source feeding real installs, coverage % known
