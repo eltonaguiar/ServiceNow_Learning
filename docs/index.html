@@ -39,6 +39,11 @@
           border:1px solid color-mix(in srgb, var(--tag) 45%, transparent); border-radius:6px;
           padding:2px 7px; }
   .start { border-color:#f97316; box-shadow:0 0 0 1px #f97316 inset; }
+  .figrow { display:grid; grid-template-columns:1fr 1fr; gap:16px; padding:26px 24px 0; }
+  @media (max-width:820px) { .figrow { grid-template-columns:1fr; } }
+  .figrow a { display:block; border:1px solid var(--line); border-radius:14px; overflow:hidden;
+               background:var(--panel); }
+  .figrow img { display:block; width:100%; height:auto; }
   footer { border-top:1px solid var(--line); padding:26px 24px 60px; color:var(--muted); font-size:14px; }
   footer a { color:var(--accent); }
   code { background:#0f1a2d; padding:1px 6px; border-radius:5px; font-size:13px; }
@@ -57,6 +62,15 @@
   <span class="pill">Built for beginners</span>
   <span class="pill">Read-only probe</span>
 </div></header>
+
+<div class="figrow">
+  <a href="../infographics/learning-loop.svg" title="The 95-minute loop">
+    <img src="../infographics/learning-loop.svg" alt="The 95-minute learning loop: orient, model, practise, prove, teach">
+  </a>
+  <a href="../infographics/module-anatomy.svg" title="Module anatomy">
+    <img src="../infographics/module-anatomy.svg" alt="Every module answers the same five questions">
+  </a>
+</div>
 
 <div class="wrap layout">
   <nav class="toc">

@@ -184,8 +184,78 @@ def integration_flow() -> list[str]:
     return parts
 
 
-BUILDERS = {"loop": learning_loop, "anatomy": module_anatomy, "flow": integration_flow}
-NAMES = {"loop": "learning-loop", "anatomy": "module-anatomy", "flow": "integration-flow"}
+def sam_gates() -> list[str]:
+    w, h = 1180, 430
+    parts = svg_open(w, h) + title_block(
+        w, "Three gates stand between you and a defensible number",
+        "Miss any one of them and every compliance figure afterwards is fiction.")
+    gates = [
+        ("1 · Schema + entitlement", ["samp_* / cmdb_sam_* tables exist",
+                                      "Foundation and Pro are different products",
+                                      "Missing → there is nothing to reconcile"], ACCENTS[5]),
+        ("2 · CMDB, with identifiers", ["CI identifiers before any data load",
+                                        "Duplicates double-count installs",
+                                        "Missing → the number is inflated"], ACCENTS[1]),
+        ("3 · A discovery feed", ["SCCM, Intune, Jamf, ACC, Service Graph",
+                                  "Scoped to a pilot, verified by eye",
+                                  "Missing → an asset register, not SAM"], ACCENTS[4]),
+    ]
+    bw, bh, gap = 340, 190, 40
+    x = 40
+    for title, lines, accent in gates:
+        parts += box(x, 120, bw, bh, title, lines, accent)
+        x += bw + gap
+    parts.append(f'<rect x="40" y="338" width="1100" height="52" rx="10" fill="#1a1330" '
+                 f'stroke="{ACCENTS[5]}" stroke-opacity="0.5"/>')
+    parts.append(text(62, 370, "Score caps on a hard gate — by design: a confident number built on "
+                               "missing discovery is worse than no number.", 13.5, INK))
+    parts.append(text(40, h - 14, "scripts/sam_readiness.py scores all ten checks from probe output, "
+                                   "with a next action per row.", 11.5, "#64748b"))
+    parts.append("</svg>")
+    return parts
+
+
+def sam_order() -> list[str]:
+    w, h = 1180, 500
+    parts = svg_open(w, h) + title_block(
+        w, "SAM build order — Crawl, Walk, Run",
+        "Nine steps, each with the checkpoint that says you may continue.")
+    phases = [
+        ("Crawl — prove the loop", [("1 · Plugin + entitlement", "SAM menu exists, plugin active"),
+                                    ("2 · Guided Setup", "read all steps before running any"),
+                                    ("3 · Roles + integration user", "SAM user sees position, no schema edit")], ACCENTS[1]),
+        ("Walk — make it real", [("4 · One discovery feed", "sampled CI has real discovery_source"),
+                                 ("5 · Normalisation + content", "top-5 titles map to one product each"),
+                                 ("6 · Entitlements from POs", "every entitlement traces to a document")], ACCENTS[3]),
+        ("Run — defend the number", [("7 · Licence metrics", "metric matches contract wording"),
+                                     ("8 · Reconciliation", "top 3 exceptions explainable"),
+                                     ("9 · Dashboards + cadence", "a named person opens it weekly")], ACCENTS[4]),
+    ]
+    cw, gap = 340, 40
+    x = 40
+    for phase, steps, accent in phases:
+        parts.append(text(x, 122, phase, 14, accent, "650"))
+        y = 138
+        for i, (name, chk) in enumerate(steps):
+            parts.append(f'<rect x="{x}" y="{y}" width="{cw}" height="82" rx="10" fill="{PANEL}" '
+                         f'stroke="{accent}" stroke-opacity="0.55"/>')
+            parts.append(text(x + 14, y + 28, name, 13.5, INK, "600"))
+            parts.append(text(x + 14, y + 52, "checkpoint:", 10.5, accent))
+            parts.append(text(x + 14, y + 69, chk, 11, MUTED))
+            if i < len(steps) - 1:
+                parts.append(arrow(x + cw // 2, y + 84, x + cw // 2, y + 102))
+            y += 100
+        x += cw + gap
+    parts.append(text(40, h - 22, "Field detail, the metric traps and the ten expensive mistakes: "
+                                   "docs/08-SAM-SETUP.md", 11.5, "#64748b"))
+    parts.append("</svg>")
+    return parts
+
+
+BUILDERS = {"loop": learning_loop, "anatomy": module_anatomy, "flow": integration_flow,
+            "sam-gates": sam_gates, "sam-order": sam_order}
+NAMES = {"loop": "learning-loop", "anatomy": "module-anatomy", "flow": "integration-flow",
+         "sam-gates": "sam-readiness-gates", "sam-order": "sam-build-order"}
 
 
 def to_png(svg_path: Path) -> str:

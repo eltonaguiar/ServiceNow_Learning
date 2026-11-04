@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="430" viewBox="0 0 1180 430" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,DejaVu Sans,Arial,sans-serif">
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#64748b"/></marker>
+<marker id="arrow-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f97316"/></marker>
+</defs>
+<rect width="1180" height="430" fill="#0b1120"/>
+<text x="40" y="52" font-size="26" fill="#e5ecf7" font-weight="700" text-anchor="start">Three gates stand between you and a defensible number</text>
+<text x="40" y="80" font-size="13.5" fill="#94a3b8" font-weight="400" text-anchor="start">Miss any one of them and every compliance figure afterwards is fiction.</text>
+<rect x="40" y="120" width="340" height="190" rx="12" fill="#111c33" stroke="#f472b6" stroke-width="1.6" stroke-opacity="0.85"/>
+<rect x="40" y="120" width="340" height="4" rx="2" fill="#f472b6"/>
+<text x="56" y="152" font-size="16" fill="#e5ecf7" font-weight="650" text-anchor="start">1 · Schema + entitlement</text>
+<text x="56" y="176" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">samp_* / cmdb_sam_* tables exist</text>
+<text x="56" y="195" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">Foundation and Pro are different products</text>
+<text x="56" y="214" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">Missing → there is nothing to reconcile</text>
+<rect x="420" y="120" width="340" height="190" rx="12" fill="#111c33" stroke="#38bdf8" stroke-width="1.6" stroke-opacity="0.85"/>
+<rect x="420" y="120" width="340" height="4" rx="2" fill="#38bdf8"/>
+<text x="436" y="152" font-size="16" fill="#e5ecf7" font-weight="650" text-anchor="start">2 · CMDB, with identifiers</text>
+<text x="436" y="176" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">CI identifiers before any data load</text>
+<text x="436" y="195" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">Duplicates double-count installs</text>
+<text x="436" y="214" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">Missing → the number is inflated</text>
+<rect x="800" y="120" width="340" height="190" rx="12" fill="#111c33" stroke="#34d399" stroke-width="1.6" stroke-opacity="0.85"/>
+<rect x="800" y="120" width="340" height="4" rx="2" fill="#34d399"/>
+<text x="816" y="152" font-size="16" fill="#e5ecf7" font-weight="650" text-anchor="start">3 · A discovery feed</text>
+<text x="816" y="176" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">SCCM, Intune, Jamf, ACC, Service Graph</text>
+<text x="816" y="195" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">Scoped to a pilot, verified by eye</text>
+<text x="816" y="214" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">Missing → an asset register, not SAM</text>
+<rect x="40" y="338" width="1100" height="52" rx="10" fill="#1a1330" stroke="#f472b6" stroke-opacity="0.5"/>
+<text x="62" y="370" font-size="13.5" fill="#e5ecf7" font-weight="400" text-anchor="start">Score caps on a hard gate — by design: a confident number built on missing discovery is worse than no number.</text>
+<text x="40" y="416" font-size="11.5" fill="#64748b" font-weight="400" text-anchor="start">scripts/sam_readiness.py scores all ten checks from probe output, with a next action per row.</text>
+</svg>

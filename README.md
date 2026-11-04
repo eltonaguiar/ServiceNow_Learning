@@ -55,9 +55,20 @@ Then pick a module and run one loop. That is the whole product.
 Timeboxes are targets, not measured benchmarks. The point is to stop before diminishing
 returns and let the next session start from what you could not explain.
 
-Infographics: [`infographics/learning-loop.png`](infographics/learning-loop.png) ·
-[`infographics/module-anatomy.png`](infographics/module-anatomy.png) ·
-[`infographics/integration-flow.png`](infographics/integration-flow.png)
+### The loop, in one image
+
+![The 95-minute loop: Orient, Model, Practise, Prove, Teach, with the teach-back feeding back into Orient](infographics/learning-loop.svg)
+
+### Every module answers the same five questions
+
+![Module anatomy: record, states, who can see it, how work moves, how it is proven](infographics/module-anatomy.svg)
+
+### Three integration shapes — pick one deliberately
+
+![Outbound REST vs Remote Table vs inbound Scripted REST API, and when each wins](infographics/integration-flow.svg)
+
+All five diagrams are generated from `scripts/make_infographic.py` — SVG for diffing, PNG
+for slides: [`infographics/`](infographics).
 
 ---
 
@@ -71,6 +82,10 @@ The first module carried all the way to a defensible number:
   position for three titles with three different licence metrics, then break it on purpose.
 - Part 0-B of the lab covers instances **without** SAM entitlement (PDIs usually qualify),
   so the reasoning is learnable even when the plugin is not.
+
+![Three gates: schema and entitlement, CMDB with identification rules, a discovery feed](infographics/sam-readiness-gates.svg)
+
+![SAM build order across Crawl, Walk and Run, nine steps with checkpoints](infographics/sam-build-order.svg)
 
 ---
 
