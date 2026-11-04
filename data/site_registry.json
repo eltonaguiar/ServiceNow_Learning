@@ -8,6 +8,20 @@
   },
   {
     "section": "Start here",
+    "title": "Video guide: watch, then record",
+    "path": "docs/11-video-guide",
+    "description": "Official channels in order, then an eight-minute getting-started video scripted scene by scene for you to record on your own instance.",
+    "tag": "start"
+  },
+  {
+    "section": "Start here",
+    "title": "The full course path",
+    "path": "docs/10-course-path",
+    "description": "Every stage from orientation to CSA to one CIS, with what to do alongside each course and a ten-hour minimum path.",
+    "tag": "start"
+  },
+  {
+    "section": "Start here",
     "title": "Foundation data: the layer everyone skips",
     "path": "docs/09-foundation-data",
     "description": "Companies, locations, departments, cost centres, users, groups, business hours \u2014 the objects every module assumes exist, in dependency order.",

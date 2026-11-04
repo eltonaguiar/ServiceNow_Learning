@@ -39,6 +39,13 @@
           border:1px solid color-mix(in srgb, var(--tag) 45%, transparent); border-radius:6px;
           padding:2px 7px; }
   .start { border-color:#f97316; box-shadow:0 0 0 1px #f97316 inset; }
+  .courses table { width:100%; border-collapse:collapse; margin:14px 0 10px; font-size:14px; }
+  .courses th { text-align:left; color:var(--muted); font-size:11.5px; text-transform:uppercase;
+                 letter-spacing:.06em; padding:8px 10px; border-bottom:1px solid var(--line); }
+  .courses td { padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:top; }
+  .courses td.num { color:var(--accent); font-weight:700; width:28px; }
+  .courses td.when { color:var(--muted); white-space:nowrap; }
+  .courses .fine { color:var(--muted); font-size:13px; }
   .figrow { display:grid; grid-template-columns:1fr 1fr; gap:16px; padding:26px 24px 0; }
   @media (max-width:820px) { .figrow { grid-template-columns:1fr; } }
   .figrow a { display:block; border:1px solid var(--line); border-radius:14px; overflow:hidden;
@@ -76,8 +83,10 @@
   <nav class="toc">
     <h2>Contents</h2>
     <ul>
-      <li><a href="#start-here"><strong>Start here</strong></a></li>
-<li><ul class="sub"><li><a href="01-ELI5.html">ELI5: ServiceNow for beginners</a></li><li><a href="09-foundation-data.html">Foundation data: the layer everyone skips</a></li><li><a href="00-methodology.html">The rapid-learning methodology</a></li><li><a href="00-methodology#4-source-ladder--official-first-always.html">Official sources only</a></li></ul></li>
+      <li><a href="#courses"><strong>Courses in order</strong></a></li>
+<li><a href="#video"><strong>Video guide</strong></a></li>
+<li><a href="#start-here"><strong>Start here</strong></a></li>
+<li><ul class="sub"><li><a href="01-ELI5.html">ELI5: ServiceNow for beginners</a></li><li><a href="11-video-guide.html">Video guide: watch, then record</a></li><li><a href="10-course-path.html">The full course path</a></li><li><a href="09-foundation-data.html">Foundation data: the layer everyone skips</a></li><li><a href="00-methodology.html">The rapid-learning methodology</a></li><li><a href="00-methodology#4-source-ladder--official-first-always.html">Official sources only</a></li></ul></li>
 <li><a href="#guides"><strong>Guides</strong></a></li>
 <li><ul class="sub"><li><a href="02-success-packs.html">Success Packs and prerequisites</a></li><li><a href="03-breadcrumbs.html">Breadcrumbs: where things live</a></li><li><a href="04-fields.html">Mandatory vs useful vs optional fields</a></li><li><a href="05-common-mistakes.html">Common mistakes by symptom</a></li><li><a href="06-inventory.html">Guided Setup &amp; OOB inventory</a></li></ul></li>
 <li><a href="#applied-sam"><strong>Applied: SAM</strong></a></li>
@@ -98,9 +107,42 @@
   </nav>
 
   <main>
+    
+    <section class="courses">
+      <h2 class="sec" id="courses">Self-directed courses — in this order</h2>
+      <p>All official: Now Learning / ServiceNow University. The order matters more than the
+      list — CSA before any CIS, automation before scripting, measurement after you have
+      something worth measuring. Rationale and timings:
+      <a href="10-course-path.html">the full course path</a>.</p>
+      <table>
+        <tr><th>#</th><th>Course (search this on Now Learning)</th><th>Take it when</th><th>Do this alongside</th></tr>
+        <tr><td class="num">0</td><td><strong>Welcome to ServiceNow</strong></td><td class="when">Day 0 · 1–2 h</td><td><a href="01-ELI5.html">the vocabulary</a></td></tr>
+<tr><td class="num">1</td><td><strong>ServiceNow Fundamentals (free)</strong></td><td class="when">First 10 hours</td><td><a href="labs/LAB-00-ORIENTATION.html">Lab 00</a></td></tr>
+<tr><td class="num">2</td><td><strong>ServiceNow Administration Fundamentals</strong></td><td class="when">Before any admin work</td><td><a href="09-foundation-data.html">foundation data + Lab 04</a></td></tr>
+<tr><td class="num">3</td><td><strong>Certified System Administrator (CSA) path + exam</strong></td><td class="when">After 1–2 · gates every CIS</td><td><a href="00-methodology.html">the loop, one module at a time</a></td></tr>
+<tr><td class="num">4</td><td><strong>Flow Designer Fundamentals</strong></td><td class="when">Before your first script</td><td><a href="06-inventory.html">find the OOB flow first</a></td></tr>
+<tr><td class="num">5</td><td><strong>Scripting in ServiceNow Fundamentals</strong></td><td class="when">After flows, not before</td><td><a href="labs/LAB-01-REST-MESSAGE.html">Lab 01, option B</a></td></tr>
+<tr><td class="num">6</td><td><strong>App Engine Studio / Application Development</strong></td><td class="when">When you must build an app</td><td><a href="labs/LAB-02-REMOTE-TABLE.html">Lab 02</a></td></tr>
+<tr><td class="num">7</td><td><strong>IntegrationHub Fundamentals</strong></td><td class="when">Before any integration</td><td><a href="labs/LAB-01-REST-MESSAGE.html">Lab 01 end-to-end</a></td></tr>
+<tr><td class="num">8</td><td><strong>Platform / Performance Analytics Fundamentals</strong></td><td class="when">Once there is data worth measuring</td><td><a href="06-inventory.html">indicators that matter</a></td></tr>
+<tr><td class="num">9</td><td><strong>One CIS only — ITSM, ITAM/SAM, CSM, HRSD, SecOps, FSM, Discovery</strong></td><td class="when">When your role is clear</td><td><a href="08-SAM-SETUP.html">the SAM track if that is you</a></td></tr>
+      </table>
+      <p class="fine">Only ten hours? Fundamentals → Lab 00 → the first half of Flow Designer →
+      one module brief plus its lab. That is enough to be genuinely useful in a team meeting.</p>
+
+      <h2 class="sec" id="video">Video guide — watch in order, then record eight minutes</h2>
+      <p>Official video first (<code>@ServiceNow</code> and <code>@ServiceNowDevProgram</code>,
+      plus the video lessons inside the courses above), each paired with one action. Then
+      record your own eight-minute getting-started video from the scene-by-scene script in
+      <a href="11-video-guide.html">docs/11-video-guide.md</a> — narrating a table
+      relationship you cannot explain is impossible, which is exactly why it works as a test.</p>
+    </section>
+    
     <h2 id="start-here">Start here</h2>
 <div class="grid">
 <a class="card" href="01-ELI5.html"><span class="tag" style="--tag:#38bdf8">guide</span><h3>ELI5: ServiceNow for beginners</h3><p>The building-and-filing-cabinet analogy, a 30-minute first session, and a glossary that defines every term before it is used.</p></a>
+<a class="card" href="11-video-guide.html"><span class="tag" style="--tag:#f97316">start</span><h3>Video guide: watch, then record</h3><p>Official channels in order, then an eight-minute getting-started video scripted scene by scene for you to record on your own instance.</p></a>
+<a class="card" href="10-course-path.html"><span class="tag" style="--tag:#f97316">start</span><h3>The full course path</h3><p>Every stage from orientation to CSA to one CIS, with what to do alongside each course and a ten-hour minimum path.</p></a>
 <a class="card" href="09-foundation-data.html"><span class="tag" style="--tag:#f97316">start</span><h3>Foundation data: the layer everyone skips</h3><p>Companies, locations, departments, cost centres, users, groups, business hours — the objects every module assumes exist, in dependency order.</p></a>
 <a class="card" href="00-methodology.html"><span class="tag" style="--tag:#a78bfa">method</span><h3>The rapid-learning methodology</h3><p>Five gates in 95 minutes: orient, model, practise, prove, teach. Why that order, and what each gate must produce.</p></a>
 <a class="card" href="00-methodology#4-source-ladder--official-first-always.html"><span class="tag" style="--tag:#22d3ee">sources</span><h3>Official sources only</h3><p>Docs, Now Create, Now Learning, Developer PDI, Community, Store, Support — and the ToS rules that keep you out of trouble.</p></a>

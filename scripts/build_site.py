@@ -26,6 +26,10 @@ UPDATED = "2026-11-04"
 PAGES = [
     ("Start here", "ELI5: ServiceNow for beginners", "docs/01-ELI5",
      "The building-and-filing-cabinet analogy, a 30-minute first session, and a glossary that defines every term before it is used.", "guide"),
+    ("Start here", "Video guide: watch, then record", "docs/11-video-guide",
+     "Official channels in order, then an eight-minute getting-started video scripted scene by scene for you to record on your own instance.", "start"),
+    ("Start here", "The full course path", "docs/10-course-path",
+     "Every stage from orientation to CSA to one CIS, with what to do alongside each course and a ten-hour minimum path.", "start"),
     ("Start here", "Foundation data: the layer everyone skips", "docs/09-foundation-data",
      "Companies, locations, departments, cost centres, users, groups, business hours — the objects every module assumes exist, in dependency order.", "start"),
     ("Start here", "The rapid-learning methodology", "docs/00-methodology",
@@ -62,6 +66,21 @@ PAGES = [
      "scripts/sn_probe.js reads your instance: mandatory fields, related lists, guided setup, flows, SAM presence. Read-only.", "tool"),
     ("Toolkit", "sn_learn.py — briefs, plans, quizzes", "docs/generated/brief-itsm-incident",
      "Renders a timeboxed study brief per module from the knowledge base. Example output included.", "tool"),
+]
+
+# Ordered self-directed curriculum. Kept here (not only in markdown) so the landing page
+# shows it above the fold; docs/10-course-path.md carries the rationale and timings.
+COURSES = [
+    ("0", "Welcome to ServiceNow", "Day 0 · 1–2 h", "docs/01-ELI5", "the vocabulary"),
+    ("1", "ServiceNow Fundamentals (free)", "First 10 hours", "labs/LAB-00-ORIENTATION", "Lab 00"),
+    ("2", "ServiceNow Administration Fundamentals", "Before any admin work", "docs/09-foundation-data", "foundation data + Lab 04"),
+    ("3", "Certified System Administrator (CSA) path + exam", "After 1–2 · gates every CIS", "docs/00-methodology", "the loop, one module at a time"),
+    ("4", "Flow Designer Fundamentals", "Before your first script", "docs/06-inventory", "find the OOB flow first"),
+    ("5", "Scripting in ServiceNow Fundamentals", "After flows, not before", "labs/LAB-01-REST-MESSAGE", "Lab 01, option B"),
+    ("6", "App Engine Studio / Application Development", "When you must build an app", "labs/LAB-02-REMOTE-TABLE", "Lab 02"),
+    ("7", "IntegrationHub Fundamentals", "Before any integration", "labs/LAB-01-REST-MESSAGE", "Lab 01 end-to-end"),
+    ("8", "Platform / Performance Analytics Fundamentals", "Once there is data worth measuring", "docs/06-inventory", "indicators that matter"),
+    ("9", "One CIS only — ITSM, ITAM/SAM, CSM, HRSD, SecOps, FSM, Discovery", "When your role is clear", "docs/08-SAM-SETUP", "the SAM track if that is you"),
 ]
 
 TAG_COLOR = {
@@ -113,7 +132,37 @@ def page(strip_docs: bool) -> str:
             )
         cards.append("</div>")
 
-    toc_html = "\n".join(toc_items)
+    toc_html = ('<li><a href="#courses"><strong>Courses in order</strong></a></li>\n'
+                '<li><a href="#video"><strong>Video guide</strong></a></li>\n' + "\n".join(toc_items))
+
+    course_rows = "\n".join(
+        f'<tr><td class="num">{n}</td><td><strong>{esc(title)}</strong></td>'
+        f'<td class="when">{esc(when)}</td>'
+        f'<td><a href="{esc(ref(path))}">{esc(companion)}</a></td></tr>'
+        for n, title, when, path, companion in COURSES)
+
+    course_block = f"""
+    <section class="courses">
+      <h2 class="sec" id="courses">Self-directed courses — in this order</h2>
+      <p>All official: Now Learning / ServiceNow University. The order matters more than the
+      list — CSA before any CIS, automation before scripting, measurement after you have
+      something worth measuring. Rationale and timings:
+      <a href="{esc(ref('docs/10-course-path'))}">the full course path</a>.</p>
+      <table>
+        <tr><th>#</th><th>Course (search this on Now Learning)</th><th>Take it when</th><th>Do this alongside</th></tr>
+        {course_rows}
+      </table>
+      <p class="fine">Only ten hours? Fundamentals → Lab 00 → the first half of Flow Designer →
+      one module brief plus its lab. That is enough to be genuinely useful in a team meeting.</p>
+
+      <h2 class="sec" id="video">Video guide — watch in order, then record eight minutes</h2>
+      <p>Official video first (<code>@ServiceNow</code> and <code>@ServiceNowDevProgram</code>,
+      plus the video lessons inside the courses above), each paired with one action. Then
+      record your own eight-minute getting-started video from the scene-by-scene script in
+      <a href="{esc(ref('docs/11-video-guide'))}">docs/11-video-guide.md</a> — narrating a table
+      relationship you cannot explain is impossible, which is exactly why it works as a test.</p>
+    </section>
+    """
     body = "\n".join(cards)
 
     return f"""<!doctype html>
@@ -157,6 +206,13 @@ def page(strip_docs: bool) -> str:
           border:1px solid color-mix(in srgb, var(--tag) 45%, transparent); border-radius:6px;
           padding:2px 7px; }}
   .start {{ border-color:#f97316; box-shadow:0 0 0 1px #f97316 inset; }}
+  .courses table {{ width:100%; border-collapse:collapse; margin:14px 0 10px; font-size:14px; }}
+  .courses th {{ text-align:left; color:var(--muted); font-size:11.5px; text-transform:uppercase;
+                 letter-spacing:.06em; padding:8px 10px; border-bottom:1px solid var(--line); }}
+  .courses td {{ padding:9px 10px; border-bottom:1px solid var(--line); vertical-align:top; }}
+  .courses td.num {{ color:var(--accent); font-weight:700; width:28px; }}
+  .courses td.when {{ color:var(--muted); white-space:nowrap; }}
+  .courses .fine {{ color:var(--muted); font-size:13px; }}
   .figrow {{ display:grid; grid-template-columns:1fr 1fr; gap:16px; padding:26px 24px 0; }}
   @media (max-width:820px) {{ .figrow {{ grid-template-columns:1fr; }} }}
   .figrow a {{ display:block; border:1px solid var(--line); border-radius:14px; overflow:hidden;
@@ -207,6 +263,7 @@ def page(strip_docs: bool) -> str:
   </nav>
 
   <main>
+    {course_block}
     {body}
 
     <h2 class="sec" id="how-to-read">How to use this in an afternoon</h2>

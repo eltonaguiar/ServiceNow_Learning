@@ -5,6 +5,37 @@
 **Website:** <https://eltonaguiar.github.io/ServiceNow_Learning/>
 **SAM track:** <https://github.com/eltonaguiar/ServiceNow_Learning_SAM>
 
+## Start here — the courses, in order
+
+Self-directed, all official (Now Learning / ServiceNow University), in the order that stops
+you taking a specialisation course before you can use it. Full rationale and timings:
+[`docs/10-course-path.md`](docs/10-course-path.md).
+
+| # | Course (search this on Now Learning) | Take it when | Do this at the same time |
+|---|---|---|---|
+| 0 | **Welcome to ServiceNow** | day 0, 1–2 h | [`01-ELI5.md`](docs/01-ELI5.md) |
+| 1 | **ServiceNow Fundamentals** (free) | first 10 hours | [`LAB-00-ORIENTATION.md`](labs/LAB-00-ORIENTATION.md) |
+| 2 | **ServiceNow Administration Fundamentals** | before any admin work | [`09-foundation-data.md`](docs/09-foundation-data.md) + [`LAB-04`](labs/LAB-04-FOUNDATION-DATA.md) |
+| 3 | **Certified System Administrator (CSA)** path + exam | after 1 and 2 — it gates every CIS | the whole kit, one module at a time |
+| 4 | **Flow Designer Fundamentals** | before you write your first script | [`06-inventory.md`](docs/06-inventory.md) — find the OOB flow first |
+| 5 | **Scripting in ServiceNow Fundamentals** | after flows, not before | [`LAB-01`](labs/LAB-01-REST-MESSAGE.md) Part 3B |
+| 6 | **App Engine Studio / Application Development Fundamentals** | when you must build an app | [`LAB-02-REMOTE-TABLE.md`](labs/LAB-02-REMOTE-TABLE.md) |
+| 7 | **IntegrationHub Fundamentals** | before any integration work | [`LAB-01-REST-MESSAGE.md`](labs/LAB-01-REST-MESSAGE.md) |
+| 8 | **Performance Analytics / Platform Analytics Fundamentals** | once there is data worth measuring | [`06-inventory.md`](docs/06-inventory.md) §metrics |
+| 9 | **One CIS only** — CIS-ITSM, CIS-ITAM/SAM, CIS-CSM, CIS-HRSD, CIS-SecOps, CIS-FSM, CIS-Discovery | when your role is clear, not before | [`08-SAM-SETUP.md`](docs/08-SAM-SETUP.md) if that is your track |
+
+> Only 10 hours? Fundamentals → Lab 00 → the first half of Flow Designer → one module brief
+> plus its lab. That is enough to be genuinely useful in a team meeting.
+
+### Video guide
+
+Official video in order (`@ServiceNow`, `@ServiceNowDevProgram`, plus the video lessons inside
+the courses above), and an 8-minute getting-started video **scripted for you to record** on
+your own instance — storyboard, narration, delivery notes:
+[`docs/11-video-guide.md`](docs/11-video-guide.md).
+
+---
+
 ServiceNow is one platform wearing dozens of costumes. ITSM, HRSD, SecOps, CSM, FSM, SAM and
 IRM are the same machinery — tables, states, roles, routing, proof — pointed at different
 records. This repository teaches the machinery **once**, then gives you a repeatable loop to
