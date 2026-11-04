@@ -96,6 +96,7 @@ happens.
 | [`scripts/sn_sheet.py`](scripts/sn_sheet.py) | Renders probe JSON into a study sheet with a gap list against the knowledge base |
 | [`scripts/sn_learn.py`](scripts/sn_learn.py) | `list`, `brief`, `plan`, `quiz`, `sources` over `data/modules.json` — a timeboxed brief per module |
 | [`scripts/make_infographic.py`](scripts/make_infographic.py) | Regenerates the three infographics as SVG (+ PNG when a converter exists) |
+| [`scripts/sam_readiness.py`](scripts/sam_readiness.py) | Scores an instance's real SAM readiness from probe output — ten checks, each with a next action |
 | [`scripts/build_site.py`](scripts/build_site.py) | Regenerates the GitHub Pages landing pages |
 | [`scripts/sn_lint.py`](scripts/sn_lint.py) | Enforces this repo's rules: stamps, dates, official-source allowlist, live links, valid KB |
 
