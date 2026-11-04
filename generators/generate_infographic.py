@@ -1,0 +1,110 @@
+#!/usr/bin/env python3
+"""
+generate_infographic.py — Auto-generate SVG/HTML infographics for ServiceNow topics
+
+Agent: Hermes Agent
+Date: 2026-11-04
+"""
+
+import argparse
+import sys
+from datetime import datetime
+from pathlib import Path
+
+
+def generate_infographic(topic: str, output_dir: str = "infographics") -> str:
+    """Generate an SVG infographic for the given topic."""
+
+    date_str = datetime.now().strftime("%Y-%m-%d")
+    safe_topic = topic.lower().replace(" ", "_").replace("/", "_")
+    filename = f"{safe_topic}_infographic_{date_str}.svg"
+    filepath = Path(output_dir) / filename
+
+    svg = f'''<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <!-- ServiceNow Learning Infographic: {topic} -->
+  <!-- Agent: Hermes Agent | Date: {date_str} -->
+  
+  <!-- Background -->
+  <rect width="1200" height="800" fill="#f8fafc"/>
+  
+  <!-- Title Bar -->
+  <rect x="40" y="40" width="1120" height="80" rx="10" fill="#0066cc"/>
+  <text x="60" y="80" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white">{topic}</text>
+  <text x="60" y="105" font-family="Arial, sans-serif" font-size="14" fill="#e0e0e0">ELI5: A ServiceNow concept explained simply</text>
+  
+  <!-- Flow Diagram (left side) -->
+  <rect x="40" y="160" width="540" height="560" rx="10" fill="#ffffff" stroke="#0066cc" stroke-width="2"/>
+  <text x="60" y="190" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#0066cc">How It Works</text>
+  
+  <!-- Step boxes -->
+  <g>
+    <rect x="60" y="220" width="160" height="60" rx="5" fill="#e3f2fd" stroke="#0066cc"/>
+    <text x="140" y="255" font-family="Arial, sans-serif" font-size="14" fill="#0066cc">Step 1</text>
+    <text x="140" y="275" font-family="Arial, sans-serif" font-size="12" fill="#333">Decompose</text>
+    
+    <rect x="240" y="220" width="160" height="60" rx="5" fill="#e3f2fd" stroke="#0066cc"/>
+    <text x="320" y="255" font-family="Arial, sans-serif" font-size="14" fill="#0066cc">Step 2</text>
+    <text x="320" y="275" font-family="Arial, sans-serif" font-size="12" fill="#333">ELI5</text>
+    
+    <rect x="60" y="300" width="160" height="60" rx="5" fill="#e3f2fd" stroke="#0066cc"/>
+    <text x="140" y="335" font-family="Arial, sans-serif" font-size="14" fill="#0066cc">Step 3</text>
+    <text x="140" y="355" font-family="Arial, sans-serif" font-size="12" fill="#333">Breadcrumbs</text>
+    
+    <rect x="240" y="300" width="160" height="60" rx="5" fill="#e3f2fd" stroke="#0066cc"/>
+    <text x="320" y="335" font-family="Arial, sans-serif" font-size="14" fill="#0066cc">Step 4</text>
+    <text x="320" y="355" font-family="Arial, sans-serif" font-size="12" fill="#333">Classify</text>
+  </g>
+  
+  <!-- Arrows -->
+  <line x1="220" y1="250" x2="240" y2="250" stroke="#0066cc" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="400" y1="250" x2="60" y2="330" stroke="#0066cc" stroke-width="2" marker-end="url(#arrowhead)"/>
+  <line x1="220" y1="330" x2="240" y2="330" stroke="#0066cc" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#0066cc"/>
+    </marker>
+  </defs>
+  
+  <!-- Field Classification (right side, top) -->
+  <rect x="600" y="160" width="560" height="260" rx="10" fill="#ffffff" stroke="#0066cc" stroke-width="2"/>
+  <text x="620" y="190" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#0066cc">Field Classification</text>
+  <text x="620" y="220" font-family="Arial, sans-serif" font-size="14" fill="#ff0000">■ CRITICAL</text>
+  <text x="680" y="220" font-family="Arial, sans-serif" font-size="14" fill="#333">Without it, nothing works</text>
+  <text x="620" y="250" font-family="Arial, sans-serif" font-size="14" fill="#ff9900">■ MANDATORY</text>
+  <text x="700" y="250" font-family="Arial, sans-serif" font-size="14" fill="#333">Required to save</text>
+  <text x="620" y="280" font-family="Arial, sans-serif" font-size="14" fill="#ffcc00">■ OPTIONAL</text>
+  <text x="700" y="280" font-family="Arial, sans-serif" font-size="14" fill="#333">Nice to have</text>
+  
+  <!-- Mistake Warnings (right side, middle) -->
+  <rect x="600" y="440" width="560" height="260" rx="10" fill="#fff5f5" stroke="#ff4444" stroke-width="2"/>
+  <text x="620" y="470" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#ff4444">⚠ Common Mistakes</text>
+  <text x="620" y="500" font-family="Arial, sans-serif" font-size="14" fill="#333">1. Forgetting HTTP method</text>
+  <text x="620" y="530" font-family="Arial, sans-serif" font-size="14" fill="#333">2. Wrong authentication type</text>
+  <text x="620" y="560" font-family="Arial, sans-serif" font-size="14" fill="#333">3. Not setting Active = true</text>
+  <text x="620" y="590" font-family="Arial, sans-serif" font-size="14" fill="#333">4. Not handling empty responses</text>
+  <text x="620" y="620" font-family="Arial, sans-serif" font-size="14" fill="#333">5. Missing caller_id on Incident</text>
+  
+  <!-- Breadcrumb Path (bottom) -->
+  <rect x="40" y="740" width="1120" height="40" rx="5" fill="#e3f2fd" stroke="#0066cc"/>
+  <text x="60" y="765" font-family="Arial, sans-serif" font-size="14" fill="#0066cc">Breadcrumb: System Web Services > Outbound > REST Messages > New</text>
+  
+</svg>'''
+
+    filepath.write_text(svg)
+    return str(filepath)
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Generate ServiceNow infographic")
+    parser.add_argument("--topic", required=True, help="ServiceNow topic for the infographic")
+    parser.add_argument("--output", default="infographics", help="Output directory")
+    args = parser.parse_args()
+
+    filepath = generate_infographic(args.topic, args.output)
+    print(f"Infographic generated: {filepath}")
+
+
+if __name__ == "__main__":
+    main()

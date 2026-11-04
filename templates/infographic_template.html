@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[TOPIC] — ServiceNow Learning Infographic</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f8fafc; }
+  .infographic { max-width: 1200px; margin: 0 auto; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+  .title-bar { background: #0066cc; color: white; padding: 20px; }
+  .title-bar h1 { margin: 0; font-size: 28px; }
+  .title-bar p { margin: 5px 0 0; font-size: 14px; color: #e0e0e0; }
+  .content { display: flex; padding: 20px; gap: 20px; }
+  .flow-panel { flex: 1; background: #ffffff; border: 2px solid #0066cc; border-radius: 8px; padding: 15px; }
+  .flow-panel h2 { color: #0066cc; margin-top: 0; }
+  .steps { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
+  .step { background: #e3f2fd; border: 1px solid #0066cc; border-radius: 5px; padding: 10px; text-align: center; }
+  .step-number { font-weight: bold; color: #0066cc; }
+  .classification-panel { flex: 1; background: #ffffff; border: 2px solid #0066cc; border-radius: 8px; padding: 15px; }
+  .classification-panel h2 { color: #0066cc; margin-top: 0; }
+  .field-row { display: flex; gap: 10px; margin: 8px 0; padding: 8px; background: #f1f5f9; border-radius: 4px; }
+  .critical { border-left: 4px solid #ff0000; }
+  .mandatory { border-left: 4px solid #ff9900; }
+  .optional { border-left: 4px solid #ffcc00; }
+  .mistake-panel { flex: 1; background: #fff5f5; border: 2px solid #ff4444; border-radius: 8px; padding: 15px; }
+  .mistake-panel h2 { color: #ff4444; margin-top: 0; }
+  .mistake-list { list-style: none; padding: 0; }
+  .mistake-list li { margin: 8px 0; padding: 8px; background: #fff; border-radius: 4px; border-left: 3px solid #ff4444; }
+  .breadcrumb { background: #e3f2fd; border: 1px solid #0066cc; border-radius: 5px; padding: 12px; margin-top: 20px; font-family: monospace; }
+</style>
+</head>
+<body>
+  <div class="infographic">
+    <div class="title-bar">
+      <h1>[TOPIC]</h1>
+      <p>ELI5: A ServiceNow concept explained simply</p>
+    </div>
+    <div class="content">
+      <div class="flow-panel">
+        <h2>How It Works</h2>
+        <div class="steps">
+          <div class="step"><div class="step-number">1</div><div>Decompose</div></div>
+          <div class="step"><div class="step-number">2</div><div>ELI5</div></div>
+          <div class="step"><div class="step-number">3</div><div>Breadcrumbs</div></div>
+          <div class="step"><div class="step-number">4</div><div>Classify</div></div>
+        </div>
+      </div>
+      <div class="classification-panel">
+        <h2>Field Classification</h2>
+        <div class="field-row critical"><span style="font-weight:bold; color:#ff0000">CRITICAL</span> <span>[field name]</span></div>
+        <div class="field-row mandatory"><span style="font-weight:bold; color:#ff9900">MANDATORY</span> <span>[field name]</span></div>
+        <div class="field-row optional"><span style="font-weight:bold; color:#ffcc00">OPTIONAL</span> <span>[field name]</span></div>
+      </div>
+      <div class="mistake-panel">
+        <h2>⚠ Common Mistakes</h2>
+        <ul class="mistake-list">
+          <li>[Mistake 1 description]</li>
+          <li>[Mistake 2 description]</li>
+          <li>[Mistake 3 description]</li>
+        </ul>
+      </div>
+    </div>
+    <div class="breadcrumb">
+      Breadcrumb: [Menu] > [Module] > [Sub-module] > [Record] > [Field]
+    </div>
+  </div>
+</body>
+</html>
