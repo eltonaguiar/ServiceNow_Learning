@@ -1,0 +1,107 @@
+[
+  {
+    "section": "Start here",
+    "title": "ELI5: ServiceNow for beginners",
+    "path": "docs/01-ELI5",
+    "description": "The building-and-filing-cabinet analogy, a 30-minute first session, and a glossary that defines every term before it is used.",
+    "tag": "guide"
+  },
+  {
+    "section": "Start here",
+    "title": "The rapid-learning methodology",
+    "path": "docs/00-methodology",
+    "description": "Five gates in 95 minutes: orient, model, practise, prove, teach. Why that order, and what each gate must produce.",
+    "tag": "method"
+  },
+  {
+    "section": "Start here",
+    "title": "Official sources only",
+    "path": "docs/00-methodology#4-source-ladder--official-first-always",
+    "description": "Docs, Now Create, Now Learning, Developer PDI, Community, Store, Support \u2014 and the ToS rules that keep you out of trouble.",
+    "tag": "sources"
+  },
+  {
+    "section": "Guides",
+    "title": "Success Packs and prerequisites",
+    "path": "docs/02-success-packs",
+    "description": "Now Create's Crawl \u2192 Walk \u2192 Run \u2192 Fly sequencing, how to read a pack in 20 minutes, and per-app prerequisites that actually bite.",
+    "tag": "guide"
+  },
+  {
+    "section": "Guides",
+    "title": "Breadcrumbs: where things live",
+    "path": "docs/03-breadcrumbs",
+    "description": "The 12 bookmarks that cover most work, plus exact paths per module \u2014 with the table name, because menus move.",
+    "tag": "nav"
+  },
+  {
+    "section": "Guides",
+    "title": "Mandatory vs useful vs optional fields",
+    "path": "docs/04-fields",
+    "description": "Three kinds of 'required', the four related lists worth adding today, and per-table field guidance.",
+    "tag": "fields"
+  },
+  {
+    "section": "Guides",
+    "title": "Common mistakes by symptom",
+    "path": "docs/05-common-mistakes",
+    "description": "Symptom \u2192 real cause \u2192 fix. Starts with 'it works for me but not for them', ends with the five that waste the most hours.",
+    "tag": "fix"
+  },
+  {
+    "section": "Guides",
+    "title": "Guided Setup & OOB inventory",
+    "path": "docs/06-inventory",
+    "description": "What ships out of the box per app \u2014 guided setup, flows, playbooks, spokes, metrics \u2014 and how to enumerate yours in five minutes.",
+    "tag": "oob"
+  },
+  {
+    "section": "Applied: SAM",
+    "title": "SAM setup guide",
+    "path": "docs/08-SAM-SETUP",
+    "description": "The applied module: prerequisites, the nine-step build order, field matrix, metrics that lie, and ten mistakes that cost money.",
+    "tag": "sam"
+  },
+  {
+    "section": "Applied: SAM",
+    "title": "SAM baseline lab",
+    "path": "labs/LAB-03-SAM-BASELINE",
+    "description": "Build one defensible compliance number for three titles with three different licence metrics \u2014 then break it on purpose.",
+    "tag": "sam"
+  },
+  {
+    "section": "Labs",
+    "title": "Lab 00 \u2014 orientation (30 min)",
+    "path": "labs/LAB-00-ORIENTATION",
+    "description": "Zero-risk first session: navigation, forms as records, dictionary-mandatory vs UI-policy-mandatory, impersonation.",
+    "tag": "lab"
+  },
+  {
+    "section": "Labs",
+    "title": "Lab 01 \u2014 REST Message that does something",
+    "path": "labs/LAB-01-REST-MESSAGE",
+    "description": "Call a real API, turn the answer into an incident with a dedupe guard, build the inbound direction, then break it five ways.",
+    "tag": "lab"
+  },
+  {
+    "section": "Labs",
+    "title": "Lab 02 \u2014 practical Remote Table",
+    "path": "labs/LAB-02-REMOTE-TABLE",
+    "description": "Expose a REST API as a read-only table, use it in a report, and learn exactly where the illusion breaks.",
+    "tag": "lab"
+  },
+  {
+    "section": "Toolkit",
+    "title": "The probe (make your instance the truth)",
+    "path": "docs/07-probe",
+    "description": "scripts/sn_probe.js reads your instance: mandatory fields, related lists, guided setup, flows, SAM presence. Read-only.",
+    "tag": "tool"
+  },
+  {
+    "section": "Toolkit",
+    "title": "sn_learn.py \u2014 briefs, plans, quizzes",
+    "path": "docs/generated/brief-itsm-incident",
+    "description": "Renders a timeboxed study brief per module from the knowledge base. Example output included.",
+    "tag": "tool"
+  }
+]

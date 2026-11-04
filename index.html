@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ServiceNow Learning — rapid, official-source-first</title>
+<meta name="description" content="A 95-minute loop for learning any ServiceNow module, with beginner guides, SAM setup, labs and a read-only instance probe.">
+<style>
+  :root { --bg:#0b1120; --panel:#111c33; --ink:#e5ecf7; --muted:#94a3b8; --line:#1f2c47; --accent:#38bdf8; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink);
+         font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+  a { color:var(--accent); }
+  header { padding:56px 24px 28px; border-bottom:1px solid var(--line);
+            background:radial-gradient(900px 300px at 15% -10%, #16304f 0%, transparent 70%); }
+  .wrap { max-width:1180px; margin:0 auto; }
+  .kicker { color:var(--muted); letter-spacing:.14em; text-transform:uppercase; font-size:12px; }
+  h1 { font-size:clamp(28px,4vw,44px); margin:10px 0 12px; line-height:1.15; }
+  .lede { color:var(--muted); max-width:70ch; margin:0 0 18px; }
+  .pill { display:inline-block; border:1px solid var(--line); border-radius:999px;
+           padding:4px 12px; margin:0 8px 8px 0; font-size:13px; color:var(--muted); }
+  .layout { display:grid; grid-template-columns:260px 1fr; gap:40px; padding:32px 24px 80px; }
+  @media (max-width:900px) { .layout { grid-template-columns:1fr; } nav.toc { position:static; } }
+  nav.toc { position:sticky; top:24px; align-self:start; border:1px solid var(--line);
+             border-radius:14px; padding:18px; background:var(--panel); }
+  nav.toc h2 { font-size:13px; text-transform:uppercase; letter-spacing:.12em; color:var(--muted); margin:0 0 10px; }
+  nav.toc ul { list-style:none; margin:0; padding:0; }
+  nav.toc li { margin:6px 0; font-size:14px; }
+  nav.toc .sub { padding-left:12px; border-left:1px solid var(--line); margin:6px 0 12px; }
+  nav.toc .sub li { font-size:13px; }
+  h2.sec { margin:36px 0 14px; font-size:22px; }
+  .grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:14px; }
+  .card { display:block; text-decoration:none; color:inherit; background:var(--panel);
+           border:1px solid var(--line); border-radius:14px; padding:18px; transition:.15s; }
+  .card:hover { border-color:var(--accent); transform:translateY(-2px); }
+  .card h3 { margin:8px 0 6px; font-size:16px; color:var(--ink); }
+  .card p { margin:0; color:var(--muted); font-size:13.5px; }
+  .tag { font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--tag);
+          border:1px solid color-mix(in srgb, var(--tag) 45%, transparent); border-radius:6px;
+          padding:2px 7px; }
+  .start { border-color:#f97316; box-shadow:0 0 0 1px #f97316 inset; }
+  footer { border-top:1px solid var(--line); padding:26px 24px 60px; color:var(--muted); font-size:14px; }
+  footer a { color:var(--accent); }
+  code { background:#0f1a2d; padding:1px 6px; border-radius:5px; font-size:13px; }
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="kicker">ServiceNow Learning · agent buffy · mimo-v2.6-flash · 2026-11-04</div>
+  <h1>Learn any ServiceNow module in 95 minutes — and prove it</h1>
+  <p class="lede">ServiceNow is one platform wearing dozens of costumes. This kit teaches the
+  machine once — tables, states, roles, routing, proof — then gives you a timeboxed loop,
+  beginner guides, applied SAM setup, hands-on labs, and a read-only probe that turns your
+  own instance into the source of truth.</p>
+  <span class="pill">Official sources first</span>
+  <span class="pill">Crawl → Walk → Run → Fly</span>
+  <span class="pill">Built for beginners</span>
+  <span class="pill">Read-only probe</span>
+</div></header>
+
+<div class="wrap layout">
+  <nav class="toc">
+    <h2>Contents</h2>
+    <ul>
+      <li><a href="#start-here"><strong>Start here</strong></a></li>
+<li><ul class="sub"><li><a href="docs/01-ELI5.html">ELI5: ServiceNow for beginners</a></li><li><a href="docs/00-methodology.html">The rapid-learning methodology</a></li><li><a href="docs/00-methodology#4-source-ladder--official-first-always.html">Official sources only</a></li></ul></li>
+<li><a href="#guides"><strong>Guides</strong></a></li>
+<li><ul class="sub"><li><a href="docs/02-success-packs.html">Success Packs and prerequisites</a></li><li><a href="docs/03-breadcrumbs.html">Breadcrumbs: where things live</a></li><li><a href="docs/04-fields.html">Mandatory vs useful vs optional fields</a></li><li><a href="docs/05-common-mistakes.html">Common mistakes by symptom</a></li><li><a href="docs/06-inventory.html">Guided Setup &amp; OOB inventory</a></li></ul></li>
+<li><a href="#applied-sam"><strong>Applied: SAM</strong></a></li>
+<li><ul class="sub"><li><a href="docs/08-SAM-SETUP.html">SAM setup guide</a></li><li><a href="labs/LAB-03-SAM-BASELINE.html">SAM baseline lab</a></li></ul></li>
+<li><a href="#labs"><strong>Labs</strong></a></li>
+<li><ul class="sub"><li><a href="labs/LAB-00-ORIENTATION.html">Lab 00 — orientation (30 min)</a></li><li><a href="labs/LAB-01-REST-MESSAGE.html">Lab 01 — REST Message that does something</a></li><li><a href="labs/LAB-02-REMOTE-TABLE.html">Lab 02 — practical Remote Table</a></li></ul></li>
+<li><a href="#toolkit"><strong>Toolkit</strong></a></li>
+<li><ul class="sub"><li><a href="docs/07-probe.html">The probe (make your instance the truth)</a></li><li><a href="docs/generated/brief-itsm-incident.html">sn_learn.py — briefs, plans, quizzes</a></li></ul></li>
+    </ul>
+    <h2 style="margin-top:20px">Links</h2>
+    <ul>
+      <li><a href="https://github.com/eltonaguiar/ServiceNow_Learning">GitHub repository</a></li>
+      <li><a href="https://github.com/eltonaguiar/ServiceNow_Learning/tree/buffy-mimo-v2.6-flash-2026-11-04">This branch</a></li>
+      <li><a href="https://github.com/eltonaguiar/ServiceNow_Learning/blob/buffy-mimo-v2.6-flash-2026-11-04/README.md">README</a></li>
+      <li><a href="https://github.com/eltonaguiar/ServiceNow_Learning/issues">Issues / feedback</a></li>
+      <li><a href="https://github.com/eltonaguiar/ServiceNow_Learning_SAM">SAM track repository</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <h2 id="start-here">Start here</h2>
+<div class="grid">
+<a class="card" href="docs/01-ELI5.html"><span class="tag" style="--tag:#38bdf8">guide</span><h3>ELI5: ServiceNow for beginners</h3><p>The building-and-filing-cabinet analogy, a 30-minute first session, and a glossary that defines every term before it is used.</p></a>
+<a class="card" href="docs/00-methodology.html"><span class="tag" style="--tag:#a78bfa">method</span><h3>The rapid-learning methodology</h3><p>Five gates in 95 minutes: orient, model, practise, prove, teach. Why that order, and what each gate must produce.</p></a>
+<a class="card" href="docs/00-methodology#4-source-ladder--official-first-always.html"><span class="tag" style="--tag:#22d3ee">sources</span><h3>Official sources only</h3><p>Docs, Now Create, Now Learning, Developer PDI, Community, Store, Support — and the ToS rules that keep you out of trouble.</p></a>
+</div>
+<h2 id="guides">Guides</h2>
+<div class="grid">
+<a class="card" href="docs/02-success-packs.html"><span class="tag" style="--tag:#38bdf8">guide</span><h3>Success Packs and prerequisites</h3><p>Now Create&#x27;s Crawl → Walk → Run → Fly sequencing, how to read a pack in 20 minutes, and per-app prerequisites that actually bite.</p></a>
+<a class="card" href="docs/03-breadcrumbs.html"><span class="tag" style="--tag:#4ade80">nav</span><h3>Breadcrumbs: where things live</h3><p>The 12 bookmarks that cover most work, plus exact paths per module — with the table name, because menus move.</p></a>
+<a class="card" href="docs/04-fields.html"><span class="tag" style="--tag:#fbbf24">fields</span><h3>Mandatory vs useful vs optional fields</h3><p>Three kinds of &#x27;required&#x27;, the four related lists worth adding today, and per-table field guidance.</p></a>
+<a class="card" href="docs/05-common-mistakes.html"><span class="tag" style="--tag:#fb7185">fix</span><h3>Common mistakes by symptom</h3><p>Symptom → real cause → fix. Starts with &#x27;it works for me but not for them&#x27;, ends with the five that waste the most hours.</p></a>
+<a class="card" href="docs/06-inventory.html"><span class="tag" style="--tag:#60a5fa">oob</span><h3>Guided Setup &amp; OOB inventory</h3><p>What ships out of the box per app — guided setup, flows, playbooks, spokes, metrics — and how to enumerate yours in five minutes.</p></a>
+</div>
+<h2 id="applied-sam">Applied: SAM</h2>
+<div class="grid">
+<a class="card" href="docs/08-SAM-SETUP.html"><span class="tag" style="--tag:#f472b6">sam</span><h3>SAM setup guide</h3><p>The applied module: prerequisites, the nine-step build order, field matrix, metrics that lie, and ten mistakes that cost money.</p></a>
+<a class="card" href="labs/LAB-03-SAM-BASELINE.html"><span class="tag" style="--tag:#f472b6">sam</span><h3>SAM baseline lab</h3><p>Build one defensible compliance number for three titles with three different licence metrics — then break it on purpose.</p></a>
+</div>
+<h2 id="labs">Labs</h2>
+<div class="grid">
+<a class="card" href="labs/LAB-00-ORIENTATION.html"><span class="tag" style="--tag:#34d399">lab</span><h3>Lab 00 — orientation (30 min)</h3><p>Zero-risk first session: navigation, forms as records, dictionary-mandatory vs UI-policy-mandatory, impersonation.</p></a>
+<a class="card" href="labs/LAB-01-REST-MESSAGE.html"><span class="tag" style="--tag:#34d399">lab</span><h3>Lab 01 — REST Message that does something</h3><p>Call a real API, turn the answer into an incident with a dedupe guard, build the inbound direction, then break it five ways.</p></a>
+<a class="card" href="labs/LAB-02-REMOTE-TABLE.html"><span class="tag" style="--tag:#34d399">lab</span><h3>Lab 02 — practical Remote Table</h3><p>Expose a REST API as a read-only table, use it in a report, and learn exactly where the illusion breaks.</p></a>
+</div>
+<h2 id="toolkit">Toolkit</h2>
+<div class="grid">
+<a class="card" href="docs/07-probe.html"><span class="tag" style="--tag:#94a3b8">tool</span><h3>The probe (make your instance the truth)</h3><p>scripts/sn_probe.js reads your instance: mandatory fields, related lists, guided setup, flows, SAM presence. Read-only.</p></a>
+<a class="card" href="docs/generated/brief-itsm-incident.html"><span class="tag" style="--tag:#94a3b8">tool</span><h3>sn_learn.py — briefs, plans, quizzes</h3><p>Renders a timeboxed study brief per module from the knowledge base. Example output included.</p></a>
+</div>
+
+    <h2 class="sec" id="how-to-read">How to use this in an afternoon</h2>
+    <p>       <strong>1.</strong> Read <a href="docs/01-ELI5.html">the ELI5 guide</a> (20 min).
+       <strong>2.</strong> Get a free PDI at
+       <a href="https://developer.servicenow.com/dev.do">developer.servicenow.com</a> and run
+       <a href="labs/LAB-00-ORIENTATION.html">Lab 00</a> (30 min).
+       <strong>3.</strong> Pick one module, render its brief with
+       <code>python3 scripts/sn_learn.py brief itsm-incident</code>, and run the loop.
+       <strong>4.</strong> For SAM specifically, start at
+       <a href="docs/08-SAM-SETUP.html">the SAM setup guide</a>.</p>
+
+    <h2 class="sec" id="honesty">What is verified, and what is not</h2>
+    <p>Every guide cites official ServiceNow sources and links out rather than copying them.
+    Menu paths, field lists and "does guided setup exist" are marked <em>verify</em> wherever
+    they vary by release and entitlement — the probe resolves them against your instance.
+    Timeboxes are targets, not measured benchmarks. Nothing here has been executed against a
+    licensed SAM instance: the SAM material is documentation-grounded, and the lab says so.</p>
+  </main>
+</div>
+
+<footer><div class="wrap">
+  Built by <strong>buffy</strong> (mimo-v2.6-flash) on branch
+  <code>buffy-mimo-v2.6-flash-2026-11-04</code>, 2026-11-04. Content is paraphrased guidance with links to
+  <a href="https://www.servicenow.com/docs/">official documentation</a>,
+  <a href="https://learning.servicenow.com/lxp">Now Learning / Now Create</a>,
+  <a href="https://developer.servicenow.com/dev.do">the developer portal</a> and
+  <a href="https://community.servicenow.com/">Community</a>. No ServiceNow content is mirrored here.
+  <br>Start here: <a href="https://github.com/eltonaguiar/ServiceNow_Learning">github.com/eltonaguiar/ServiceNow_Learning</a>
+</div></footer>
+</body>
+</html>

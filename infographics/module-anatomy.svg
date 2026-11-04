@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="520" viewBox="0 0 1180 520" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,DejaVu Sans,Arial,sans-serif">
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#64748b"/></marker>
+<marker id="arrow-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f97316"/></marker>
+</defs>
+<rect width="1180" height="520" fill="#0b1120"/>
+<text x="40" y="52" font-size="26" fill="#e5ecf7" font-weight="700" text-anchor="start">Every module answers the same five questions</text>
+<text x="40" y="80" font-size="13.5" fill="#94a3b8" font-weight="400" text-anchor="start">Learn the machine once; a new module then costs an hour, not a week.</text>
+<rect x="40" y="118" width="1100" height="62" rx="10" fill="#111c33" stroke="#1f2c47"/>
+<rect x="40" y="118" width="5" height="62" rx="2.5" fill="#38bdf8"/>
+<text x="62" y="156" font-size="15.5" fill="#e5ecf7" font-weight="600" text-anchor="start">What is the record?</text>
+<rect x="420" y="136" width="94" height="26" rx="13" fill="#0f1a2d" stroke="#38bdf8" stroke-opacity="0.5"/>
+<text x="467" y="154" font-size="12" fill="#94a3b8" font-weight="400" text-anchor="middle">incident</text>
+<rect x="524" y="136" width="148" height="26" rx="13" fill="#0f1a2d" stroke="#38bdf8" stroke-opacity="0.5"/>
+<text x="598" y="154" font-size="12" fill="#94a3b8" font-weight="400" text-anchor="middle">change_request</text>
+<rect x="682" y="136" width="157" height="26" rx="13" fill="#0f1a2d" stroke="#38bdf8" stroke-opacity="0.5"/>
+<text x="760" y="154" font-size="12" fill="#94a3b8" font-weight="400" text-anchor="middle">sn_hr_core_case</text>
+<rect x="849" y="136" width="94" height="26" rx="13" fill="#0f1a2d" stroke="#38bdf8" stroke-opacity="0.5"/>
+<text x="896" y="154" font-size="12" fill="#94a3b8" font-weight="400" text-anchor="middle">wm_order</text>
+<rect x="40" y="190" width="1100" height="62" rx="10" fill="#111c33" stroke="#1f2c47"/>
+<rect x="40" y="190" width="5" height="62" rx="2.5" fill="#a78bfa"/>
+<text x="62" y="228" font-size="15.5" fill="#e5ecf7" font-weight="600" text-anchor="start">What are the states?</text>
+<rect x="420" y="208" width="274" height="26" rx="13" fill="#0f1a2d" stroke="#a78bfa" stroke-opacity="0.5"/>
+<text x="557" y="226" font-size="12" fill="#94a3b8" font-weight="400" text-anchor="middle">new → in progress → resolved</text>
+<rect x="704" y="208" width="256" height="26" rx="13" fill="#0f1a2d" stroke="#a78bfa" stroke-opacity="0.5"/>
+<text x="832" y="226" font-size="12" fill="#94a3b8" font-weight="400" text-anchor="middle">drives SLA, flows, metrics</text>
+<rect x="40" y="262" width="1100" height="62" rx="10" fill="#111c33" stroke="#1f2c47"/>
+<rect x="40" y="262" width="5" height="62" rx="2.5" fill="#22d3ee"/>
+<text x="62" y="300" font-size="15.5" fill="#e5ecf7" font-weight="600" text-anchor="start">Who can see it?</text>
+<rect x="420" y="280" width="90" height="26" rx="13" fill="#0f1a2d" stroke="#22d3ee" stroke-opacity="0.5"/>
+<text x="465" y="298" font-size="12" fill="#94a3b8" font-weight="400" text-anchor="middle">itil</text>
+<rect x="520" y="280" width="175" height="26" rx="13" fill="#0f1a2d" stroke="#22d3ee" stroke-opacity="0.5"/>
+<text x="607" y="298" font-size="12" fill="#94a3b8" font-weight="400" text-anchor="middle">sn_incident_write</text>
+<rect x="705" y="280" width="220" height="26" rx="13" fill="#0f1a2d" stroke="#22d3ee" stroke-opacity="0.5"/>
+<text x="815" y="298" font-size="12" fill="#94a3b8" font-weight="400" text-anchor="middle">sn_hr_core.case_writer</text>
+<rect x="935" y="280" width="90" height="26" rx="13" fill="#0f1a2d" stroke="#22d3ee" stroke-opacity="0.5"/>
+<text x="980" y="298" font-size="12" fill="#94a3b8" font-weight="400" text-anchor="middle">ACLs</text>
+<rect x="40" y="334" width="1100" height="62" rx="10" fill="#111c33" stroke="#1f2c47"/>
+<rect x="40" y="334" width="5" height="62" rx="2.5" fill="#34d399"/>
+<text x="62" y="372" font-size="15.5" fill="#e5ecf7" font-weight="600" text-anchor="start">How does work move?</text>
+<rect x="420" y="352" width="175" height="26" rx="13" fill="#0f1a2d" stroke="#34d399" stroke-opacity="0.5"/>
+<text x="507" y="370" font-size="12" fill="#94a3b8" font-weight="400" text-anchor="middle">assignment groups</text>
+<rect x="605" y="352" width="103" height="26" rx="13" fill="#0f1a2d" stroke="#34d399" stroke-opacity="0.5"/>
+<text x="656" y="370" font-size="12" fill="#94a3b8" font-weight="400" text-anchor="middle">approvals</text>
+<rect x="718" y="352" width="90" height="26" rx="13" fill="#0f1a2d" stroke="#34d399" stroke-opacity="0.5"/>
+<text x="763" y="370" font-size="12" fill="#94a3b8" font-weight="400" text-anchor="middle">flows</text>
+<rect x="818" y="352" width="103" height="26" rx="13" fill="#0f1a2d" stroke="#34d399" stroke-opacity="0.5"/>
+<text x="869" y="370" font-size="12" fill="#94a3b8" font-weight="400" text-anchor="middle">playbooks</text>
+<rect x="40" y="406" width="1100" height="62" rx="10" fill="#111c33" stroke="#1f2c47"/>
+<rect x="40" y="406" width="5" height="62" rx="2.5" fill="#f97316"/>
+<text x="62" y="444" font-size="15.5" fill="#e5ecf7" font-weight="600" text-anchor="start">How is it proven?</text>
+<rect x="420" y="424" width="103" height="26" rx="13" fill="#0f1a2d" stroke="#f97316" stroke-opacity="0.5"/>
+<text x="471" y="442" font-size="12" fill="#94a3b8" font-weight="400" text-anchor="middle">indicator</text>
+<rect x="533" y="424" width="103" height="26" rx="13" fill="#0f1a2d" stroke="#f97316" stroke-opacity="0.5"/>
+<text x="584" y="442" font-size="12" fill="#94a3b8" font-weight="400" text-anchor="middle">breakdown</text>
+<rect x="646" y="424" width="103" height="26" rx="13" fill="#0f1a2d" stroke="#f97316" stroke-opacity="0.5"/>
+<text x="697" y="442" font-size="12" fill="#94a3b8" font-weight="400" text-anchor="middle">dashboard</text>
+<rect x="759" y="424" width="94" height="26" rx="13" fill="#0f1a2d" stroke="#f97316" stroke-opacity="0.5"/>
+<text x="806" y="442" font-size="12" fill="#94a3b8" font-weight="400" text-anchor="middle">task_sla</text>
+<text x="40" y="494" font-size="12" fill="#64748b" font-weight="400" text-anchor="start">If you cannot answer all five from memory, you have read about the module — you have not learned it.</text>
+</svg>

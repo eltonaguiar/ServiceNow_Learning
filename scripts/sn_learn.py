@@ -139,7 +139,7 @@ def brief(kb: dict, sources: dict, mod: dict) -> str:
     lines += [f"- {m}" for m in mod.get("mistakes", [])]
     lines += ["", "## Labs", ""]
     labs = mod.get("labs") or []
-    lines += [f"- [`{l}`](../{l})" for l in labs] if labs else ["- (no lab mapped yet — build one and add it to `data/modules.json`)"]
+    lines += [f"- [`{l}`](../../{l})" for l in labs] if labs else ["- (no lab mapped yet — build one and add it to `data/modules.json`)"]
     lines += [
         "",
         "## Timebox",
@@ -151,7 +151,7 @@ def brief(kb: dict, sources: dict, mod: dict) -> str:
         f"| Practice | {tb.get('practice','?')} | the lab works, and you broke it once and fixed it |",
         f"| Prove | {tb.get('prove','?')} | the quiz answered from memory + probe sheet attached |",
         "",
-        "## Official sources to read (in this order)",
+        "## Official sources",
         "",
         f"1. Docs (search): {docs_url(sources, mod['id'])}",
         "2. Now Learning: https://learning.servicenow.com/lxp — search the module name; free fundamentals first",

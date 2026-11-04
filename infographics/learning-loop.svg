@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="460" viewBox="0 0 1180 460" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,DejaVu Sans,Arial,sans-serif">
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#64748b"/></marker>
+<marker id="arrow-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f97316"/></marker>
+</defs>
+<rect width="1180" height="460" fill="#0b1120"/>
+<text x="40" y="52" font-size="26" fill="#e5ecf7" font-weight="700" text-anchor="start">The 95-minute loop</text>
+<text x="40" y="80" font-size="13.5" fill="#94a3b8" font-weight="400" text-anchor="start">One module, five gates. Artifacts are the unit of progress — not hours watched.</text>
+<rect x="40" y="130" width="200" height="150" rx="12" fill="#111c33" stroke="#38bdf8" stroke-width="1.6" stroke-opacity="0.85"/>
+<rect x="40" y="130" width="200" height="4" rx="2" fill="#38bdf8"/>
+<text x="56" y="162" font-size="16" fill="#e5ecf7" font-weight="650" text-anchor="start">1 · Orient</text>
+<text x="56" y="186" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">10 min</text>
+<text x="56" y="205" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">Filter navigator + 3 lists</text>
+<text x="56" y="224" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">Artifact: 3 breadcrumbs</text>
+<line x1="243" y1="205" x2="259" y2="205" stroke="#64748b" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="262" y="130" width="200" height="150" rx="12" fill="#111c33" stroke="#a78bfa" stroke-width="1.6" stroke-opacity="0.85"/>
+<rect x="262" y="130" width="200" height="4" rx="2" fill="#a78bfa"/>
+<text x="278" y="162" font-size="16" fill="#e5ecf7" font-weight="650" text-anchor="start">2 · Model</text>
+<text x="278" y="186" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">20 min</text>
+<text x="278" y="205" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">Tables, states, roles</text>
+<text x="278" y="224" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">Artifact: one page + diagram</text>
+<line x1="465" y1="205" x2="481" y2="205" stroke="#64748b" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="484" y="130" width="200" height="150" rx="12" fill="#111c33" stroke="#22d3ee" stroke-width="1.6" stroke-opacity="0.85"/>
+<rect x="484" y="130" width="200" height="4" rx="2" fill="#22d3ee"/>
+<text x="500" y="162" font-size="16" fill="#e5ecf7" font-weight="650" text-anchor="start">3 · Practise</text>
+<text x="500" y="186" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">45 min</text>
+<text x="500" y="205" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">Lab, then break it</text>
+<text x="500" y="224" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">Artifact: fix + 'what broke'</text>
+<line x1="687" y1="205" x2="703" y2="205" stroke="#64748b" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="706" y="130" width="200" height="150" rx="12" fill="#111c33" stroke="#34d399" stroke-width="1.6" stroke-opacity="0.85"/>
+<rect x="706" y="130" width="200" height="4" rx="2" fill="#34d399"/>
+<text x="722" y="162" font-size="16" fill="#e5ecf7" font-weight="650" text-anchor="start">4 · Prove</text>
+<text x="722" y="186" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">10 min</text>
+<text x="722" y="205" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">Probe sheet + quiz</text>
+<text x="722" y="224" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">Artifact: probe.json diff</text>
+<line x1="909" y1="205" x2="925" y2="205" stroke="#64748b" stroke-width="1.6" marker-end="url(#arrow)"/>
+<rect x="928" y="130" width="200" height="150" rx="12" fill="#111c33" stroke="#f97316" stroke-width="1.6" stroke-opacity="0.85"/>
+<rect x="928" y="130" width="200" height="4" rx="2" fill="#f97316"/>
+<text x="944" y="162" font-size="16" fill="#e5ecf7" font-weight="650" text-anchor="start">5 · Teach</text>
+<text x="944" y="186" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">10 min</text>
+<text x="944" y="205" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">5 sentences + diagram</text>
+<text x="944" y="224" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">Artifact: teach-back note</text>
+<path d="M 1028 294 L 1028 326 L 140 326 L 140 296" fill="none" stroke="#f472b6" stroke-width="1.6" stroke-dasharray="6 5" marker-end="url(#arrow)"/>
+<text x="590" y="362" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="middle">Teach-back exposes the gap → next day starts at Orient</text>
+<text x="40" y="436" font-size="11.5" fill="#64748b" font-weight="400" text-anchor="start">Targets, not measured benchmarks. Stop at the timebox; unfinished work becomes tomorrow's first gate.</text>
+</svg>

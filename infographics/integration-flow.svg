@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="470" viewBox="0 0 1180 470" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,DejaVu Sans,Arial,sans-serif">
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#64748b"/></marker>
+<marker id="arrow-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#f97316"/></marker>
+</defs>
+<rect width="1180" height="470" fill="#0b1120"/>
+<text x="40" y="52" font-size="26" fill="#e5ecf7" font-weight="700" text-anchor="start">Three integration shapes — pick one deliberately</text>
+<text x="40" y="80" font-size="13.5" fill="#94a3b8" font-weight="400" text-anchor="start">The most common design error is choosing the wrong row for the data's behaviour.</text>
+<rect x="40" y="118" width="340" height="250" rx="12" fill="#111c33" stroke="#38bdf8" stroke-width="1.6" stroke-opacity="0.85"/>
+<rect x="40" y="118" width="340" height="4" rx="2" fill="#38bdf8"/>
+<text x="56" y="150" font-size="16" fill="#e5ecf7" font-weight="650" text-anchor="start">Outbound REST</text>
+<text x="56" y="174" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">ServiceNow calls an API</text>
+<text x="56" y="193" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">REST Message / Flow REST step</text>
+<text x="56" y="212" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">Can read AND write</text>
+<text x="56" y="231" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">Log: sys_outbound_http_log</text>
+<text x="56" y="272" font-size="12" fill="#38bdf8" font-weight="600" text-anchor="start">Use it for:</text>
+<text x="56" y="294" font-size="12" fill="#94a3b8" font-weight="400" text-anchor="start">· Tickets ↔ vendor system</text>
+<text x="56" y="312" font-size="12" fill="#94a3b8" font-weight="400" text-anchor="start">· Trigger actions from data</text>
+<text x="56" y="330" font-size="12" fill="#94a3b8" font-weight="400" text-anchor="start">· Scheduled syncs</text>
+<rect x="420" y="118" width="340" height="250" rx="12" fill="#111c33" stroke="#a78bfa" stroke-width="1.6" stroke-opacity="0.85"/>
+<rect x="420" y="118" width="340" height="4" rx="2" fill="#a78bfa"/>
+<text x="436" y="150" font-size="16" fill="#e5ecf7" font-weight="650" text-anchor="start">Remote Table</text>
+<text x="436" y="174" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">An API appears as a table</text>
+<text x="436" y="193" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">Read-only view, live</text>
+<text x="436" y="212" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">No writes, no local joins</text>
+<text x="436" y="231" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">Cost: one HTTP call per query</text>
+<text x="436" y="272" font-size="12" fill="#a78bfa" font-weight="600" text-anchor="start">Use it for:</text>
+<text x="436" y="294" font-size="12" fill="#94a3b8" font-weight="400" text-anchor="start">· Reference data, rarely changing</text>
+<text x="436" y="312" font-size="12" fill="#94a3b8" font-weight="400" text-anchor="start">· Vendor directories</text>
+<text x="436" y="330" font-size="12" fill="#94a3b8" font-weight="400" text-anchor="start">· Small lookups</text>
+<rect x="800" y="118" width="340" height="250" rx="12" fill="#111c33" stroke="#34d399" stroke-width="1.6" stroke-opacity="0.85"/>
+<rect x="800" y="118" width="340" height="4" rx="2" fill="#34d399"/>
+<text x="816" y="150" font-size="16" fill="#e5ecf7" font-weight="650" text-anchor="start">Inbound API</text>
+<text x="816" y="174" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">The world calls ServiceNow</text>
+<text x="816" y="193" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">Scripted REST API</text>
+<text x="816" y="212" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">You control validation</text>
+<text x="816" y="231" font-size="12.5" fill="#94a3b8" font-weight="400" text-anchor="start">Auth: OAuth / basic + ACLs</text>
+<text x="816" y="272" font-size="12" fill="#34d399" font-weight="600" text-anchor="start">Use it for:</text>
+<text x="816" y="294" font-size="12" fill="#94a3b8" font-weight="400" text-anchor="start">· Webhooks from SaaS</text>
+<text x="816" y="312" font-size="12" fill="#94a3b8" font-weight="400" text-anchor="start">· External portals</text>
+<text x="816" y="330" font-size="12" fill="#94a3b8" font-weight="400" text-anchor="start">· Event ingestion</text>
+<line x1="384" y1="240" x2="414" y2="240" stroke="#475569" stroke-width="1.4" stroke-dasharray="5 5" marker-end="url(#arrow)"/>
+<line x1="764" y1="240" x2="794" y2="240" stroke="#475569" stroke-width="1.4" stroke-dasharray="5 5" marker-end="url(#arrow)"/>
+<text x="40" y="442" font-size="12" fill="#64748b" font-weight="400" text-anchor="start">Read rarely and live → remote table.  Read often and join → scheduled import.  Must write → REST + flow.</text>
+</svg>
