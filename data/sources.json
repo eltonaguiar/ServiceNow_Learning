@@ -1,0 +1,140 @@
+{
+  "_meta": {
+    "title": "Official ServiceNow source catalog",
+    "agent": "buffy",
+    "model": "mimo-v2.6-flash",
+    "created": "2026-11-04",
+    "verified": "2026-11-04 — HTTP status checked from this environment (see status_2026_11_04)",
+    "rule": "A topic is not learned until it has been read on an official ServiceNow source and confirmed on an instance. Blogs, videos and third-party courses are allowed only AFTER that, and are never the citation of record.",
+    "tos": "Read manually, summarise in your own words, cite the URL. Do NOT bulk-scrape, crawl, mirror, or republish ServiceNow content. This repo deliberately contains zero scraped pages: the only automated fetching is a 7-request HTTP status check on the base URLs below.",
+    "check_with": "python3 scripts/sn_learn.py sources --check"
+  },
+  "allowlisted_domains": [
+    "www.servicenow.com",
+    "servicenow.com",
+    "docs.servicenow.com",
+    "learning.servicenow.com",
+    "nowlearning.servicenow.com",
+    "community.servicenow.com",
+    "developer.servicenow.com",
+    "support.servicenow.com",
+    "store.servicenow.com",
+    "nowcreate.servicenow.com"
+  ],
+  "ladder": [
+    {
+      "rank": 1,
+      "name": "Product documentation",
+      "url": "https://www.servicenow.com/docs/",
+      "alias": "docs.servicenow.com",
+      "use_for": "Configuration steps, architecture, release notes, field and table definitions, plugin names, guided-setup step lists.",
+      "access": "public",
+      "status_2026_11_04": "200 (301 from docs.servicenow.com → www.servicenow.com/docs/)",
+      "canonical_note": "Docs are versioned per release: /docs/bundle/<release>-<product>/page/... The release segment changes every family release — prefer the docs search URL over a hardcoded deep path."
+    },
+    {
+      "rank": 2,
+      "name": "Now Create (Success Packs)",
+      "url": "https://learning.servicenow.com/lxp",
+      "alias": "nowcreate.servicenow.com",
+      "search_term": "Now Create",
+      "use_for": "Success Packs: process guides, starter stories, implementation insights, architecture blueprints and recommended sequencing (Crawl → Walk → Run → Fly). The closest thing to an official 'how to implement this app correctly' package.",
+      "access": "reached via Now Learning / ServiceNow University (search \"Now Create\"); nowcreate.servicenow.com itself wants a partner/customer login and returned no response from this sandbox on 2026-11-04",
+      "status_2026_11_04": "learning.servicenow.com 200; nowcreate.servicenow.com 000 (blocked/timeout — known-good URL, unverified here)",
+      "note": "If you only do one thing beyond the docs, do this: the Success Pack sequence is the difference between a working deployment and a rebuild."
+    },
+    {
+      "rank": 3,
+      "name": "ServiceNow University / Now Learning",
+      "url": "https://learning.servicenow.com/lxp",
+      "alias": "nowlearning.servicenow.com/lxp",
+      "use_for": "Official courses, learning paths, free on-demand content, certification paths (CSA → CAD → CIS-ITSM/FSM/...), simulation labs.",
+      "access": "free account; some content requires a partner/customer login",
+      "status_2026_11_04": "200 (301 from nowlearning.servicenow.com/lxp)"
+    },
+    {
+      "rank": 4,
+      "name": "Developer portal + Personal Developer Instance (PDI)",
+      "url": "https://developer.servicenow.com/dev.do",
+      "use_for": "The free instance you practise on, API Explorer (try REST calls live), official sample code, developer learning plans.",
+      "access": "free ServiceNow developer account",
+      "status_2026_11_04": "200",
+      "why_it_matters": "Every lab in this repo assumes a PDI. No PDI, no proof — reading is not learning."
+    },
+    {
+      "rank": 5,
+      "name": "ServiceNow Community",
+      "url": "https://community.servicenow.com/",
+      "alias": "www.servicenow.com/community",
+      "use_for": "Real-world gotchas, 'what we wish we knew', employee and partner posts, screenshots when docs are silent.",
+      "access": "public read",
+      "status_2026_11_04": "200 (redirects to www.servicenow.com/community/)",
+      "note": "Peer content. Never authoritative — confirm on your instance before you teach it."
+    },
+    {
+      "rank": 6,
+      "name": "ServiceNow Store",
+      "url": "https://store.servicenow.com/store",
+      "use_for": "App documentation and activation notes, which plugin/entitlement a capability needs, certified apps and spokes.",
+      "access": "public browse",
+      "status_2026_11_04": "302 → /store (reachable)"
+    },
+    {
+      "rank": 7,
+      "name": "Now Support / Knowledge Base",
+      "url": "https://support.servicenow.com/now",
+      "use_for": "Official KBs, troubleshooting, known errors, patch/release advisories.",
+      "access": "login usually required",
+      "status_2026_11_04": "302 → /now (reachable)"
+    }
+  ],
+  "tos_rules": {
+    "allowed": [
+      "Reading public documentation, Community posts, free Now Learning content and Developer site material",
+      "Writing your own beginner-friendly summaries, outlines and setup guides for personal or internal use",
+      "Reasonable copies of documentation for internal business use tied to your authorised ServiceNow use",
+      "Citing URLs with your own paraphrase"
+    ],
+    "not_allowed": [
+      "Automated scraping, spiders or bulk crawling of ServiceNow sites",
+      "Republishing large chunks of copyrighted material verbatim",
+      "Selling guides that are mostly copied ServiceNow content",
+      "Mirroring docs into a repo"
+    ],
+    "how_this_repo_complies": [
+      "No crawler or scraper ships here. scripts/sn_probe.js reads YOUR instance via your own login.",
+      "The only network calls are a 7-request HTTP status check in `sn_learn.py sources --check`.",
+      "Every doc paraphrases and links out; nothing is a doc mirror."
+    ]
+  },
+  "per_module_docs_search": {
+    "note": "Deep bundle paths embed the release name, so link the docs SEARCH query for a module rather than a fixed page. Replace spaces with +.",
+    "pattern": "https://www.servicenow.com/docs/search?q=<query>",
+    "queries": {
+      "platform-basics": "tables+and+columns+dictionary",
+      "itsm-incident": "incident+management+states+priority",
+      "itsm-problem-change": "change+management+types+approval",
+      "itom-cmdb": "cmdb+identification+rules+health",
+      "itam": "asset+management+license+reconciliation",
+      "hrsd": "hr+service+delivery+case+confidentiality",
+      "secops": "security+incident+response+playbook",
+      "grc-irm": "integrated+risk+management+entity+scoping",
+      "csm": "customer+service+management+entitlement",
+      "fsm": "field+service+management+work+order+scheduling",
+      "app-engine": "app+engine+studio+scoped+application",
+      "integration": "rest+message+remote+table+scripted+rest+api",
+      "analytics": "performance+analytics+indicator+breakdown"
+    }
+  },
+  "study_order": [
+    "1. Docs page for the module — skim the structure only (5 min); write down the 3 table names you saw",
+    "2. Now Learning course for that module, if one exists — 1.5x speed, no notes, just timestamps of 'aha' moments",
+    "3. PDI probe: run scripts/sn_probe.js, render the sheet (this repo) — now you know what YOUR instance actually has",
+    "4. Lab: do the hands-on thing, break it on purpose, fix it",
+    "5. Now Create Success Pack for the app — read prerequisites + acceptance criteria, compare with what you just built",
+    "6. Now Support KB: search the two errors you actually hit",
+    "7. Community: only for gaps the official sources left open",
+    "8. Teach-back: 5 sentences + one diagram from memory, then correct against the docs"
+  ],
+  "citation_format": "> Source: <official URL> (read <YYYY-MM-DD>)"
+}
