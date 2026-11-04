@@ -1,0 +1,689 @@
+{
+  "_meta": {
+    "title": "ServiceNow rapid-learning knowledge base",
+    "version": "1.0.0",
+    "agent": "buffy",
+    "model": "mimo-v2.6-flash",
+    "created": "2026-11-04",
+    "rules": [
+      "Every breadcrumb here is a STARTING POINT, not a guarantee. Menu labels move between releases and with which plugins are installed.",
+      "Any entry with \"confidence\": \"verify\" must be confirmed on your own instance with scripts/sn_probe.js before you teach it to anyone.",
+      "Field mandatory-ness is instance-specific: admins add UI policies and dictionary overrides. The probe reads sys_dictionary and reports what YOUR instance actually enforces."
+    ]
+  },
+  "modules": [
+    {
+      "id": "platform-basics",
+      "name": "Platform basics (Module 0 — do this first)",
+      "app": "Platform",
+      "confidence": "high",
+      "why": "Every other module is the same machinery with different tables. Learn the machinery once and each new module costs you about an hour instead of a week.",
+      "primary_table": "sys_user",
+      "tables": ["sys_user", "sys_user_group", "sys_user_role", "sys_dictionary", "sys_db_object", "sys_app_module", "sys_hub_flow", "sys_ws_definition", "sys_properties"],
+      "roles": ["admin", "itil", "snc_internal"],
+      "breadcrumbs": [
+        "Filter navigator (top-left, type-anywhere) — your real navigation, faster than clicking menus",
+        "All > System Definition > Tables & Columns  (sys_db_object + sys_dictionary: the map of everything)",
+        "All > System Definition > Application Menus  (sys_app_module: why a menu item exists / where it points)",
+        "All > System Applications > All Available Applications  (what is installed, and what is available to install)",
+        "All > User Administration > Users  (sys_user: impersonate a persona to see their menus)",
+        "Profile avatar (top-right) > Impersonate user  (the single most useful learning tool on the platform)"
+      ],
+      "guided_setup": {"available": false, "note": "Platform itself has no guided setup; each application ships its own (see other modules)."},
+      "oob": {
+        "flows": ["Flow Designer: All > Process Automation > Flow Designer"],
+        "playbooks": ["All > Process Automation > Process Automation Designer"],
+        "integrations": ["IntegrationHub spokes: All > Process Automation > Integrations (per-spoke modules appear after install)"],
+        "metrics": ["Platform Analytics: All > Platform Analytics (release-dependent label; older: Performance Analytics)"],
+        "dashboards": ["All > Platform Analytics > Dashboards / Library"]
+      },
+      "fields": {
+        "critical": [
+          {"field": "sys_user.user_name", "why": "Login id; impersonation and approvals hinge on it."},
+          {"field": "sys_user.active", "why": "Inactive users still resolve in history but cannot log in; never delete, deactivate."},
+          {"field": "sys_user_group.name", "why": "Assignment groups are the unit of routing in every ITSM table."},
+          {"field": "sys_dictionary.mandatory", "why": "The real answer to 'which fields are required' — read it, do not guess."}
+        ],
+        "useful": ["sys_user.title", "sys_user.manager", "sys_user_group.manager", "sys_user_group.parent", "sys_properties.value"],
+        "optional": ["sys_user.photo", "sys_user.preferred_language"],
+        "related_lists": ["sys_user > Roles", "sys_user > Groups", "sys_user_group > Members", "sys_user_group > Roles"]
+      },
+      "must_know": [
+        "A record is a row; a field is a column; a table extends another table (incident extends task, which extends sys_...base).",
+        "Lists are filtered views of a table; a form is one record; a related list is another table filtered to this record.",
+        "Almost everything you see is a record in a table. 'Where does this come from?' is answered by Tables & Columns, not by memory.",
+        "Dev → Test → Prod is a promotion path, not three copies of your homework. Never experiment in prod."
+      ],
+      "mistakes": [
+        "Learning by clicking menus instead of the filter navigator (10x slower, and you never learn the table name).",
+        "Skipping impersonation, so you never see the UI the actual user sees.",
+        "Assuming your instance looks like the docs screenshot — release + plugins + theme all change it."
+      ],
+      "labs": ["labs/LAB-00-ORIENTATION.md"],
+      "timebox_min": {"orient": 15, "model": 20, "practice": 30, "prove": 10},
+      "quiz": [
+        "Which table holds the field definitions for the incident table?",
+        "How do you find the table behind any list you are looking at?",
+        "What is the difference between a role and a group?"
+      ]
+    },
+    {
+      "id": "itsm-incident",
+      "name": "Incident Management",
+      "app": "ITSM",
+      "confidence": "high",
+      "why": "The reference implementation of the whole platform: states, assignment, SLA, notifications, approvals-lite. Learn it and every other process module is a variation.",
+      "primary_table": "incident",
+      "tables": ["incident", "task", "task_sla", "sys_user", "sys_user_group", "cmdb_ci", "kb_knowledge"],
+      "roles": ["itil", "sn_incident_read", "sn_incident_write", "admin"],
+      "breadcrumbs": [
+        "All > Incident > Create New",
+        "All > Incident > Open  /  > All  /  > Resolved",
+        "All > Incident > Assigned to me  (the only list that matters day one)",
+        "Open any incident > right-click the header > Configure > Form Layout (add/remove fields)",
+        "Open any incident > Additional actions (⋯) > Create Knowledge (OOB knowledge loop)",
+        "All > Service Level Management > SLA Definitions  (what 'SLA' actually means here)"
+      ],
+      "guided_setup": {"available": true, "path": "All > Incident > Guided Setup", "confidence": "verify", "note": "ITSM ships guided setup content in recent releases; the menu label and depth differ by release and by whether ITSM Pro is entitled. Confirm with the probe (it lists every module whose name contains 'Guided Setup')."},
+      "oob": {
+        "flows": ["Incident assignment / escalation flows in Flow Designer", "Notify on incident comment / state change", "SLA task flows (task_sla)"],
+        "playbooks": ["Incident playbook (Process Automation Designer) on recent releases", "Agent Assist / recommended actions inside Service Operations Workspace"],
+        "integrations": ["Inbound email → incident (System Mailbox)", "Outbound notification (SMTP)", "Microsoft Teams / Slack notify spokes", "Monitoring/event sources → ITOM alert → incident"],
+        "metrics": ["Open incidents by priority", "Mean time to resolve (MTTR)", "Reassignment count", "SLA breach %"],
+        "dashboards": ["ITSM / Service Desk dashboard (OOB Performance Analytics content, requires PA)"]
+      },
+      "fields": {
+        "critical": [
+          {"field": "number", "why": "Auto-number; the only identifier users quote. Never edit by hand."},
+          {"field": "caller_id", "why": "Who is affected. Wrong caller = wrong SLA, wrong comms, wrong reports."},
+          {"field": "short_description", "why": "Mandatory by dictionary on OOB; the searchable summary."},
+          {"field": "assignment_group", "why": "Routing. If this is empty, nothing else you configure will get the ticket worked."},
+          {"field": "state", "why": "Drives SLA pause/resume, close rules, and reporting. Changing state order breaks automation."},
+          {"field": "impact + urgency", "why": "These compute priority. Priority is usually derived, not typed."},
+          {"field": "close_code + close_notes", "why": "Enforced at close by OOB UI policy; blank closes corrupt reporting."}
+        ],
+        "useful": ["category / subcategory", "cmdb_ci", "assigned_to", "short_description vs description hygiene", "u_* custom fields only when a report demands it"],
+        "optional": ["location", "department", "caused_by (problem)", "parent_incident", "knowledge (linked article)"],
+        "related_lists": ["Task SLA", "Incidents (child/related)", "Affected CIs", "Approvers", "Work notes / Additional comments"]
+      },
+      "must_know": [
+        "incident extends task. Everything you learn about 'task' fields applies to incident, problem, change, and catalog tasks.",
+        "Priority = f(impact, urgency) through a matrix (Data Lookup), not something agents type.",
+        "An SLA is a task_sla record attached to the incident; the SLA definition decides start/pause/stop conditions.",
+        "Closing requires close_code + close_notes in OOB; that is a UI policy, so it is invisible in the dictionary."
+      ],
+      "mistakes": [
+        "Adding a custom field when an unused OOB field already exists.",
+        "Editing state choices without checking SLA and flow conditions that reference state values.",
+        "Testing as admin only — admin bypasses ACLs, so 'it works' means nothing.",
+        "Making assignment_group optional 'to go faster', which silently orphans tickets.",
+        "Deleting demo users, which breaks OOB flow references."
+      ],
+      "labs": ["labs/LAB-00-ORIENTATION.md", "labs/LAB-01-REST-MESSAGE.md"],
+      "timebox_min": {"orient": 10, "model": 20, "practice": 30, "prove": 10},
+      "quiz": [
+        "Which fields determine priority, and where is that matrix defined?",
+        "What record type implements an SLA on a given incident?",
+        "Name three things that break if you reorder state values."
+      ]
+    },
+    {
+      "id": "itsm-problem-change",
+      "name": "Problem + Change Management",
+      "app": "ITSM",
+      "confidence": "high",
+      "why": "Where process design lives: approvals, risk, CAB, and the relationship between reactive (problem) and planned (change) work.",
+      "primary_table": "change_request",
+      "tables": ["problem", "change_request", "change_task", "std_change_producer_version", "sysapproval_approver", "task_rel_task"],
+      "roles": ["itil", "sn_change_write", "sn_change_coordinator", "admin"],
+      "breadcrumbs": [
+        "All > Change > Create New",
+        "All > Change > Open  /  > Unassigned  /  > Scheduled",
+        "All > Change > Standard Change Catalog  (pre-approved templates — the fastest safe win)",
+        "All > Change > Change Advisory Board (CAB) Workbench",
+        "All > Problem > Create New",
+        "All > Problem > Open  /  > Known Errors"
+      ],
+      "guided_setup": {"available": true, "path": "All > Change > Guided Setup", "confidence": "verify", "note": "Verify label per release."},
+      "oob": {
+        "flows": ["Normal change approval flow (CAB / manager approvals)", "Change conflict detection", "Standard change template publishing", "Problem → known error → fix task"],
+        "playbooks": ["Change enablement playbook on recent releases", "Risk assessment questionnaire"],
+        "integrations": ["Change calendar / schedule integration", "DevOps: change creation from CI/CD (DevOps Change Velocity)"],
+        "metrics": ["Change success rate", "Unauthorized change count", "Change lead time", "Problem MTTR"],
+        "dashboards": ["Change Management dashboard", "CAB workbench views"]
+      },
+      "fields": {
+        "critical": [
+          {"field": "type", "why": "standard / normal / emergency decides which approvals and which fields appear. Get this wrong and approvals never fire."},
+          {"field": "short_description", "why": "Mandatory; appears in CAB agenda."},
+          {"field": "start_date + end_date", "why": "Drives conflict detection and the change calendar."},
+          {"field": "assignment_group", "why": "Routing and approval targeting."},
+          {"field": "risk + impact", "why": "Feed approval policy; changing them mid-flight can re-trigger approvals."},
+          {"field": "implementation_plan + backout_plan + test_plan", "why": "Required by OOB for normal changes; blank plans are the #1 audit finding."}
+        ],
+        "useful": ["cmdb_ci", "change_plan (template)", "cab_required", "conflict_status", "review_status"],
+        "optional": ["unauthorized flag", "Justification fields", "test/validate dates"],
+        "related_lists": ["Change Tasks", "Affected CIs", "Approvers", "Conflicts", "Affected/Impacted services"]
+      },
+      "must_know": [
+        "Standard change = pre-approved via a template; normal goes through CAB; emergency is the 'break glass' path. Choosing the type is the whole design decision.",
+        "Approvals are sysapproval_approver records created by a flow, not a field.",
+        "A problem is not an incident. Problem = root cause; incident = symptom. Link them, do not merge them."
+      ],
+      "mistakes": [
+        "Building approvals with the legacy Workflow Editor when Flow Designer is the supported path on current releases.",
+        "Approving as the requester's delegate and calling it a two-person control.",
+        "Leaving test_plan blank, then failing an audit.",
+        "Creating standard change templates without a retry/backout path."
+      ],
+      "labs": [],
+      "timebox_min": {"orient": 10, "model": 25, "practice": 40, "prove": 10},
+      "quiz": [
+        "Which record type stores an approval?",
+        "What makes a change 'standard'?",
+        "Where do you configure the change/incident conflict rule?"
+      ]
+    },
+    {
+      "id": "itom-cmdb",
+      "name": "CMDB (and ITOM discovery basics)",
+      "app": "ITOM",
+      "confidence": "high",
+      "why": "The CMDB is the platform's spine: incidents, changes, assets, services, and impact analysis all point at CIs. It is also the module people most often 'set up' without understanding.",
+      "primary_table": "cmdb_ci",
+      "tables": ["cmdb_ci", "cmdb_ci_server", "cmdb_ci_linux_server", "cmdb_rel_ci", "cmdb_ci_service", "cmdb_ci_service_discovered", "cmdb_model", "discovery_status"],
+      "roles": ["sn_cmdb_admin", "itil", "asset", "admin"],
+      "breadcrumbs": [
+        "All > Configuration Management Database > CMDB Workspace  (modern UI)",
+        "All > Configuration Management Database > CI Class Manager  (class tree, identification rules)",
+        "All > Configuration Management > CI Identifiers  (rules that prevent duplicate CIs — set these BEFORE loading data)",
+        "All > Configuration Management > Health > CMDB Health Dashboard",
+        "All > Discovery > Home  (mid-server / discovery schedules, if ITOM licensed)",
+        "All > Configuration Management > CI Relationship Editor"
+      ],
+      "guided_setup": {"available": true, "path": "All > Configuration Management Database > Guided Setup", "confidence": "verify", "note": "CMDB guided setup covers identifier rules, health, and data certification. Days-1-5 order matters more than any individual step."},
+      "oob": {
+        "flows": ["CMDB health scoring jobs (dashboards + scheduled jobs)", "Discovery → CI create/update", "Service mapping (top-down) — separate entitlement"],
+        "playbooks": ["CMDB data remediation playbooks (de-duplication guidance)"],
+        "integrations": ["Service Graph Connectors (Import from SCCM, Intune, AWS, Azure, vCenter)", "Discovery (agentless)", "Agent Client Collector"],
+        "metrics": ["CMDB health score (correctness/completeness/compliance)", "Duplicate CI count", "CIs without relationships", "Orphan CI count"],
+        "dashboards": ["CMDB Health Dashboard", "CMDB 360 view"]
+      },
+      "fields": {
+        "critical": [
+          {"field": "name", "why": "Together with the identification rule, decides whether you create a duplicate CI."},
+          {"field": "sys_class_name", "why": "You must pick the right class at create time; moving class later is painful."},
+          {"field": "install_status / operational_status", "why": "Impact analysis and asset lifecycle depend on them."},
+          {"field": "environment (prod/test/dev)", "why": "Everything downstream (change risk, alerts) assumes it is right."},
+          {"field": "managed_by_group", "why": "Support group routing for CI-related incidents."},
+          {"field": "discovery_source", "why": "Tells you whether a CI is authoritative or hand-typed."}
+        ],
+        "useful": ["ip_address", "fqdn", "serial_number", "assigned_to", "location", "model_id / manufacturer"],
+        "optional": ["u_* business fields", "support_group", "comments"],
+        "related_lists": ["Relationships (cmdb_rel_ci, both directions)", "Incidents", "Changes", "Assets", "Service offerings"]
+      },
+      "must_know": [
+        "Identification rules (CI Identifiers) must be configured before you load data, or you ship duplicates on day one.",
+        "Relationships are bidirectional records (parent/child); both sides matter for impact analysis.",
+        "Class hierarchy is the model: server → linux server → …; put data at the most specific correct class.",
+        "CMDB health = correctness + completeness + compliance. Pick one, prove it, then expand."
+      ],
+      "mistakes": [
+        "Bulk-importing CIs before defining identification rules (creates thousands of duplicates you cannot merge cleanly).",
+        "Using cmdb_ci for everything instead of the proper subclass.",
+        "Treating Discovery as 'just install the mid-server' — without credentials and scope, discovery produces noise.",
+        "Manually creating CIs that discovery will later duplicate."
+      ],
+      "labs": ["labs/LAB-02-REMOTE-TABLE.md"],
+      "timebox_min": {"orient": 15, "model": 30, "practice": 60, "prove": 15},
+      "quiz": [
+        "What happens if you load CIs before defining CI identifiers?",
+        "Which table stores CI-to-CI relationships?",
+        "Name the three components of CMDB health."
+      ]
+    },
+    {
+      "id": "itam",
+      "name": "IT Asset Management (HAM + SAM Pro)",
+      "app": "ITAM",
+      "confidence": "high",
+      "why": "Money module: licences, contracts, and hardware lifecycle. Same CI data, different questions ('what do we own, what do we pay, when does it expire').",
+      "primary_table": "alm_asset",
+      "tables": ["alm_asset", "alm_hardware", "alm_license", "ast_contract", "cmdb_model", "cmdb_ci_hardware", "samp_sw_product", "samp_sw_license"],
+      "roles": ["asset", "sam", "sn_hamp_admin", "admin"],
+      "breadcrumbs": [
+        "All > Asset > Portfolios > All Assets  (alm_asset)",
+        "All > Asset > Assets > Hardware / Software",
+        "All > Asset > Contracts > All  (ast_contract)",
+        "All > Software Asset Management > License Operations",
+        "All > Asset > Asset Lifecycle  (procurement → deploy → retire)"
+      ],
+      "guided_setup": {"available": true, "path": "All > Asset > Guided Setup", "confidence": "verify"},
+      "oob": {
+        "flows": ["Asset lifecycle flows (request → procure → receive → deploy → retire)", "License reconciliation jobs (SAM Pro)", "Contract renewal notifications"],
+        "playbooks": ["Asset lifecycle playbooks", "SAM remediation guidance"],
+        "integrations": ["Service Graph Connectors (Intune/SCCM/Jamf → hardware + software installs)", "Oracle/SAP/Microsoft publisher connectors (SAM Pro)"],
+        "metrics": ["License compliance position", "Software spend vs entitlement", "Assets under management", "Contract expiry in 90 days"],
+        "dashboards": ["Asset Manager dashboard", "SAM license position dashboard"]
+      },
+      "fields": {
+        "critical": [
+          {"field": "asset_tag", "why": "Human key; must be unique and sticker-aligned."},
+          {"field": "model_id", "why": "Links asset → model → manufacturer; drives contracts and licences."},
+          {"field": "state / substate", "why": "Lifecycle truth: on order / in stock / in use / retired."},
+          {"field": "assigned_to", "why": "Custody. Missing owner = lost asset."},
+          {"field": "install_status on the linked CI", "why": "Asset and CI must agree or reporting lies."},
+          {"field": "contract start/end dates", "why": "Renewal alerts and true-up run off these."}
+        ],
+        "useful": ["cost, cost_center, department, location", "po_number, vendor", "warranty_expiration", "gl_account"],
+        "optional": ["depreciation fields", "reserved_for", "beneficiary"],
+        "related_lists": ["CI (linked configuration item)", "Contracts", "Asset history", "Licenses", "Transfer orders"]
+      },
+      "must_know": [
+        "Assets (alm_asset) and CIs (cmdb_ci) are different records that point at each other. One asset can map to one CI; not everything is an asset.",
+        "SAM Pro needs the software install data feed (SCCM/Intune/agent) or the license position is fiction.",
+        "Licence compliance = rights (entitlement) vs installs/usage; you need both sides."
+      ],
+      "mistakes": [
+        "Loading the asset register as CIs, or vice versa.",
+        "Assuming SAM works without publisher-specific reconciliation rules.",
+        "Ignoring contract renewal dates until the auto-renewal already happened."
+      ],
+      "labs": [],
+      "timebox_min": {"orient": 10, "model": 25, "practice": 45, "prove": 10},
+      "quiz": ["What is the difference between alm_asset and cmdb_ci?", "Which table holds licence entitlement?", "What reconciles installs against rights?"]
+    },
+    {
+      "id": "hrsd",
+      "name": "HR Service Delivery (HRSD)",
+      "app": "HRSD",
+      "confidence": "high",
+      "why": "The cleanest example of 'same engine, different domain': cases instead of incidents, and confidentiality (ACLs) becomes the whole design.",
+      "primary_table": "sn_hr_core_case",
+      "tables": ["sn_hr_core_case", "sn_hr_core_task", "sn_hr_core_profile", "sn_hr_le_case", "sn_hr_core_job", "sn_hr_core_document"],
+      "roles": ["sn_hr_core.admin", "sn_hr_core.case_writer", "sn_hr_core.case_reader", "sn_hr_core.employee"],
+      "breadcrumbs": [
+        "All > HR > Cases > All",
+        "All > HR > Employee Center (portal experience)",
+        "All > HR > Administration > HR Services  (what the employee can ask for)",
+        "All > HR > Administration > HR Profiles",
+        "All > HR > Lifecycle Events  (onboarding/offboarding orchestration)"
+      ],
+      "guided_setup": {"available": true, "path": "All > HR > Guided Setup", "confidence": "verify"},
+      "oob": {
+        "flows": ["HR case assignment/triage flows", "Lifecycle event flows (onboarding, offboarding, leave)", "Document/acknowledgement tasks"],
+        "playbooks": ["HR case playbooks", "Lifecycle event playbooks"],
+        "integrations": ["Workday / SAP SuccessFactors spokes (employee data)", "DocuSign spoke (signatures)", "Employee Center portal"],
+        "metrics": ["Case volume by HR service", "Time to close", "Employee satisfaction (survey)", "SLA compliance per service"],
+        "dashboards": ["HR Service Delivery dashboard", "Employee Center analytics"]
+      },
+      "fields": {
+        "critical": [
+          {"field": "subject_person", "why": "The employee the case is about — distinct from the opener. Wrong value leaks or hides data."},
+          {"field": "hr_service", "why": "Selects the workflow, SLA, and fields. The single most important choice on the form."},
+          {"field": "state", "why": "HRSD states include work-in-progress/awaiting-info; alert/notification logic keys off them."},
+          {"field": "opened_for / opened_by", "why": "Confidentiality depends on the who."},
+          {"field": "assignment_group (HR COE)", "why": "Routing between HR COEs; no group = no service."}
+        ],
+        "useful": ["priority", "due date", "confidential flag", "short_description"],
+        "optional": ["additional comments", "attachments", "requested_for department fields"],
+        "related_lists": ["Tasks", "Documents", "Approvals", "Related cases"]
+      },
+      "must_know": [
+        "Confidentiality in HRSD is ACLs + restricted fields, not a checkbox. Design it first.",
+        "HR Services (not 'categories') are the catalog of what employees can request; each carries its own workflow.",
+        "Lifecycle Events orchestrate many cases/tasks across departments (onboarding day 1 ≠ one case)."
+      ],
+      "mistakes": [
+        "Reusing ITIL assignment groups for HR COEs.",
+        "Ignoring confidentiality until after go-live (retrofitting ACLs is a rebuild).",
+        "Building one giant 'ask HR' service instead of a catalog."
+      ],
+      "labs": [],
+      "timebox_min": {"orient": 10, "model": 25, "practice": 40, "prove": 10},
+      "quiz": ["Which field drives HRSD workflow selection?", "What enforces confidentiality?", "What orchestrates onboarding across departments?"]
+    },
+    {
+      "id": "secops",
+      "name": "Security Operations (SecOps)",
+      "app": "SecOps",
+      "confidence": "high",
+      "why": "Shows the platform as an integration hub: alerts arrive from tools, correlate into incidents, spawn response tasks and playbooks.",
+      "primary_table": "sn_si_incident",
+      "tables": ["sn_si_incident", "sn_si_alert", "sn_si_task", "sn_si_observable", "sn_si_attack", "sn_si_m2m_alert_incident"],
+      "roles": ["sn_si.admin", "sn_si.analyst", "sn_si.read", "admin"],
+      "breadcrumbs": [
+        "All > Security Operations > Security Incidents > All",
+        "All > Security Operations > All Alerts",
+        "All > Security Operations > Administration > Alert Ingestion (integration profiles)",
+        "All > Security Operations > Threat Intelligence (observables, IOC feeds)",
+        "All > Security Operations > Security Incident Response Workspace"
+      ],
+      "guided_setup": {"available": true, "path": "All > Security Operations > Guided Setup", "confidence": "verify"},
+      "oob": {
+        "flows": ["Alert → incident correlation", "Incident response tasks (investigate/contain/eradicate)", "Threat intel enrichment", "Post-incident review"],
+        "playbooks": ["Security incident response playbooks (per incident category)", "Phishing/endpoint/identity flows"],
+        "integrations": ["Splunk / CrowdStrike / Defender / Palo Alto / Qualys spokes", "SIEM alert ingestion profiles", "Threat intelligence feeds (STIX/TAXII)"],
+        "metrics": ["MTTD / MTTR for security incidents", "Alerts per source", "False positive rate", "Open critical incidents"],
+        "dashboards": ["Security Operations Overview", "Alert triage dashboard", "Analyst workload"]
+      },
+      "fields": {
+        "critical": [
+          {"field": "category (security incident)", "why": "Drives the response playbook and required fields."},
+          {"field": "priority", "why": "Derived from risk/severity; gates escalation."},
+          {"field": "assignment_group (SOC tier)", "why": "Tier routing is the SOC operating model."},
+          {"field": "state", "why": "Investigate → contain → eradicate → recover → review; review cannot be skipped for compliance."},
+          {"field": "observables (IOCs)", "why": "The evidence chain; without them, enrichment and reporting are empty."}
+        ],
+        "useful": ["cmdb_ci", "business_impact", "attack techniques (MITRE mapping)", "related alerts"],
+        "optional": ["external ticket ref", "regulatory reporting flags"],
+        "related_lists": ["Alerts", "Tasks", "Observables", "Affected CIs", "Post-incident review"]
+      },
+      "must_know": [
+        "Alerts are not incidents. Correlation rules turn N alerts into 1 incident — that rule set is the product.",
+        "Playbooks (Process Automation Designer) are the response backbone; the incident form is just the record.",
+        "Observables (IOCs) are child records used for enrichment and threat intel matching."
+      ],
+      "mistakes": [
+        "Turning every alert into an incident (alert fatigue plus a useless MTTR).",
+        "Skipping post-incident review state to 'close faster', losing compliance evidence.",
+        "Loading intel feeds without tuning observables first."
+      ],
+      "labs": ["labs/LAB-01-REST-MESSAGE.md"],
+      "timebox_min": {"orient": 10, "model": 25, "practice": 45, "prove": 10},
+      "quiz": ["What turns many alerts into one incident?", "Which record holds IOCs?", "Which state cannot be skipped?"]
+    },
+    {
+      "id": "grc-irm",
+      "name": "Governance, Risk & Compliance (IRM)",
+      "app": "GRC/IRM",
+      "confidence": "verify",
+      "why": "Regulator-facing: entities, risks, controls, tests, issues. The data model is the hardest on the platform — do it in the right order or you rebuild.",
+      "primary_table": "sn_risk_risk",
+      "tables": ["sn_risk_risk", "sn_compliance_control", "sn_compliance_policy", "sn_grc_profile", "sn_audit_engagement", "sn_vul_vulnerability"],
+      "roles": ["sn_risk.admin", "sn_compliance.admin", "sn_grc.user", "admin"],
+      "breadcrumbs": [
+        "All > GRC > Risk > Risk Register",
+        "All > GRC > Compliance > Controls",
+        "All > GRC > Compliance > Policies",
+        "All > GRC > Audit > Engagements",
+        "All > GRC > Administration > Entity Types  (the scoping model — build this first)"
+      ],
+      "guided_setup": {"available": true, "path": "All > GRC > Guided Setup", "confidence": "verify"},
+      "oob": {
+        "flows": ["Risk assessment cycles", "Control attestation / test tasks", "Issue → remediation task", "Policy acknowledgement"],
+        "playbooks": ["Risk assessment playbooks", "Audit engagement playbooks"],
+        "integrations": ["ServiceNow VR (vulnerability response) feed", "Third-party risk (TPRM) questionnaires", "Regulatory content (UCF)"],
+        "metrics": ["Residual risk by entity", "Control test pass rate", "Overdue issues", "Policy acknowledgement %"],
+        "dashboards": ["Risk heat map", "Compliance posture dashboard", "Audit status"]
+      },
+      "fields": {
+        "critical": [
+          {"field": "risk statement + entity scope", "why": "A risk without an entity is not auditable."},
+          {"field": "inherent vs residual score", "why": "The whole methodology lives in that pair."},
+          {"field": "control owner", "why": "Accountability; attestations route to this person."},
+          {"field": "test result + evidence", "why": "Compliance claim without evidence fails audit."},
+          {"field": "due dates", "why": "Drive escalations and regulatory reporting."}
+        ],
+        "useful": ["risk appetite thresholds", "control objective", "policy → control mapping", "issue linkage"],
+        "optional": ["custom scoring matrices", "advanced risk hierarchy"],
+        "related_lists": ["Controls", "Assessments", "Issues", "Evidence", "Entities"]
+      },
+      "must_know": [
+        "Build order: entities → risks → controls → tests → issues. Any other order creates orphan data.",
+        "IRM tables are the least 'guessable' on the platform; use the guided setup as the curriculum, not the docs.",
+        "Scoring matrices are configuration; changing them after assessments exist rewrites your history."
+      ],
+      "mistakes": [
+        "Starting with controls instead of entities and risks.",
+        "Treating a GRC implementation as a data-entry project (it is a methodology decision).",
+        "No evidence attachments — fails audit regardless of perfect status fields."
+      ],
+      "labs": [],
+      "timebox_min": {"orient": 15, "model": 35, "practice": 60, "prove": 15},
+      "quiz": ["What is the correct build order for IRM?", "Which pair of scores drives risk reporting?", "What makes a control 'tested'?"]
+    },
+    {
+      "id": "csm",
+      "name": "Customer Service Management (CSM)",
+      "app": "CSM",
+      "confidence": "high",
+      "why": "ITSM pointed outward: cases, accounts, entitlements, SLAs against paying customers, and a portal that customers actually use.",
+      "primary_table": "sn_customerservice_case",
+      "tables": ["sn_customerservice_case", "customer_account", "sn_customerservice_consumer", "sn_customerservice_entitlement", "sn_customerservice_sla", "sn_customerservice_product"],
+      "roles": ["sn_customerservice_agent", "sn_customerservice_manager", "sn_customerservice.customer", "admin"],
+      "breadcrumbs": [
+        "All > Customer Service > Cases > All",
+        "All > Customer Service > Accounts",
+        "All > Customer Service > Administration > Entitlements",
+        "All > Customer Service > Customer Service Portal (or the CSM Configurable Workspace)",
+        "All > Customer Service > Administration > Case types"
+      ],
+      "guided_setup": {"available": true, "path": "All > Customer Service > Guided Setup", "confidence": "verify"},
+      "oob": {
+        "flows": ["Case assignment / escalation", "Entitlement validation on create", "Customer satisfaction survey", "Case → work order"],
+        "playbooks": ["CSM playbooks (case types)", "Agent assist / recommended actions"],
+        "integrations": ["Email, chat, messaging spokes (Twilio/WhatsApp)", "Salesforce / ERP account sync", "CSM portal + Knowledge"],
+        "metrics": ["First contact resolution", "CSAT", "Case backlog by account", "Entitlement breach count"],
+        "dashboards": ["CSM Manager dashboard", "Agent workspace analytics"]
+      },
+      "fields": {
+        "critical": [
+          {"field": "account", "why": "Everything (entitlement, SLA, reporting) hangs off the account."},
+          {"field": "contact / consumer", "why": "Who reported it; drives auth and comms."},
+          {"field": "entitlement", "why": "Decides whether service is included — get it wrong and you bill/deny wrongly."},
+          {"field": "case type", "why": "Selects workflow and required fields."},
+          {"field": "priority + SLA", "why": "Contractual, not internal, promise."}
+        ],
+        "useful": ["product", "channel", "short_description", "assignment_group (internal tier)"],
+        "optional": ["billing fields", "special handling notes"],
+        "related_lists": ["Cases", "Entitlements", "Contracts", "Work orders", "Contacts"]
+      },
+      "must_know": [
+        "Entitlement checks are the CSM-specific twist; without them SLAs are guesses.",
+        "External users are real users with ACLs — test as the customer, not as admin.",
+        "Case types are the CSM equivalent of catalog items: they define what an agent can even do."
+      ],
+      "mistakes": ["Skipping entitlement setup", "Testing the portal as admin", "One case type for every request"],
+      "labs": [],
+      "timebox_min": {"orient": 10, "model": 25, "practice": 40, "prove": 10},
+      "quiz": ["What decides if service is included?", "Where do customer-visible SLAs come from?", "What selects the case workflow?"]
+    },
+    {
+      "id": "fsm",
+      "name": "Field Service Management (FSM)",
+      "app": "FSM",
+      "confidence": "verify",
+      "why": "Scheduling + mobile work: work orders, tasks, territories, and the constraint engine. The visual (dispatch map) hides a lot of configuration.",
+      "primary_table": "wm_order",
+      "tables": ["wm_order", "wm_task", "wm_schedule_plan", "wm_territory", "wm_agent", "wm_crew"],
+      "roles": ["wm_admin", "wm_dispatcher", "wm_agent", "admin"],
+      "breadcrumbs": [
+        "All > Field Service Management > Work Orders > All",
+        "All > Field Service Management > Dispatch > Dispatch Board",
+        "All > Field Service Management > Administration > Territories",
+        "All > Field Service Management > Administration > Scheduling > Constraints"
+      ],
+      "guided_setup": {"available": true, "path": "All > Field Service Management > Guided Setup", "confidence": "verify"},
+      "oob": {
+        "flows": ["Work order → task → assignment → schedule", "Travel/time tracking", "Mobile agent sync"],
+        "playbooks": ["Dispatch and closure playbooks"],
+        "integrations": ["Google Maps / travel time", "Mobile (Now Mobile app)", "CSM/ITSM work order creation"],
+        "metrics": ["On-time arrival", "First-time fix rate", "Utilization", "Travel time %"],
+        "dashboards": ["Dispatch dashboard", "Field agent performance"]
+      },
+      "fields": {
+        "critical": [
+          {"field": "territory", "why": "Primary routing constraint; wrong territory = unassignable work."},
+          {"field": "scheduled start/end", "why": "Drives the whole scheduling engine and customer promise."},
+          {"field": "assigned_agent / crew", "why": "Who actually does the work."},
+          {"field": "task type + skills", "why": "Skill matching decides eligibility."},
+          {"field": "location (geo)", "why": "Travel time and dispatch map depend on coordinates."}
+        ],
+        "useful": ["priority", "estimated duration", "parts required", "customer signature"],
+        "optional": ["billing codes", "equipment details"],
+        "related_lists": ["Tasks", "Assignments", "Parts", "Time entries"]
+      },
+      "must_know": [
+        "Work order = the business ask; task = the visit; assignment = who/when. Three tables, three concepts.",
+        "Constraints (skills, territory, hours) are configuration, not code — but bad data makes the engine look broken.",
+        "Mobile behaviour must be tested on Now Mobile, not desktop."
+      ],
+      "mistakes": ["No territories (then everything is unschedulable)", "Skipping skill data", "Testing only as dispatcher"],
+      "labs": [],
+      "timebox_min": {"orient": 10, "model": 25, "practice": 45, "prove": 10},
+      "quiz": ["Difference between work order, task, assignment?", "What are the three main scheduling constraints?"]
+    },
+    {
+      "id": "app-engine",
+      "name": "App Engine Studio (build your own app)",
+      "app": "App Engine",
+      "confidence": "high",
+      "why": "The fastest way to internalize the platform: build one tiny app end-to-end (table → form → flow → portal/role). One hour here teaches more than three docs.",
+      "primary_table": "sys_app",
+      "tables": ["sys_app", "sys_db_object", "sys_dictionary", "sys_hub_flow", "sys_ui_page", "sys_app_module"],
+      "roles": ["admin", "sn_app_eng_studio.developer"],
+      "breadcrumbs": [
+        "All > App Engine Studio  (guided builder)",
+        "All > System Applications > Studio  (classic dev environment)",
+        "All > System Definition > Tables  (create table manually)",
+        "All > Process Automation > Flow Designer > New > Action/Flow",
+        "All > System Definition > Plugins  (install what you need — asks for admin)"
+      ],
+      "guided_setup": {"available": false, "note": "App Engine Studio is a builder, not a guided setup."},
+      "oob": {
+        "flows": ["App templates (request app, approvals app, etc.)"],
+        "playbooks": ["Playbook templates inside Process Automation Designer"],
+        "integrations": ["IntegrationHub actions from the app scope", "REST step in Flow Designer (no code)"],
+        "metrics": ["App usage analytics (sys_app_usage)"],
+        "dashboards": ["Custom reports on your own table"]
+      },
+      "fields": {
+        "critical": [
+          {"field": "table label + name (u_*)", "why": "Naming is permanent-ish; renaming later breaks references."},
+          {"field": "application scope", "why": "Global vs scoped decides whether you can use OOB tables freely."},
+          {"field": "roles on the app", "why": "Without an app role, everyone is admin or nobody can see it."},
+          {"field": "state field via choice list", "why": "Flows and reports key off state; design the states first."}
+        ],
+        "useful": ["form layout", "list layout", "ACLs generated by the builder", "app menu"],
+        "optional": ["custom UI pages", "workspace"],
+        "related_lists": ["Auto-generated activities (task table)", "Attachments"]
+      },
+      "must_know": [
+        "Scoped app = cannot touch global tables/scripts without explicit cross-scope access. Decide scope before adding tables.",
+        "Start from a table, not a form: data model first, then UI, then automation.",
+        "Every app should ship with a role; otherwise security is an afterthought."
+      ],
+      "mistakes": ["Global scope by default, then wondering why upgrades conflict", "No app role", "Building UI before the data model"],
+      "labs": ["labs/LAB-01-REST-MESSAGE.md", "labs/LAB-02-REMOTE-TABLE.md"],
+      "timebox_min": {"orient": 10, "model": 15, "practice": 60, "prove": 10},
+      "quiz": ["What does a scope prevent?", "What is the first artifact you build?", "Where is a scoped app's menu defined?"]
+    },
+    {
+      "id": "integration",
+      "name": "Integration: REST, IntegrationHub, Remote Tables",
+      "app": "IntegrationHub / Platform",
+      "confidence": "high",
+      "why": "The single highest-leverage skill on the platform. Every 'can ServiceNow do X with our other system' question lands here.",
+      "primary_table": "sys_ws_definition",
+      "tables": ["sys_ws_definition", "sys_ws_operation", "sys_rest_message", "sys_rest_message_fn", "sys_hub_flow", "sys_hub_action_type_definition", "sys_remote_table", "sys_data_source"],
+      "roles": ["admin", "sn_integrationhub.admin", "oauth_admin"],
+      "breadcrumbs": [
+        "All > System Web Services > Outbound > REST Message  (sys_rest_message — call someone else)",
+        "All > System Web Services > Scripted REST APIs  (sys_ws_definition — someone calls you)",
+        "All > System Web Services > Remote Tables  (expose a REST API AS a table)",
+        "All > Process Automation > Flow Designer > Action (REST step, generated action)",
+        "All > System OAuth > Application Registry  (credentials for outbound calls)",
+        "All > System Logs > Outbound HTTP Requests  (the log nobody checks and everybody needs)"
+      ],
+      "guided_setup": {"available": false, "note": "No guided setup for generic REST; IntegrationHub spokes do ship guided setup per spoke."},
+      "oob": {
+        "flows": ["Flow Designer REST step", "IntegrationHub action templates per spoke"],
+        "playbooks": ["Spoke onboarding checklists (per connector)"],
+        "integrations": ["REST/SOAP/JSON/XML, LDAP, JDBC, email, file, MID Server for on-prem"],
+        "metrics": ["Outbound HTTP error rate", "Integration job duration", "Queue/retry counts"],
+        "dashboards": ["Integration health dashboards (custom, built on sys_outbound_http_log)"]
+      },
+      "fields": {
+        "critical": [
+          {"field": "Endpoint + HTTP method", "why": "Half of all integration bugs are wrong URL, method, or content-type."},
+          {"field": "Authentication (basic / OAuth 2.0 / API key in header)", "why": "Never hardcode secrets; use Connection & Credential aliases."},
+          {"field": "Headers incl. Content-Type and Accept", "why": "APIs reject silently-wrong content types."},
+          {"field": "Response body parsing (JSON path)", "why": "This is where 'it returned 200 but nothing happened' lives."},
+          {"field": "Timeout + retry policy", "why": "Default timeouts make slow APIs look broken."}
+        ],
+        "useful": ["MID Server selection", "mutual TLS", "rate-limit backoff", "error handling branch"],
+        "optional": ["custom logging tables", "payload templates"],
+        "related_lists": ["HTTP Methods (sys_rest_message_fn)", "Variables", "HTTP Headers", "Authentication"]
+      },
+      "must_know": [
+        "Outbound REST Message = ServiceNow calls out. Scripted REST API = the world calls in. Remote Table = the world's API pretends to be a table.",
+        "Remote Tables are read-only views. If you need writes, use REST + Flow/scripted action.",
+        "Use Connection & Credential aliases so credentials are not in the message body or scripts.",
+        "Check sys_outbound_http_log before blaming the API."
+      ],
+      "mistakes": [
+        "Hardcoding tokens in scripts (leaks into update sets and logs).",
+        "Ignoring the response status: 200-with-error-payload is common.",
+        "Not pinning content-type, then debugging JSON parse errors for an hour.",
+        "Building a remote table for high-volume joins (performance cliff) instead of a scheduled sync."
+      ],
+      "labs": ["labs/LAB-01-REST-MESSAGE.md", "labs/LAB-02-REMOTE-TABLE.md"],
+      "timebox_min": {"orient": 10, "model": 20, "practice": 75, "prove": 15},
+      "quiz": ["Which table stores an outbound REST message?", "When is a Remote Table the wrong tool?", "Where do you look first when an outbound call fails?"]
+    },
+    {
+      "id": "analytics",
+      "name": "Analytics: metrics, dashboards, Performance Analytics",
+      "app": "Platform Analytics / PA",
+      "confidence": "verify",
+      "why": "This is how anyone believes your work happened. Learn indicator → breakdown → dashboard once and every module's reporting becomes mechanical.",
+      "primary_table": "pa_indicators",
+      "tables": ["pa_indicators", "pa_breakdowns", "pa_scores", "pa_dashboards", "sys_report", "sys_properties"],
+      "roles": ["pa_admin", "pa_viewer", "report_admin", "admin"],
+      "breadcrumbs": [
+        "All > Platform Analytics  (newer releases; older: Performance Analytics)",
+        "All > Platform Analytics > Indicators  (pa_indicators: what is being measured)",
+        "All > Platform Analytics > Breakdowns  (the 'by what' — priority, group, assignment)",
+        "All > Platform Analytics > Dashboards / Library",
+        "All > Reports > View / Create New  (classic reporting still works and is often enough)",
+        "All > Platform Analytics > Data Collector  (scheduled jobs that snapshot scores)"
+      ],
+      "guided_setup": {"available": true, "path": "All > Platform Analytics > Guided Setup", "confidence": "verify", "note": "There is also an 'Analytics' / PA onboarding checklist on some releases. Probe for modules matching 'Guided Setup'."},
+      "oob": {
+        "flows": ["OOB PA content packs per module (ITSM, HRSD, CSM, SecOps, CMDB)"],
+        "playbooks": ["KPI accelerator workflows (Target/KPI Signals on newer releases)"],
+        "integrations": ["Export to Power BI / Tableau via ODBC or scheduled export", "Data snapshots to external warehouse"],
+        "metrics": ["Indicator scores, targets, thresholds, KPI signals, MTTR, SLA %"],
+        "dashboards": ["OOB ITSM/HR/CSM dashboards (entitlement dependent)"]
+      },
+      "fields": {
+        "critical": [
+          {"field": "indicator source (table + aggregate)", "why": "Count/avg of what, filtered how. Vague source = untrustworthy number."},
+          {"field": "conditions (filter)", "why": "Most 'wrong numbers' are wrong filters, not wrong math."},
+          {"field": "breakdown", "why": "The 'by' dimension; without it a number cannot drive action."},
+          {"field": "frequency + collector schedule", "why": "Daily vs weekly decides whether you see trends or snapshots."},
+          {"field": "target / threshold", "why": "Turns a number into an alert."}
+        ],
+        "useful": ["forecasting", "unit/format (%, hours)", "visibility domains (who can see what)"],
+        "optional": ["scorecard widgets", "custom widgets"],
+        "related_lists": ["Indicator breakdowns", "Targets", "Dashboards containing this indicator"]
+      },
+      "must_know": [
+        "Indicator = what to measure. Breakdown = how to slice it. Dashboard = how to show it. That is the entire model.",
+        "PA needs a data collector to keep scores current; nothing is real-time by default.",
+        "Analytics visibility (who sees which rows) is separate from ACLs and is a common leak.",
+        "Platform Analytics (newer) and Performance Analytics (classic) coexist; don't assume docs match your release."
+      ],
+      "mistakes": [
+        "Building 40 indicators instead of 3 that someone will act on.",
+        "Reporting on data that is dirty upstream (report the truth, then fix the data).",
+        "Forgetting the collector schedule, then wondering why numbers froze.",
+        "Publishing dashboards to users who cannot see the underlying rows."
+      ],
+      "labs": ["labs/LAB-02-REMOTE-TABLE.md"],
+      "timebox_min": {"orient": 10, "model": 20, "practice": 30, "prove": 10},
+      "quiz": ["What are the three parts of the PA model?", "What keeps scores up to date?", "Why can a correct indicator look wrong?"]
+    }
+  ]
+}

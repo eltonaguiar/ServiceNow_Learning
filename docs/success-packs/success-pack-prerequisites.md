@@ -1,0 +1,114 @@
+# ServiceNow Success Packs - Prerequisites & What to Know
+
+**Agent:** Kilo  
+**Date:** 2026-11-04  
+
+---
+
+## What Are Success Packs?
+
+ServiceNow Success Packs are guided packages designed to accelerate adoption of specific products/workflows. They often include:
+- Guided Setup flows
+- Pre-built dashboards/reports
+- Playbooks
+- Sample data
+- Best practice configurations
+- Implementation checklists
+
+**Where to find:** Often under the product's setup page, or via Now Create / ServiceNow documentation. In your instance, look for "Guided Setup" for the product.
+
+---
+
+## General Prerequisites (Applies to Most Success Packs)
+
+Before running any Success Pack, verify these basics.
+
+| Prerequisite | Check | How to Verify |
+|--------------|-------|---------------|
+| **Admin access** | You have `admin` role (or equivalent) | User Administration → Users → [your user] → Roles |
+| **Plugins activated** | Required plugins for the product are active | System Definition → Plugins → search for product name |
+| **Application scope correct** | You're working in right scope or follow pack instructions | Top-right scope selector |
+| **Update Set created** | Capture changes in a named Update Set | System Update Sets → Local Update Sets → Create New |
+| **Developer instance** | Using a non-prod instance for practice | Check instance name (devXXXX.service-now.com) |
+| **Integrations readiness** | If integrating externally, MID Server/network access confirmed | MID Server → Servers (if needed) |
+
+---
+
+## Product-Specific Prerequisites
+
+| Product | Common Prerequisites | Notes |
+|---------|---------------------|-------|
+| **ITSM** | ITIL plugin, Incident/Problem/Change activated | Usually core; check plugins |
+| **IT Operations Management (ITOM)** | Discovery, Event Management, Service Mapping plugins (licensing varies) | Often needs MID Server for Discovery |
+| **IT Asset Management (ITAM)** | HAM/SAM plugins, normalization data, import sources | Data quality matters - garbage in, garbage out |
+| **HR Service Delivery (HRSD)** | HR plugins, HR Admin role, Lifecycle Events | Needs HR scope consideration |
+| **Customer Service Management (CSM)** | CSM plugins, Account/Contact models configured | B2B/B2C considerations |
+| **Governance Risk Compliance (GRC)** | Policy & Compliance, Risk plugins | Often needs significant configuration |
+| **Security Incident Response (SIR)** | Security Incident Response plugin | May need Security Operations dependencies |
+| **Field Service Management (FSM)** | FSM plugins, territories/work schedules | Location-based configuration |
+| **Strategic Portfolio Management (SPM)** | SPM plugins, portfolios/demand models | Project/portfolio governance setup |
+| **Telecom Service Management (TSM)** | TSM/FSM related plugins | Industry-specific |
+
+---
+
+## Success Pack Execution Checklist
+
+Use this every time you run a Success Pack.
+
+### Before Starting
+- [ ] Read the Success Pack overview/documentation
+- [ ] Create a dedicated Update Set
+- [ ] Activate in correct application scope
+- [ ] Verify required plugins are active
+- [ ] Have required roles assigned
+- [ ] Back up/snapshot plan (or just use dev instance)
+
+### During Execution
+- [ ] Follow Guided Setup steps in order - don't skip
+- [ ] Read tooltips/help text on each step
+- [ ] Take notes on what each step does (build your mental model)
+- [ ] Create test data as suggested
+- [ ] Note any manual steps required outside the wizard
+
+### After Completion
+- [ ] Run validation checks suggested by the pack
+- [ ] Test with sample records
+- [ ] Review created dashboards/reports/playbooks
+- [ ] Document deviations from defaults
+- [ ] Test end-to-end scenario
+- [ ] Clean up test data if needed
+
+---
+
+## Where to Find Prerequisites Info
+
+| Source | What You'll Find |
+|--------|-----------------|
+| **Plugin description** | Dependencies, activation instructions in System Definition → Plugins |
+| **Guided Setup intro page** | Often lists prerequisites at the beginning |
+| **Now Create (docs.servicenow.com)** | Official implementation guides with prerequisites |
+| **Product documentation** | Requirements, sizing, integration needs |
+| **Store app description** | Dependencies and compatibility |
+
+---
+
+## Common Pitfalls
+
+| Pitfall | Why It Happens | Fix |
+|---------|----------------|-----|
+| **Skipping plugin activation** | Assumed it's on | Check Plugins first |
+| **Wrong scope** | Changes go to wrong app | Use correct scope or Global as instructed |
+| **Missing roles** | Can't see/access setup pages | Grant roles, logout/login |
+| **Running on prod** | Dangerous | Only practice on dev instances |
+| **Not using Update Set** | Changes lost/mixed up | Always create named Update Set first |
+| **Ignoring dependencies** | Pack fails partway | Read prerequisites fully before starting |
+
+---
+
+## Quick Rule
+
+**If Guided Setup says "Activate plugin X first" - DO IT.** Don't work around it. Prerequisites exist for a reason.
+
+---
+
+*Generated by Kilo on 2026-11-04. Part of the ServiceNow_Learning repository at github.com/eltonaguiar/ServiceNow_Learning.*
