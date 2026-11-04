@@ -77,13 +77,13 @@
     <h2>Contents</h2>
     <ul>
       <li><a href="#start-here"><strong>Start here</strong></a></li>
-<li><ul class="sub"><li><a href="01-ELI5.html">ELI5: ServiceNow for beginners</a></li><li><a href="00-methodology.html">The rapid-learning methodology</a></li><li><a href="00-methodology#4-source-ladder--official-first-always.html">Official sources only</a></li></ul></li>
+<li><ul class="sub"><li><a href="01-ELI5.html">ELI5: ServiceNow for beginners</a></li><li><a href="09-foundation-data.html">Foundation data: the layer everyone skips</a></li><li><a href="00-methodology.html">The rapid-learning methodology</a></li><li><a href="00-methodology#4-source-ladder--official-first-always.html">Official sources only</a></li></ul></li>
 <li><a href="#guides"><strong>Guides</strong></a></li>
 <li><ul class="sub"><li><a href="02-success-packs.html">Success Packs and prerequisites</a></li><li><a href="03-breadcrumbs.html">Breadcrumbs: where things live</a></li><li><a href="04-fields.html">Mandatory vs useful vs optional fields</a></li><li><a href="05-common-mistakes.html">Common mistakes by symptom</a></li><li><a href="06-inventory.html">Guided Setup &amp; OOB inventory</a></li></ul></li>
 <li><a href="#applied-sam"><strong>Applied: SAM</strong></a></li>
 <li><ul class="sub"><li><a href="08-SAM-SETUP.html">SAM setup guide</a></li><li><a href="labs/LAB-03-SAM-BASELINE.html">SAM baseline lab</a></li></ul></li>
 <li><a href="#labs"><strong>Labs</strong></a></li>
-<li><ul class="sub"><li><a href="labs/LAB-00-ORIENTATION.html">Lab 00 — orientation (30 min)</a></li><li><a href="labs/LAB-01-REST-MESSAGE.html">Lab 01 — REST Message that does something</a></li><li><a href="labs/LAB-02-REMOTE-TABLE.html">Lab 02 — practical Remote Table</a></li></ul></li>
+<li><ul class="sub"><li><a href="labs/LAB-00-ORIENTATION.html">Lab 00 — orientation (30 min)</a></li><li><a href="labs/LAB-01-REST-MESSAGE.html">Lab 01 — REST Message that does something</a></li><li><a href="labs/LAB-04-FOUNDATION-DATA.html">Lab 04 — foundation data, then proof</a></li><li><a href="labs/LAB-02-REMOTE-TABLE.html">Lab 02 — practical Remote Table</a></li></ul></li>
 <li><a href="#toolkit"><strong>Toolkit</strong></a></li>
 <li><ul class="sub"><li><a href="07-probe.html">The probe (make your instance the truth)</a></li><li><a href="generated/brief-itsm-incident.html">sn_learn.py — briefs, plans, quizzes</a></li></ul></li>
     </ul>
@@ -101,6 +101,7 @@
     <h2 id="start-here">Start here</h2>
 <div class="grid">
 <a class="card" href="01-ELI5.html"><span class="tag" style="--tag:#38bdf8">guide</span><h3>ELI5: ServiceNow for beginners</h3><p>The building-and-filing-cabinet analogy, a 30-minute first session, and a glossary that defines every term before it is used.</p></a>
+<a class="card" href="09-foundation-data.html"><span class="tag" style="--tag:#f97316">start</span><h3>Foundation data: the layer everyone skips</h3><p>Companies, locations, departments, cost centres, users, groups, business hours — the objects every module assumes exist, in dependency order.</p></a>
 <a class="card" href="00-methodology.html"><span class="tag" style="--tag:#a78bfa">method</span><h3>The rapid-learning methodology</h3><p>Five gates in 95 minutes: orient, model, practise, prove, teach. Why that order, and what each gate must produce.</p></a>
 <a class="card" href="00-methodology#4-source-ladder--official-first-always.html"><span class="tag" style="--tag:#22d3ee">sources</span><h3>Official sources only</h3><p>Docs, Now Create, Now Learning, Developer PDI, Community, Store, Support — and the ToS rules that keep you out of trouble.</p></a>
 </div>
@@ -121,6 +122,7 @@
 <div class="grid">
 <a class="card" href="labs/LAB-00-ORIENTATION.html"><span class="tag" style="--tag:#34d399">lab</span><h3>Lab 00 — orientation (30 min)</h3><p>Zero-risk first session: navigation, forms as records, dictionary-mandatory vs UI-policy-mandatory, impersonation.</p></a>
 <a class="card" href="labs/LAB-01-REST-MESSAGE.html"><span class="tag" style="--tag:#34d399">lab</span><h3>Lab 01 — REST Message that does something</h3><p>Call a real API, turn the answer into an incident with a dedupe guard, build the inbound direction, then break it five ways.</p></a>
+<a class="card" href="labs/LAB-04-FOUNDATION-DATA.html"><span class="tag" style="--tag:#34d399">lab</span><h3>Lab 04 — foundation data, then proof</h3><p>Load the smallest foundation set that makes ITSM behave, then break each dependency and watch the module fail without an error message.</p></a>
 <a class="card" href="labs/LAB-02-REMOTE-TABLE.html"><span class="tag" style="--tag:#34d399">lab</span><h3>Lab 02 — practical Remote Table</h3><p>Expose a REST API as a read-only table, use it in a report, and learn exactly where the illusion breaks.</p></a>
 </div>
 <h2 id="toolkit">Toolkit</h2>

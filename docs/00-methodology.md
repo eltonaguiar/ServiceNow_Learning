@@ -132,7 +132,7 @@ A summary that stops at "what it is" is a dictionary entry. The value is in *wha
 | Day | 90-minute block | Output |
 |---|---|---|
 | 0 (30 min) | Get a PDI, log in, run `sn_probe.js`, open `docs/01-ELI5.md` | A probe sheet and a working login |
-| 1 | `platform-basics`, then `itsm-incident` with `LAB-00-ORIENTATION.md` | Two teach-back notes, one incident you raised and resolved |
+| 1 | `foundation-data` + [`LAB-04-FOUNDATION-DATA.md`](../labs/LAB-04-FOUNDATION-DATA.md), then `platform-basics` and `itsm-incident` with `LAB-00-ORIENTATION.md` | A foundation set that makes ITSM behave, two teach-back notes, one incident you raised and resolved |
 | 2 | `integration` + `LAB-01-REST-MESSAGE.md` | A REST Message that creates a real record from an external API |
 | 3 | `itom-cmdb` + `LAB-02-REMOTE-TABLE.md` | A remote table you can report on, plus the fields/related-lists audit |
 

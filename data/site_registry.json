@@ -8,6 +8,13 @@
   },
   {
     "section": "Start here",
+    "title": "Foundation data: the layer everyone skips",
+    "path": "docs/09-foundation-data",
+    "description": "Companies, locations, departments, cost centres, users, groups, business hours \u2014 the objects every module assumes exist, in dependency order.",
+    "tag": "start"
+  },
+  {
+    "section": "Start here",
     "title": "The rapid-learning methodology",
     "path": "docs/00-methodology",
     "description": "Five gates in 95 minutes: orient, model, practise, prove, teach. Why that order, and what each gate must produce.",
@@ -81,6 +88,13 @@
     "title": "Lab 01 \u2014 REST Message that does something",
     "path": "labs/LAB-01-REST-MESSAGE",
     "description": "Call a real API, turn the answer into an incident with a dedupe guard, build the inbound direction, then break it five ways.",
+    "tag": "lab"
+  },
+  {
+    "section": "Labs",
+    "title": "Lab 04 \u2014 foundation data, then proof",
+    "path": "labs/LAB-04-FOUNDATION-DATA",
+    "description": "Load the smallest foundation set that makes ITSM behave, then break each dependency and watch the module fail without an error message.",
     "tag": "lab"
   },
   {

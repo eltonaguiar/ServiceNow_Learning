@@ -13,6 +13,73 @@
   },
   "modules": [
     {
+      "id": "foundation-data",
+      "name": "Foundation data (load this before any module)",
+      "app": "Platform",
+      "confidence": "high",
+      "why": "Every module assumes people, places and groups already exist. Skip this and your incident has no caller, no assignment group, no SLA schedule and no reporting dimensions — the module looks broken when the data is simply absent.",
+      "primary_table": "sys_user",
+      "tables": ["core_company", "cmn_location", "cmn_department", "cmn_cost_center", "sys_user", "sys_user_group", "sys_user_group_type", "cmn_schedule", "sys_choice"],
+      "roles": ["admin", "user_admin", "itil"],
+      "breadcrumbs": [
+        "All > Organization > Companies  (core_company)",
+        "All > Organization > Locations  (cmn_location — hierarchies, time zones)",
+        "All > Organization > Departments  (cmn_department — the reporting backbone)",
+        "All > Organization > Cost Centers  (cmn_cost_center)",
+        "All > User Administration > Users  (sys_user — never delete, deactivate)",
+        "All > User Administration > Groups  (sys_user_group — the unit of routing)",
+        "All > Service Level Management > Schedules  (business hours that SLAs run on)",
+        "All > System Import Sets > Load Data  (the loader you will use for all of it)"
+      ],
+      "guided_setup": {"available": false, "note": "Foundation data has no guided setup of its own; each app's guided setup assumes it is already loaded. That assumption is exactly why people skip it."},
+      "oob": {
+        "flows": ["Nothing to automate here — this is data, not process. Load order is the 'flow'."],
+        "playbooks": ["Success Pack / implementation guidance starts with a foundation data load phase"],
+        "integrations": ["HR system (employee master), AD/LDAP (users + groups), ERP (cost centres), CMDB discovery (locations)"],
+        "metrics": ["Users without a department" , "Users without a manager", "Groups with no manager or members", "Locations without a time zone"],
+        "dashboards": ["User/group hygiene reports (custom, but cheap and high value)"]
+      },
+      "fields": {
+        "critical": [
+          {"field": "sys_user.user_name", "why": "Login id; also the join key for every HR/AD feed. Get the convention right once."},
+          {"field": "sys_user.active", "why": "Deactivate, never delete — history and approvals reference it."},
+          {"field": "sys_user.department", "why": "Drives reporting, approvals and cost allocation."},
+          {"field": "sys_user.manager", "why": "Every approval flow and escalation path ultimately walks this."},
+          {"field": "sys_user_group.name", "why": "Assignment groups are how work is routed; a group with no manager is an orphan queue."},
+          {"field": "cmn_location.time_zone", "why": "Schedules and SLAs silently compute against the wrong clock without it."},
+          {"field": "cmn_schedule business hours", "why": "An SLA on a 24x7 schedule against a business-hours team reports breaches that are arithmetic, not performance."}
+        ],
+        "useful": ["company", "location", "cost_center", "email", "phone", "title", "group type", "parent location", "parent department"],
+        "optional": ["photo", "preferred_language", "notification preferences"],
+        "related_lists": ["User > Roles", "User > Groups", "User > Assigned to me", "Group > Members", "Group > Roles", "Location > Child locations"]
+      },
+      "must_know": [
+        "Load order is dependency order: company → location → department → cost centre → users → groups → schedules → categories. Reversing it creates orphans you will chase for weeks.",
+        "Users are referenced by every record they ever touched. Import an update, never delete-and-recreate.",
+        "Assignment groups are routing. If a group has no manager and no members, the queue is invisible.",
+        "Business hours/schedules are foundation data, not SLA configuration — but SLAs break without them.",
+        "A 20-row real load with correct references beats a 2,000-row import with wrong ones."
+      ],
+      "mistakes": [
+        "Loading users before departments/companies (every user ends up with an empty org).",
+        "Infinite recursion via a manager chain or a parent location pointing at its own child.",
+        "Duplicate users from two feeds (HR + AD) with different user_name conventions.",
+        "Deleting users instead of deactivating, breaking historical approvals.",
+        "Groups created per person instead of per function.",
+        "Skipping time zones on locations, so SLAs compute against UTC.",
+        "No business-hours schedule, then blaming the SLA engine.",
+        "Loading in production first because 'it's only reference data'."
+      ],
+      "labs": ["labs/LAB-04-FOUNDATION-DATA.md"],
+      "timebox_min": {"orient": 10, "model": 20, "practice": 45, "prove": 10},
+      "quiz": [
+        "What is the correct load order, and which two objects are most often swapped?",
+        "Why is delete-and-recreate the wrong way to fix a user record?",
+        "Which foundation object silently breaks SLA timing if it is wrong?",
+        "What makes an assignment group an orphan queue?"
+      ]
+    },
+    {
       "id": "platform-basics",
       "name": "Platform basics (Module 0 — do this first)",
       "app": "Platform",

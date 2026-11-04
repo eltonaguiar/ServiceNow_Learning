@@ -88,8 +88,39 @@ def render(probe: dict, kb: dict, focus: str | None) -> str:
         "",
     ]
 
+    # ---- foundation data
+    fnd = probe.get("foundation") or {}
+    lines += ["## 2. Foundation data (the layer every module assumes)", ""]
+    counts = fnd.get("counts") or {}
+    if counts or fnd.get("missing"):
+        rows = []
+        for table in sorted(set(list(counts) + (fnd.get("missing") or []))):
+            if table in (fnd.get("missing") or []):
+                rows.append([f"`{table}`", "—", "MISSING", "table not in this instance"])
+            else:
+                n = counts.get(table, 0)
+                state = "EMPTY" if n == 0 else "ok"
+                note = "nothing loaded — every dependent feature degrades" if n == 0 else ""
+                rows.append([f"`{table}`", str(n), state, note])
+        lines.append(table_md(["Object", "Rows", "State", "Read it as"], rows))
+        hyg = fnd.get("hygiene") or {}
+        if hyg:
+            lines += ["", "**Hygiene (the numbers that predict bad reports):**", ""]
+            for k, v in hyg.items():
+                flag = "⚠️" if v else "✅"
+                lines.append(f"- {flag} {k.replace('_', ' ')}: **{v}**")
+        cmn = fnd.get("cmn_tables") or []
+        if cmn:
+            lines += ["", f"Schedule-related tables present: {', '.join('`'+c+'`' for c in cmn)}"]
+        lines += ["", "Load order (company → location → department → cost centre → users → groups → "
+                      "schedules) is in `docs/09-foundation-data.md`."]
+    else:
+        lines.append("_The probe did not report foundation data — re-run it with the current "
+                     "`scripts/sn_probe.js`._")
+    lines.append("")
+
     # ---- guided setup
-    lines += ["## 2. Guided Setup modules found", ""]
+    lines += ["## 3. Guided Setup modules found", ""]
     mods = gs.get("modules", [])
     if mods:
         lines.append(table_md(["Module title", "Target"], [[m.get("title", ""), m.get("target", "")] for m in mods]))
@@ -102,7 +133,7 @@ def render(probe: dict, kb: dict, focus: str | None) -> str:
     lines.append("")
 
     # ---- per-table detail
-    lines += ["## 3. Per-table facts (mandatory fields are the real answer)", ""]
+    lines += ["## 4. Per-table facts (mandatory fields are the real answer)", ""]
     for name, info in tables.items():
         if focus and focus in kb_map(kb) and name not in kb_map(kb)[focus].get("tables", []):
             continue
@@ -121,7 +152,7 @@ def render(probe: dict, kb: dict, focus: str | None) -> str:
         lines += ["", f"**Related lists configured:** {', '.join('`'+r+'`' for r in rel) if rel else '_none found_'}", ""]
 
     # ---- gaps vs the kit
-    lines += ["## 4. Gaps vs what the kit expects", ""]
+    lines += ["## 5. Gaps vs what the kit expects", ""]
     gaps = []
     for mod in kb["modules"]:
         primary = mod.get("primary_table")
@@ -139,11 +170,13 @@ def render(probe: dict, kb: dict, focus: str | None) -> str:
 
     # ---- errors
     errs = probe.get("errors") or []
-    lines += ["## 5. Probe errors (each one is a release difference)", ""]
+    lines += ["## 6. Probe errors (each one is a release difference)", ""]
     lines += [f"- {e}" for e in errs] if errs else ["- None. Every query in the probe succeeded."]
-    lines += ["", "## 6. What to do next", "",
-              "1. Compare section 3 against `docs/04-fields.md` — differences are your release's truth.",
-              "2. Open every module in section 4's gap list and confirm whether it is genuinely absent.",
+    lines += ["", "## 7. What to do next", "",
+              "0. Empty foundation rows in section 2 mean no module will behave: load them first "
+              "(see docs/09-foundation-data.md).",
+              "1. Compare section 4 against `docs/04-fields.md` — differences are your release's truth.",
+              "2. Open every module in section 5's gap list and confirm whether it is genuinely absent.",
               "3. Run the lab for the module you are learning, then re-run the probe and diff the sheet.", ""]
     return "\n".join(lines)
 

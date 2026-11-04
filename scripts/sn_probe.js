@@ -30,6 +30,13 @@ var PROBE = (function () {
         'sn_hr_core_case', 'sn_si_incident', 'sn_customerservice_case', 'wm_order',
         'sys_user', 'sys_user_group'
     ];
+    // Foundation data: the layer every module assumes exists. Load order matters and has
+    // nothing to do with process configuration, which is why it gets skipped.
+    var FOUNDATION_TABLES = [
+        'core_company', 'cmn_location', 'cmn_department', 'cmn_cost_center',
+        'sys_user', 'sys_user_group', 'sys_user_group_type',
+        'cmn_schedule'
+    ];
     var MAX_ROWS = 60;        // per list, keeps the output readable
     var SAMPLE = 8;           // example names per section
     // -----------------------------------------------------------------------
@@ -47,7 +54,8 @@ var PROBE = (function () {
         automation: {},
         apis: {},
         analytics: {},
-        sam: {}
+        sam: {},
+        foundation: {}
     };
 
     function safe(label, fn, fallback) {
@@ -112,6 +120,52 @@ var PROBE = (function () {
             return info;
         }, { label: table, exists: false, mandatory: [], related_lists: [], row_count: null });
     });
+
+    // ---- foundation data: counts, missing, empty --------------------------
+    out.foundation = safe('foundation', function () {
+        var counts = {};
+        var missing = [];
+        FOUNDATION_TABLES.forEach(function (t) {
+            var dbo = new GlideRecord('sys_db_object');
+            if (!dbo.get('name', t)) { missing.push(t); return; }
+            var agg = new GlideAggregate(t);
+            agg.addAggregate('COUNT');
+            agg.query();
+            counts[t] = agg.next() ? (parseInt(agg.getAggregate('COUNT'), 10) || 0) : 0;
+        });
+        var empty = [];
+        for (var k in counts) { if (counts[k] === 0) { empty.push(k); } }
+
+        // Users with no org dimensions are the symptom that shows up in every bad report.
+        function countWhere(table, field) {
+            var gr = new GlideAggregate(table);
+            gr.addQuery(field, 'EMPTY');
+            gr.addAggregate('COUNT');
+            gr.query();
+            return gr.next() ? (parseInt(gr.getAggregate('COUNT'), 10) || 0) : 0;
+        }
+        var hygiene = safe('foundation hygiene', function () {
+            return {
+                users_without_department: countWhere('sys_user', 'department'),
+                users_without_manager: countWhere('sys_user', 'manager'),
+                users_without_location: countWhere('sys_user', 'location'),
+                groups_without_manager: countWhere('sys_user_group', 'manager'),
+                locations_without_time_zone: countWhere('cmn_location', 'time_zone')
+            };
+        }, {});
+
+        // Which schedule-ish tables this release actually has (names vary).
+        var schedule_tables = [];
+        var sched = new GlideRecord('sys_db_object');
+        sched.addQuery('name', 'STARTSWITH', 'cmn_');
+        sched.orderBy('name');
+        sched.setLimit(30);
+        sched.query();
+        while (sched.next()) { schedule_tables.push(sched.getValue('name')); }
+
+        return { counts: counts, missing: missing, empty: empty, hygiene: hygiene,
+                 cmn_tables: schedule_tables };
+    }, {});
 
     // ---- plugins / installed apps ----------------------------------------
     out.plugins = safe('plugins', function () {

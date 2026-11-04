@@ -19,7 +19,32 @@
 | SAM schema | 0 tables | 0 = SAM not installed (Foundation vs Pro matters) |
 | Active plugins listed | 42 | first 60 only |
 
-## 2. Guided Setup modules found
+## 2. Foundation data (the layer every module assumes)
+
+| Object | Rows | State | Read it as |
+|---|---|---|---|
+| `cmn_cost_center` | 0 | EMPTY | nothing loaded — every dependent feature degrades |
+| `cmn_department` | 8 | ok |  |
+| `cmn_location` | 12 | ok |  |
+| `cmn_schedule` | 2 | ok |  |
+| `core_company` | 3 | ok |  |
+| `sys_user` | 240 | ok |  |
+| `sys_user_group` | 31 | ok |  |
+| `sys_user_group_type` | 6 | ok |  |
+
+**Hygiene (the numbers that predict bad reports):**
+
+- ⚠️ users without department: **41**
+- ⚠️ users without manager: **12**
+- ⚠️ users without location: **7**
+- ⚠️ groups without manager: **4**
+- ⚠️ locations without time zone: **2**
+
+Schedule-related tables present: `cmn_department`, `cmn_location`, `cmn_schedule`, `cmn_schedule_span`
+
+Load order (company → location → department → cost centre → users → groups → schedules) is in `docs/09-foundation-data.md`.
+
+## 3. Guided Setup modules found
 
 | Module title | Target |
 |---|---|
@@ -28,7 +53,7 @@
 
 If an app you care about is missing here, it either has no guided setup on this release or the module is titled differently — do not assume it is missing.
 
-## 3. Per-table facts (mandatory fields are the real answer)
+## 4. Per-table facts (mandatory fields are the real answer)
 
 ### `incident` — Incident · 412 rows
 
@@ -51,16 +76,17 @@ If an app you care about is missing here, it either has no guided setup on this 
 
 The table does not exist on this instance (plugin/app not installed).
 
-## 4. Gaps vs what the kit expects
+## 5. Gaps vs what the kit expects
 
 - SAM: no `samp_*` / `cmdb_sam_*` tables — the SAM guide is theory until you get a SAM-entitled instance (see labs/LAB-03-SAM-BASELINE.md Part 0-B for the fallback)
 
-## 5. Probe errors (each one is a release difference)
+## 6. Probe errors (each one is a release difference)
 
 - pa_dashboards: Invalid table
 
-## 6. What to do next
+## 7. What to do next
 
-1. Compare section 3 against `docs/04-fields.md` — differences are your release's truth.
-2. Open every module in section 4's gap list and confirm whether it is genuinely absent.
+0. Empty foundation rows in section 2 mean no module will behave: load them first (see docs/09-foundation-data.md).
+1. Compare section 4 against `docs/04-fields.md` — differences are your release's truth.
+2. Open every module in section 5's gap list and confirm whether it is genuinely absent.
 3. Run the lab for the module you are learning, then re-run the probe and diff the sheet.

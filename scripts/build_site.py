@@ -26,6 +26,8 @@ UPDATED = "2026-11-04"
 PAGES = [
     ("Start here", "ELI5: ServiceNow for beginners", "docs/01-ELI5",
      "The building-and-filing-cabinet analogy, a 30-minute first session, and a glossary that defines every term before it is used.", "guide"),
+    ("Start here", "Foundation data: the layer everyone skips", "docs/09-foundation-data",
+     "Companies, locations, departments, cost centres, users, groups, business hours — the objects every module assumes exist, in dependency order.", "start"),
     ("Start here", "The rapid-learning methodology", "docs/00-methodology",
      "Five gates in 95 minutes: orient, model, practise, prove, teach. Why that order, and what each gate must produce.", "method"),
     ("Start here", "Official sources only", "docs/00-methodology#4-source-ladder--official-first-always",
@@ -51,6 +53,8 @@ PAGES = [
      "Zero-risk first session: navigation, forms as records, dictionary-mandatory vs UI-policy-mandatory, impersonation.", "lab"),
     ("Labs", "Lab 01 — REST Message that does something", "labs/LAB-01-REST-MESSAGE",
      "Call a real API, turn the answer into an incident with a dedupe guard, build the inbound direction, then break it five ways.", "lab"),
+    ("Labs", "Lab 04 — foundation data, then proof", "labs/LAB-04-FOUNDATION-DATA",
+     "Load the smallest foundation set that makes ITSM behave, then break each dependency and watch the module fail without an error message.", "lab"),
     ("Labs", "Lab 02 — practical Remote Table", "labs/LAB-02-REMOTE-TABLE",
      "Expose a REST API as a read-only table, use it in a report, and learn exactly where the illusion breaks.", "lab"),
 

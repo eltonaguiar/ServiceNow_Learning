@@ -35,6 +35,7 @@ no "10 tricks" listicles.
 | Read | Why |
 |---|---|
 | [`docs/01-ELI5.md`](docs/01-ELI5.md) | The building-and-filing-cabinet analogy, a 30-minute first session, and a glossary that defines every term before using it |
+| [`docs/09-foundation-data.md`](docs/09-foundation-data.md) | Companies, locations, departments, cost centres, users, groups, business hours — the layer every module assumes, in dependency order |
 | [`docs/00-methodology.md`](docs/00-methodology.md) | The five-gate loop, why the order matters, and the five multipliers that save hours |
 | [`labs/LAB-00-ORIENTATION.md`](labs/LAB-00-ORIENTATION.md) | A zero-risk first 30 minutes on your own instance |
 
@@ -58,6 +59,10 @@ returns and let the next session start from what you could not explain.
 ### The loop, in one image
 
 ![The 95-minute loop: Orient, Model, Practise, Prove, Teach, with the teach-back feeding back into Orient](infographics/learning-loop.png)
+
+### The layer underneath every module
+
+![Foundation data in dependency order: company, location, department, cost centre, users, groups, schedules](infographics/foundation-load-order.png)
 
 ### Every module answers the same five questions
 
@@ -94,6 +99,7 @@ The first module carried all the way to a defensible number:
 | Lab | What you build | Time |
 |---|---|---|
 | [`LAB-00-ORIENTATION.md`](labs/LAB-00-ORIENTATION.md) | Nothing — you learn to read the platform | 30 min |
+| [`LAB-04-FOUNDATION-DATA.md`](labs/LAB-04-FOUNDATION-DATA.md) | The smallest foundation data set that makes ITSM behave — then break each dependency | 60 min |
 | [`LAB-01-REST-MESSAGE.md`](labs/LAB-01-REST-MESSAGE.md) | A REST Message that creates a real incident from live external data, with dedupe, plus the inbound direction | 75 min |
 | [`LAB-02-REMOTE-TABLE.md`](labs/LAB-02-REMOTE-TABLE.md) | A REST API exposed as a read-only table, used in a report, with its limits demonstrated | 60 min |
 | [`LAB-03-SAM-BASELINE.md`](labs/LAB-03-SAM-BASELINE.md) | A licence position you can defend — and can break with one metric change | 90 min |
@@ -143,6 +149,7 @@ docs/
   06-inventory.md       Guided Setup / OOB flows / spokes / metrics per app
   07-probe.md           how to run and use the probe
   08-SAM-SETUP.md       applied SAM guide
+  09-foundation-data.md users, groups, locations, departments, schedules — load order
 labs/                   4 hands-on labs, each with a break-it phase
 scripts/                probe, sheet, brief generator, infographics, site, lint
 infographics/           SVG + PNG, regenerable

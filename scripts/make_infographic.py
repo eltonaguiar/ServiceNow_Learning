@@ -252,10 +252,54 @@ def sam_order() -> list[str]:
     return parts
 
 
+def foundation() -> list[str]:
+    w, h = 1180, 470
+    parts = svg_open(w, h) + title_block(
+        w, "Foundation data — load in this order or chase orphans for weeks",
+        "Every module above this layer looks broken when the layer below is empty.")
+    steps = [
+        ("1 · Company", "core_company", "no owner of record"),
+        ("2 · Location", "cmn_location + time zone", "SLAs compute against UTC"),
+        ("3 · Department", "cmn_department", "reports group into (empty)"),
+        ("4 · Cost centre", "cmn_cost_center", "no spend allocation"),
+        ("5 · Users", "sys_user + manager", "approvals have nowhere to go"),
+        ("6 · Groups", "sys_user_group + manager", "routing to an orphan queue"),
+        ("7 · Schedule", "business hours", "SLA clock is wrong by hours"),
+        ("8 · Categories", "sys_choice, kept short", "unusable reporting"),
+    ]
+    bw, bh, gx, gy = 250, 108, 30, 34
+    x0, y0 = 40, 118
+    for i, (name, table, breaks) in enumerate(steps):
+        row, col = divmod(i, 4)
+        x = x0 + col * (bw + gx)
+        y = y0 + row * (bh + gy)
+        accent = ACCENTS[i % len(ACCENTS)]
+        parts.append(f'<rect x="{x}" y="{y}" width="{bw}" height="{bh}" rx="10" fill="{PANEL}" '
+                     f'stroke="{accent}" stroke-opacity="0.6"/>')
+        parts.append(text(x + 14, y + 28, name, 14, INK, "650"))
+        parts.append(text(x + 14, y + 50, table, 11.5, accent))
+        parts.append(text(x + 14, y + 74, "skip → " + breaks, 11, MUTED))
+        if col < 3:
+            parts.append(arrow(x + bw + 3, y + bh // 2, x + bw + gx - 3, y + bh // 2))
+    # row 1 ends at box 4; the sequence continues at box 5 (start of row 2),
+    # so the connector goes down, back across, then down into box 5.
+    x4 = x0 + 3 * (bw + gx) + bw // 2
+    x5 = x0 + bw // 2
+    y_mid = y0 + bh + gy // 2
+    y_row2 = y0 + bh + gy
+    parts.append(f'<path d="M {x4} {y0 + bh} V {y_mid} H {x5} V {y_row2 - 2}" fill="none" '
+                 f'stroke="#64748b" stroke-width="1.6" marker-end="url(#arrow)"/>')
+    parts.append(text(40, h - 26, "Lab: labs/LAB-04-FOUNDATION-DATA.md · Load 20 real rows, not 2,000 wrong ones.",
+                      11.5, "#64748b"))
+    parts.append("</svg>")
+    return parts
+
+
 BUILDERS = {"loop": learning_loop, "anatomy": module_anatomy, "flow": integration_flow,
-            "sam-gates": sam_gates, "sam-order": sam_order}
+            "sam-gates": sam_gates, "sam-order": sam_order, "foundation": foundation}
 NAMES = {"loop": "learning-loop", "anatomy": "module-anatomy", "flow": "integration-flow",
-         "sam-gates": "sam-readiness-gates", "sam-order": "sam-build-order"}
+         "sam-gates": "sam-readiness-gates", "sam-order": "sam-build-order",
+         "foundation": "foundation-load-order"}
 
 
 def to_png(svg_path: Path) -> str:
