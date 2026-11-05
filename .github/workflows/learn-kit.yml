@@ -1,0 +1,65 @@
+name: Learning kit checks
+
+# Runs on every push and PR: the lint that enforces the kit's own rules, and a re-check of
+# every video link already published in data/video_links.json. Both are cheap and offline-ish,
+# so there is no reason to let a broken doc or a dead video reach the Pages site.
+#
+# Note: this does NOT run find_videos.py in search mode. A push must never rewrite the
+# published table with whatever today's search returns — --verify only re-checks what is
+# already published and fails loudly if something rotted.
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Lint the docs and data
+        run: python3 scripts/sn_lint.py
+
+      - name: Verify published video links
+        # --verify only re-checks what is already published; it never searches or writes.
+        run: python3 scripts/find_videos.py --verify
+
+      - name: Rebuild the landing page and fail if the committed HTML is stale
+        run: |
+          python3 scripts/build_site.py
+          if ! git diff --quiet -- index.html docs/index.html; then
+            echo "::error::index.html is out of date — run 'python3 scripts/build_site.py' and commit the result"
+            git diff --stat -- index.html docs/index.html
+            exit 1
+          fi
+
+  # Manual only, and deliberately does not commit: resolving writes data/video_links.json, and a
+  # machine should not silently swap published videos. Run it from the Actions tab, read the
+  # job log, then commit the diff yourself if the picks are right.
+  fill-gaps:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Re-resolve topics against the official channels
+        env:
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_V3_KEY }}
+        run: |
+          python3 scripts/find_videos.py
+          python3 scripts/find_videos.py --report
+          git diff --stat -- data/video_links.json || true
+          echo "::notice::If the picks changed, review the diff and commit it yourself."

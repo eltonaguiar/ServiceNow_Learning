@@ -1,100 +1,93 @@
 {
   "generated": "2026-11-05",
-  "method": "youtube channel search + oEmbed verification; only ServiceNow-owned authors kept",
+  "method": "youtube data api v3 search (official channels only) + oEmbed verification",
   "topics": {
     "fundamentals": {
       "label": "ServiceNow Fundamentals",
-      "keywords": [
-        "fundamentals"
-      ],
-      "video": null
+      "kind": "teaching series (#1 of 6)",
+      "match": "where do i fit",
+      "video": {
+        "id": "XErEM1jLxeU",
+        "title": "What is ServiceNow & Where Do I Fit? (ServiceNow Foundations #1)",
+        "author": "ServiceNow Dev Program",
+        "url": "https://www.youtube.com/watch?v=XErEM1jLxeU"
+      }
     },
     "admin": {
       "label": "ServiceNow Administration Fundamentals",
-      "keywords": [
-        "administration",
-        "fundamentals"
-      ],
-      "video": null
+      "kind": "teaching series (#2 of 6) \u2014 the closest official material to admin basics",
+      "match": "get started building",
+      "video": {
+        "id": "HPCTwBFvgBc",
+        "title": "How Do I Get Started Building on ServiceNow? (ServiceNow Foundations #2)",
+        "author": "ServiceNow Dev Program",
+        "url": "https://www.youtube.com/watch?v=HPCTwBFvgBc"
+      }
     },
     "sam-overview": {
       "label": "SAM overview",
-      "keywords": [
-        "software asset",
-        "asset management",
-        "sam"
-      ],
+      "kind": "conference keynote (Knowledge 2022), feature tour",
+      "match": "what's new in it asset management",
       "video": {
         "id": "rTWFbjAcQ7Q",
         "title": "What's New In IT Asset Management With Now Platform San Diego Release | Knowledge 2022",
         "author": "ServiceNow",
-        "url": "https://www.youtube.com/watch?v=rTWFbjAcQ7Q",
-        "score": 3
+        "url": "https://www.youtube.com/watch?v=rTWFbjAcQ7Q"
       }
     },
     "ham": {
       "label": "Hardware Asset Management overview",
-      "keywords": [
-        "hardware asset",
-        "asset management"
-      ],
+      "kind": "same keynote \u2014 no separate HAM video exists",
+      "match": "what's new in it asset management",
       "video": {
         "id": "rTWFbjAcQ7Q",
         "title": "What's New In IT Asset Management With Now Platform San Diego Release | Knowledge 2022",
         "author": "ServiceNow",
-        "url": "https://www.youtube.com/watch?v=rTWFbjAcQ7Q",
-        "score": 3
+        "url": "https://www.youtube.com/watch?v=rTWFbjAcQ7Q"
       }
     },
     "license": {
       "label": "Software license management",
-      "keywords": [
-        "license",
-        "software asset"
-      ],
+      "kind": "customer story, not a how-to",
+      "match": "southstate bank",
       "video": {
         "id": "UZRehk5SqIU",
         "title": "Presidio helps SouthState Bank improve audit readiness and software asset visibility with ServiceNow",
         "author": "ServiceNow",
-        "url": "https://www.youtube.com/watch?v=UZRehk5SqIU",
-        "score": 3
+        "url": "https://www.youtube.com/watch?v=UZRehk5SqIU"
       }
     },
     "procurement": {
       "label": "Procurement and contract management",
-      "keywords": [
-        "procurement",
-        "contract"
-      ],
+      "kind": "product/marketing",
+      "match": "put ai to work in procurement",
       "video": {
         "id": "KlqbDTaq7Ns",
         "title": "Put AI to work in procurement",
         "author": "ServiceNow",
-        "url": "https://www.youtube.com/watch?v=KlqbDTaq7Ns",
-        "score": 3
+        "url": "https://www.youtube.com/watch?v=KlqbDTaq7Ns"
       }
     },
     "cmdb": {
       "label": "CMDB fundamentals",
-      "keywords": [
-        "cmdb",
-        "configuration management"
-      ],
-      "video": null
+      "kind": "teaching series (#4 of 6) \u2014 data model and CMDB",
+      "match": "model your data",
+      "video": {
+        "id": "TTIcvlp4XNs",
+        "title": "How does ServiceNow Model Your Data? (ServiceNow Foundations #4)",
+        "author": "ServiceNow Dev Program",
+        "url": "https://www.youtube.com/watch?v=TTIcvlp4XNs"
+      }
     },
     "integration": {
       "label": "IntegrationHub and Discovery",
-      "keywords": [
-        "integrationhub",
-        "integration",
-        "discovery"
-      ],
+      "kind": "teaching series \u2014 Integrations on the Now Platform",
+      "match": "integrationhub overview",
       "video": {
-        "id": "_B5m3gcihqI",
-        "title": "Excel Imports in Integration Hub - Live Coding Happy Hour 2022/03/04",
+        "id": "RO707H-b5iY",
+        "title": "IntegrationHub Overview - Learn Integrations on the Now Platform",
         "author": "ServiceNow Dev Program",
-        "url": "https://www.youtube.com/watch?v=_B5m3gcihqI",
-        "score": 3
+        "url": "https://www.youtube.com/watch?v=RO707H-b5iY"
       }
     }
   }

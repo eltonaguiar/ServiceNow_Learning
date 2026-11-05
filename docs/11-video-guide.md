@@ -124,6 +124,88 @@ Edit `SCENES` in `scripts/build_video.py` to change narration; the captions rege
 
 ## Part E — Verified official videos by topic (checked 2026-11-04)
 
+**All 8 SAM topics resolve to a ServiceNow-owned video, and every link was verified through
+YouTube's oEmbed endpoint** — which returns the real title and channel, so a dead or
+re-uploaded video fails rather than 404s quietly.
+
+| SAM topic | Verified official video | What it actually is |
+|---|---|---|
+| ServiceNow Fundamentals | [What is ServiceNow & Where Do I Fit? (ServiceNow Foundations #1)](https://www.youtube.com/watch?v=XErEM1jLxeU) | teaching series (#1 of 6) |
+| ServiceNow Administration Fundamentals | [How Do I Get Started Building on ServiceNow? (ServiceNow Foundations #2)](https://www.youtube.com/watch?v=HPCTwBFvgBc) | teaching series (#2 of 6) — the closest official material to admin basics |
+| SAM overview | [What's New In IT Asset Management With Now Platform San Diego Release \| Knowledge 2022](https://www.youtube.com/watch?v=rTWFbjAcQ7Q) | conference keynote (Knowledge 2022), feature tour |
+| Hardware Asset Management overview | [What's New In IT Asset Management With Now Platform San Diego Release \| Knowledge 2022](https://www.youtube.com/watch?v=rTWFbjAcQ7Q) | same keynote — no separate HAM video exists |
+| Software license management | [Presidio helps SouthState Bank improve audit readiness and software asset visibility with ServiceNow](https://www.youtube.com/watch?v=UZRehk5SqIU) | customer story, not a how-to |
+| Procurement and contract management | [Put AI to work in procurement](https://www.youtube.com/watch?v=KlqbDTaq7Ns) | product/marketing |
+| CMDB fundamentals | [How does ServiceNow Model Your Data? (ServiceNow Foundations #4)](https://www.youtube.com/watch?v=TTIcvlp4XNs) | teaching series (#4 of 6) — data model and CMDB |
+| IntegrationHub and Discovery | [IntegrationHub Overview - Learn Integrations on the Now Platform](https://www.youtube.com/watch?v=RO707H-b5iY) | teaching series — Integrations on the Now Platform |
+
+**Read the right-hand column before you press play.** Four of these are genuine teaching
+material: the *ServiceNow Foundations* series (#1, #2, #4) and *IntegrationHub Overview*. The
+other four are not instruction — a Knowledge keynote, one customer story, and a
+procurement-marketing clip. ServiceNow does not publish SAM tutorials on its public channels;
+that content lives in Now Learning course lessons, which is why
+[`10-course-path.md`](10-course-path.md) is still the primary path and this table is the
+supplement.
+
+### How the table is produced and kept honest
+
+`scripts/find_videos.py` searches **inside** each official channel through the YouTube Data
+API (`channelId` scoped — a global search returns third-party creators first, which is how an
+earlier pass found nothing for Fundamentals or CMDB), then pins each result by a substring of
+its real title. Two failure modes are handled deliberately:
+
+- **No key, no guessing.** Without `YOUTUBE_API_KEY`/`YOUTUBE_API_V3_KEY` the script falls
+  back to parsing channel search pages and will report a topic as unresolved rather than invent
+  an id.
+- **No silent drift.** `python3 scripts/find_videos.py --verify` re-checks published links only
+  — no search, no writes — and fails if a video is gone or its title changed. CI runs exactly
+  that, so a dead video breaks the build instead of the reader's trust.
+
+`python3 scripts/find_videos.py --report` prints the table above from
+`data/video_links.json`; the doc is generated from that file, so they cannot disagree.
+
+## Part C — Material other agents dropped (checked 2026-11-04)
+
+Reviewed both repositories and every branch: **no video files and no specific video URLs exist
+yet.** What is there is useful preparation, so it is linked rather than duplicated:
+
+| Agent | What it actually is | Link |
+|---|---|---|
+| KiloCode | SAM video learning path, 8 items, titles + provider + length, no URLs | <https://github.com/eltonaguiar/ServiceNow_Learning_SAM/blob/main/KiloCode/docs/video-guide-getting-started.md> |
+| opencode | 25–30 min recording script, scene by scene | <https://github.com/eltonaguiar/ServiceNow_Learning_SAM/blob/main/opencode/guides/courses/video-guide-getting-started.md> |
+| opencode | Slide deck companion to that recording | <https://github.com/eltonaguiar/ServiceNow_Learning_SAM/blob/main/opencode/guides/courses/video-slides.md> |
+| Kilo (learning repo) | Course ordering with YouTube search links | <https://github.com/eltonaguiar/ServiceNow_Learning/blob/main/docs/courses/top-servicenow-learning-courses-order.md> |
+
+Two honest observations: a video *path* without links is a reading list, and a recording
+*script* is not a video. Both are worth keeping — they are the input to the recording described
+in Part B — but neither should be presented to a beginner as "the video".
+
+> Provenance note: this material has since been merged into `main` on both repositories, so the
+> links above are stable rather than branch-dependent.
+
+---
+
+## Part D — Watch the generated version (the one that exists today)
+
+**`video/getting-started.mp4`** — 4:48, 1280×720, H.264/AAC, burned-in captions, with
+`video/getting-started.vtt` beside it.
+
+- **What it is:** the eight-scene script above, narrated over slides, generated by
+  `scripts/build_video.py` (ffmpeg + espeak-ng + PIL). Deterministic: re-run it and you get the
+  same file.
+- **What it is not:** a screencast of a live instance. This repository has no ServiceNow
+  instance to record, so the clicks are described, not filmed. The footer says so on every
+  frame.
+- **Why 4:48 and not 8:00:** speech runs faster than a human demo with pauses. The eight
+  minutes in Part B remains the target for *your* screencast; this file rehearses the words.
+- **Rebuild:** `python3 scripts/build_video.py` (needs `ffmpeg`, `ffprobe`, `espeak-ng`).
+
+Edit `SCENES` in `scripts/build_video.py` to change narration; the captions regenerate with it.
+
+---
+
+## Part E — Verified official videos by topic (checked 2026-11-04)
+
 `scripts/find_videos.py` resolves a topic to a video by searching the official channel, then
 **verifying every candidate through YouTube's oEmbed endpoint** — which returns the real title
 and channel. Anything not authored by a ServiceNow channel is dropped rather than guessed.

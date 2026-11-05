@@ -34,11 +34,12 @@ you taking a specialisation course before you can use it. Full rationale and tim
 slides, rebuilt deterministically with `python3 scripts/build_video.py`; it is *not* a
 live-instance screencast and says so on every frame.
 
-**Verified official videos by topic:** 5 of the 8 SAM topics resolved to ServiceNow-owned
-videos and each was checked through YouTube's oEmbed endpoint — with the honest caveat that
-what exists is a keynote, a customer story and a dev session, not a curriculum. The three
-topics with no verified match are named rather than filled with a plausible-looking id:
-[`docs/11-video-guide.md`](docs/11-video-guide.md) Part E.
+**Verified official videos by topic:** all 8 SAM topics now resolve to a ServiceNow-owned
+video, each verified through YouTube's oEmbed endpoint. Four are real teaching material (the
+*ServiceNow Foundations* series and *IntegrationHub Overview*); the remaining four are a
+keynote, a customer story and a marketing clip, labelled as such rather than passed off as
+instruction: [`docs/11-video-guide.md`](docs/11-video-guide.md) Part E. A workflow re-checks
+every published link on each push and fails the build if one rots.
 
 Official video in order (`@ServiceNow`, `@ServiceNowDevProgram`, plus the video lessons inside
 the courses above), and an 8-minute getting-started video **scripted for you to record** on
