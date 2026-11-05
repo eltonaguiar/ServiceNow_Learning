@@ -1,0 +1,101 @@
+{
+  "generated": "2026-11-05",
+  "method": "youtube channel search + oEmbed verification; only ServiceNow-owned authors kept",
+  "topics": {
+    "fundamentals": {
+      "label": "ServiceNow Fundamentals",
+      "keywords": [
+        "fundamentals"
+      ],
+      "video": null
+    },
+    "admin": {
+      "label": "ServiceNow Administration Fundamentals",
+      "keywords": [
+        "administration",
+        "fundamentals"
+      ],
+      "video": null
+    },
+    "sam-overview": {
+      "label": "SAM overview",
+      "keywords": [
+        "software asset",
+        "asset management",
+        "sam"
+      ],
+      "video": {
+        "id": "rTWFbjAcQ7Q",
+        "title": "What's New In IT Asset Management With Now Platform San Diego Release | Knowledge 2022",
+        "author": "ServiceNow",
+        "url": "https://www.youtube.com/watch?v=rTWFbjAcQ7Q",
+        "score": 3
+      }
+    },
+    "ham": {
+      "label": "Hardware Asset Management overview",
+      "keywords": [
+        "hardware asset",
+        "asset management"
+      ],
+      "video": {
+        "id": "rTWFbjAcQ7Q",
+        "title": "What's New In IT Asset Management With Now Platform San Diego Release | Knowledge 2022",
+        "author": "ServiceNow",
+        "url": "https://www.youtube.com/watch?v=rTWFbjAcQ7Q",
+        "score": 3
+      }
+    },
+    "license": {
+      "label": "Software license management",
+      "keywords": [
+        "license",
+        "software asset"
+      ],
+      "video": {
+        "id": "UZRehk5SqIU",
+        "title": "Presidio helps SouthState Bank improve audit readiness and software asset visibility with ServiceNow",
+        "author": "ServiceNow",
+        "url": "https://www.youtube.com/watch?v=UZRehk5SqIU",
+        "score": 3
+      }
+    },
+    "procurement": {
+      "label": "Procurement and contract management",
+      "keywords": [
+        "procurement",
+        "contract"
+      ],
+      "video": {
+        "id": "KlqbDTaq7Ns",
+        "title": "Put AI to work in procurement",
+        "author": "ServiceNow",
+        "url": "https://www.youtube.com/watch?v=KlqbDTaq7Ns",
+        "score": 3
+      }
+    },
+    "cmdb": {
+      "label": "CMDB fundamentals",
+      "keywords": [
+        "cmdb",
+        "configuration management"
+      ],
+      "video": null
+    },
+    "integration": {
+      "label": "IntegrationHub and Discovery",
+      "keywords": [
+        "integrationhub",
+        "integration",
+        "discovery"
+      ],
+      "video": {
+        "id": "_B5m3gcihqI",
+        "title": "Excel Imports in Integration Hub - Live Coding Happy Hour 2022/03/04",
+        "author": "ServiceNow Dev Program",
+        "url": "https://www.youtube.com/watch?v=_B5m3gcihqI",
+        "score": 3
+      }
+    }
+  }
+}

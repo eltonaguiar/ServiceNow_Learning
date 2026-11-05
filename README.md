@@ -29,6 +29,17 @@ you taking a specialisation course before you can use it. Full rationale and tim
 
 ### Video guide
 
+**▶ Generated walkthrough — [`video/getting-started.mp4`](video/getting-started.mp4)** (4:48,
+1280×720, captions in [`getting-started.vtt`](video/getting-started.vtt)). Narration over
+slides, rebuilt deterministically with `python3 scripts/build_video.py`; it is *not* a
+live-instance screencast and says so on every frame.
+
+**Verified official videos by topic:** 5 of the 8 SAM topics resolved to ServiceNow-owned
+videos and each was checked through YouTube's oEmbed endpoint — with the honest caveat that
+what exists is a keynote, a customer story and a dev session, not a curriculum. The three
+topics with no verified match are named rather than filled with a plausible-looking id:
+[`docs/11-video-guide.md`](docs/11-video-guide.md) Part E.
+
 Official video in order (`@ServiceNow`, `@ServiceNowDevProgram`, plus the video lessons inside
 the courses above), and an 8-minute getting-started video **scripted for you to record** on
 your own instance — storyboard, narration, delivery notes:
