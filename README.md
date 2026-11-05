@@ -42,18 +42,17 @@ rather than copied:
 
 | Agent | What it actually is | Link |
 |---|---|---|
-| **KiloCode** | Curated SAM video path — 8 items with provider and length, **titles only, no URLs** | [video-guide-getting-started.md](https://github.com/eltonaguiar/ServiceNow_Learning_SAM/blob/kilo-2026-11-04-sam-learning-materials/KiloCode/docs/video-guide-getting-started.md) |
-| **opencode** | 25–30 minute getting-started recording script, scene by scene | [video-guide-getting-started.md](https://github.com/eltonaguiar/ServiceNow_Learning_SAM/blob/kilo-2026-11-04-sam-learning-materials/opencode/guides/courses/video-guide-getting-started.md) |
-| **opencode** | Slide deck for that recording | [video-slides.md](https://github.com/eltonaguiar/ServiceNow_Learning_SAM/blob/kilo-2026-11-04-sam-learning-materials/opencode/guides/courses/video-slides.md) |
-| **Kilo (learning repo)** | Course ordering with YouTube *search* links and the `@ServiceNow` channel | [top-servicenow-learning-courses-order.md](https://github.com/eltonaguiar/ServiceNow_Learning/blob/kilo-2026-11-04-servicenow-learning-methodology/docs/courses/top-servicenow-learning-courses-order.md) |
+| **KiloCode** | Curated SAM video path — 8 items with provider and length, **titles only, no URLs** | [video-guide-getting-started.md](https://github.com/eltonaguiar/ServiceNow_Learning_SAM/blob/main/KiloCode/docs/video-guide-getting-started.md) |
+| **opencode** | 25–30 minute getting-started recording script, scene by scene | [video-guide-getting-started.md](https://github.com/eltonaguiar/ServiceNow_Learning_SAM/blob/main/opencode/guides/courses/video-guide-getting-started.md) |
+| **opencode** | Slide deck for that recording | [video-slides.md](https://github.com/eltonaguiar/ServiceNow_Learning_SAM/blob/main/opencode/guides/courses/video-slides.md) |
+| **Kilo (learning repo)** | Course ordering with YouTube *search* links and the `@ServiceNow` channel | [top-servicenow-learning-courses-order.md](https://github.com/eltonaguiar/ServiceNow_Learning/blob/main/docs/courses/top-servicenow-learning-courses-order.md) |
 
 Stated plainly: a path without links is a reading list, and a script is not a video. Both are
 worth keeping — they are the input to the recording in `docs/11-video-guide.md` — but neither
 should be handed to a beginner as "the video". The only ServiceNow-owned channels verified on
 2026-11-04 are <https://www.youtube.com/@ServiceNow> and
-<https://www.youtube.com/@ServiceNowDevProgram>; anything else is third-party. The SAM files
-sit on the `kilo-2026-11-04-sam-learning-materials` branch, so those links break if it is
-deleted.
+<https://www.youtube.com/@ServiceNowDevProgram>; anything else is third-party. All of this material is now merged to `main` (see the merge commits), so these links no
+longer depend on a feature branch.
 
 ---
 

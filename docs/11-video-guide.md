@@ -89,17 +89,17 @@ yet.** What is there is useful preparation, so it is linked rather than duplicat
 
 | Agent | What it actually is | Link |
 |---|---|---|
-| KiloCode | SAM video learning path, 8 items, titles + provider + length, no URLs | <https://github.com/eltonaguiar/ServiceNow_Learning_SAM/blob/kilo-2026-11-04-sam-learning-materials/KiloCode/docs/video-guide-getting-started.md> |
-| opencode | 25–30 min recording script, scene by scene | <https://github.com/eltonaguiar/ServiceNow_Learning_SAM/blob/kilo-2026-11-04-sam-learning-materials/opencode/guides/courses/video-guide-getting-started.md> |
-| opencode | Slide deck companion to that recording | <https://github.com/eltonaguiar/ServiceNow_Learning_SAM/blob/kilo-2026-11-04-sam-learning-materials/opencode/guides/courses/video-slides.md> |
-| Kilo (learning repo) | Course ordering with YouTube search links | <https://github.com/eltonaguiar/ServiceNow_Learning/blob/kilo-2026-11-04-servicenow-learning-methodology/docs/courses/top-servicenow-learning-courses-order.md> |
+| KiloCode | SAM video learning path, 8 items, titles + provider + length, no URLs | <https://github.com/eltonaguiar/ServiceNow_Learning_SAM/blob/main/KiloCode/docs/video-guide-getting-started.md> |
+| opencode | 25–30 min recording script, scene by scene | <https://github.com/eltonaguiar/ServiceNow_Learning_SAM/blob/main/opencode/guides/courses/video-guide-getting-started.md> |
+| opencode | Slide deck companion to that recording | <https://github.com/eltonaguiar/ServiceNow_Learning_SAM/blob/main/opencode/guides/courses/video-slides.md> |
+| Kilo (learning repo) | Course ordering with YouTube search links | <https://github.com/eltonaguiar/ServiceNow_Learning/blob/main/docs/courses/top-servicenow-learning-courses-order.md> |
 
 Two honest observations: a video *path* without links is a reading list, and a recording
 *script* is not a video. Both are worth keeping — they are the input to the recording described
 in Part B — but neither should be presented to a beginner as "the video".
 
-> Provenance note: the SAM files sit on the `kilo-2026-11-04-sam-learning-materials` branch, not
-> `main`, so these links break if the branch is deleted.
+> Provenance note: this material has since been merged into `main` on both repositories, so the
+> links above are stable rather than branch-dependent.
 
 ## Official sources
 

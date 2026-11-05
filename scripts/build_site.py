@@ -168,12 +168,12 @@ def page(strip_docs: bool) -> str:
       linked here, not copied:</p>
       <ul class="agents">
         <li><strong>KiloCode</strong> — curated SAM video path, 8 items, titles only (no URLs):
-          <a href="https://github.com/eltonaguiar/ServiceNow_Learning_SAM/blob/kilo-2026-11-04-sam-learning-materials/KiloCode/docs/video-guide-getting-started.md">video-guide-getting-started.md</a></li>
+          <a href="https://github.com/eltonaguiar/ServiceNow_Learning_SAM/blob/main/KiloCode/docs/video-guide-getting-started.md">video-guide-getting-started.md</a></li>
         <li><strong>opencode</strong> — 25–30 minute recording script, scene by scene:
-          <a href="https://github.com/eltonaguiar/ServiceNow_Learning_SAM/blob/kilo-2026-11-04-sam-learning-materials/opencode/guides/courses/video-guide-getting-started.md">video script</a> ·
-          <a href="https://github.com/eltonaguiar/ServiceNow_Learning_SAM/blob/kilo-2026-11-04-sam-learning-materials/opencode/guides/courses/video-slides.md">slides</a></li>
+          <a href="https://github.com/eltonaguiar/ServiceNow_Learning_SAM/blob/main/opencode/guides/courses/video-guide-getting-started.md">video script</a> ·
+          <a href="https://github.com/eltonaguiar/ServiceNow_Learning_SAM/blob/main/opencode/guides/courses/video-slides.md">slides</a></li>
         <li><strong>Kilo (learning repo)</strong> — course order with YouTube search links:
-          <a href="https://github.com/eltonaguiar/ServiceNow_Learning/blob/kilo-2026-11-04-servicenow-learning-methodology/docs/courses/top-servicenow-learning-courses-order.md">top-servicenow-learning-courses-order.md</a></li>
+          <a href="https://github.com/eltonaguiar/ServiceNow_Learning/blob/main/docs/courses/top-servicenow-learning-courses-order.md">top-servicenow-learning-courses-order.md</a></li>
       </ul>
       <p class="fine">A path without links is a reading list; a script is not a video. The only
       ServiceNow-owned channels verified on 2026-11-04 are
