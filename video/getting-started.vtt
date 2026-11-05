@@ -1,25 +1,25 @@
 WEBVTT
 
-00:00:00.000 --> 00:00:40.084
+00:00:00.000 --> 00:00:39.444
 This is ServiceNow. One platform, many costumes: IT service management, HR, security operations, customer service, field service. They look like different products. They are the same machine pointed at different records. In the next eight minutes I will show you the machine, not a tour of menus. Everything you see is a row in a table; everything you can do is a rule about those rows. If that sounds abstract now, it will not by the end: you will watch one incident travel from a person who cannot log a ticket to a team that fixes it.
 
-00:00:40.084 --> 00:01:17.125
+00:00:39.444 --> 00:01:15.788
 Start in the filter navigator, top left. Type incident. This is the fastest way to navigate, and it teaches you the real name of things. What opens is a list: many records of one type. Click any row and you get a form: one record, with fields. So there are only three shapes to learn. A table holds records. A list shows many of them. A form shows one. The menu is just a saved pointer to a list, which is why the menu can move between releases and nothing about your data changes.
 
-00:01:17.125 --> 00:01:45.419
+00:01:15.788 --> 00:01:43.646
 Scroll to the bottom of the form. These are related lists, and they are the part beginners skip. Each one is another table, filtered to this record. Task SLA is the promise and its clock. Approvers are the people who can block. Work notes are the history. Affected configuration items are what this incident is about. If you only read the fields at the top, you are reading the cover of the book.
 
-00:01:45.419 --> 00:02:24.735
+00:01:43.646 --> 00:02:22.191
 Right click the header and choose configure, form layout. Fields are chosen, not hardcoded, and that change is reversible. Now the important part. Open tables and columns, search incident, and look at the columns. This is the dictionary, the definition of every field. A field can be mandatory here, which blocks forms, imports and APIs, or mandatory only through a UI policy, which blocks one form for one group of people. Those are different things, and confusing them breaks integrations that used to work.
 
-00:02:24.735 --> 00:03:02.603
+00:02:22.191 --> 00:02:59.434
 Under every module is a layer people forget to load. Users with a department, a location and a manager. Groups with a manager and members. Locations with a time zone. A business hours schedule. Skip these and the module looks broken: an incident with no caller, no assignment group and no schedule is not a bug, it is missing foundation data. Load them in dependency order, company, location, department, users, groups, schedules. Reversing that order creates orphans you will chase for weeks.
 
-00:03:02.603 --> 00:03:33.670
+00:02:59.434 --> 00:03:29.987
 Here is the whole idea in one flow. I impersonate an employee and raise an incident. Notice what they can see: almost nothing, by design. Back as an agent, I pick it up, assign a group, work it, resolve it. Now look at task SLA: a record with a clock that started when the ticket did and will pause when the state pauses. That is the difference between a promise in a contract and a number somebody can actually watch.
 
-00:03:33.670 --> 00:04:08.740
+00:03:29.987 --> 00:04:04.495
 Automation lives in flow designer. Before you build one, open an existing flow and read it out loud: trigger, condition, action. Most requirements are already a flow you can copy. Integrations are the same discipline in a different shape: a request, a body, a status code, and a record. Test the endpoint outside the platform first, then look at outbound HTTP requests before you blame the other system. That log answers more integration questions than any document.
 
-00:04:08.740 --> 00:04:48.889
+00:04:04.495 --> 00:04:43.926
 If you are starting: ServiceNow Fundamentals, then administration fundamentals, then the certified system administrator path. That last one gates every specialisation, so take it before a product certification rather than after. Automation before scripting. Measurement once you have something worth measuring. And do the lab next to every course, because a course without a lab teaches you to recognise a screen, not to build one. The order and the labs are in this repository. Start with the orientation lab, and record your own version of this video when you finish it.

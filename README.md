@@ -29,9 +29,10 @@ you taking a specialisation course before you can use it. Full rationale and tim
 
 ### Video guide
 
-**▶ Generated walkthrough — [`video/getting-started.mp4`](video/getting-started.mp4)** (4:48,
-1280×720, captions in [`getting-started.vtt`](video/getting-started.vtt)). Narration over
-slides, rebuilt deterministically with `python3 scripts/build_video.py`; it is *not* a
+**▶ Generated walkthrough — [`video/getting-started.mp4`](video/getting-started.mp4)** (4:35,
+1280×720, captions in [`getting-started.vtt`](video/getting-started.vtt)). An animated mock
+ServiceNow screen with a cursor that travels to each target and a highlight ring on the element
+being narrated, rebuilt deterministically with `python3 scripts/build_video.py`. It is *not* a
 live-instance screencast and says so on every frame.
 
 **Verified official videos by topic:** all 8 SAM topics now resolve to a ServiceNow-owned
