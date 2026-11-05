@@ -1,0 +1,135 @@
+# ServiceNow Module Learning Framework
+
+**Agent:** Kilo  
+**Date:** 2026-11-04  
+
+---
+
+## Purpose
+
+This framework teaches you how to learn **any** ServiceNow module using the same repeatable process. ServiceNow has 200+ modules and applications, but they all follow the same underlying patterns. Learn the pattern once, apply it everywhere.
+
+---
+
+## The Module Anatomy
+
+Every ServiceNow module has these common components:
+
+| Component | What It Is | Where to Find It |
+|-----------|------------|------------------|
+| **Table** | The database table storing records | Table: `[table_name]` |
+| **Form** | The UI for creating/editing records | Form designer on the table |
+| **List** | The UI for viewing multiple records | List view on the table |
+| **Business Rule** | Server-side logic that runs on save/delete | System Definition → Business Rules |
+| **UI Policy** | Client-side logic that shows/hides fields | System UI → UI Policies |
+| **Client Script** | JavaScript that runs in the browser | System UI → Client Scripts |
+| **ACL** | Access control (who can see/edit) | System Security → ACLs |
+| **Flow/Workflow** | Automated multi-step process | Flow Designer / Workflow |
+| **Report** | Aggregated view of data | Reports → Create New |
+| **Dashboard** | Visual collection of reports | Performance Analytics / Dashboards |
+
+---
+
+## The Module Learning Checklist
+
+For any module, answer these 10 questions:
+
+1. What is the module's primary table name?
+2. What is the required user role to access it?
+3. What are the 5 most important fields on the main form?
+4. What business rules fire on insert/update?
+5. What UI policies control field visibility?
+6. What ACLs protect the table?
+7. What flows or workflows are associated?
+8. What related tables does it connect to?
+9. What reports/dashboards exist out of the box?
+10. What integrations (inbound/outbound) does it support?
+
+---
+
+## Module-Specific Quick Starts
+
+### ServiceNow ITSM (Incident, Problem, Change)
+
+**Core table:** `incident`, `problem`, `change_request`  
+**Required role:** `itil`  
+**Key fields:** `number`, `short_description`, `state`, `priority`, `assignment_group`, `assigned_to`  
+**Common business rules:** Incident state transitions, SLA triggers, notification on assignment  
+**Common UI policies:** Show/hide fields based on incident state  
+**Lab:** Create an incident, assign it, resolve it, close it. Watch the state field change.
+
+### ServiceNow GRC (Governance, Risk, Compliance)
+
+**Core table:** `risk`, `policy`, `control`, `violation`  
+**Required role:** `sn_grc.admin`  
+**Key fields:** `risk_category`, `likelihood`, `impact`, `risk_score`, `control_type`  
+**Lab:** Create a risk record, associate a control, link a violation.
+
+### ServiceNow HR Service Delivery
+
+**Core table:** `sn_hr_core_case`, `sn_hr_core_task`  
+**Required role:** `sn_hr_core.admin`  
+**Key fields:** `case_state`, `category`, `assignment_group`, `employee`  
+**Lab:** Create an HR case, route it to an HR agent, close it.
+
+### ServiceNow ITOM (Discovery, Service Mapping, Event Management)
+
+**Core table:** `cmdb_ci`, `em_event`, `discovery_history`  
+**Required role:** `itil` + `discovery_admin`  
+**Lab:** Run a discovery scan against a test target, view the resulting CI in the CMDB.
+
+---
+
+## Success Packs
+
+ServiceNow "Success Packs" are pre-built application packages for specific industries or use cases (e.g., Financial Services, Healthcare, Public Sector). They bundle:
+
+- Pre-configured tables and fields
+- Pre-built flows and workflows
+- Pre-defined ACLs and roles
+- Pre-designed dashboards and reports
+- Sample data
+
+### Pre-Requisites for Installing a Success Pack
+
+| Prerequisite | What to Check | How to Verify |
+|-------------|--------------|---------------|
+| **Correct ServiceNow release** | Does the pack support your release? | System Properties → `glide.product.version` |
+| **Dependent applications** | Are required apps installed first? | Application Manager → check dependencies |
+| **Administrator role** | You need `admin` to install | Your user record → Roles → `admin` |
+| **Sufficient storage** | Packs add tables, records, attachments | System Diagnostics → Storage |
+| **Backup snapshot** | You can't uninstall a pack easily | System Clone → take a snapshot |
+
+---
+
+## Out-of-Box Components
+
+Every ServiceNow instance includes these out of the box:
+
+### Workflows
+- Incident Assignment workflow
+- Change Request Approval workflow
+- Problem Resolution workflow
+- Catalog Item Fulfillment workflow
+
+### Integrations
+- REST Message (outbound REST calls)
+- Inbound REST API (Table API, Record API)
+- MID Server (on-premise connectivity)
+- Import Sets (data loading from CSV/Excel)
+
+### Playbooks
+- Incident Response playbook
+- Change Management playbook
+- Major Incident Management playbook
+
+### Metrics & Dashboards
+- Incident volume by priority
+- Change success rate
+- SLA compliance percentage
+- CMDB completeness score
+- User adoption by module
+
+---
+
+*Generated by Kilo on 2026-11-04.*
