@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="620" viewBox="0 0 1280 620" font-family="'Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1120"/>
+      <stop offset="1" stop-color="#12264a"/>
+    </linearGradient>
+    <linearGradient id="chev" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#6366f1"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="620" fill="url(#bg2)"/>
+  <text x="640" y="58" text-anchor="middle" fill="#e5ecf7" font-size="30" font-weight="700">ServiceNow Module Implementation Lifecycle — 10 Gates</text>
+  <text x="640" y="88" text-anchor="middle" fill="#94a3b8" font-size="15">From "should we?" to "who runs it day 2?" — every gate has an owner and an evidence artifact</text>
+
+  <!-- Row 1: gates 1-5 -->
+  <g font-size="12">
+    <g>
+      <polygon points="60,150 240,150 260,195 240,240 60,240 40,195" fill="url(#chev)" opacity="0.92"/>
+      <text x="150" y="185" text-anchor="middle" fill="#06121f" font-size="12" font-weight="700">GATE 1</text>
+      <text x="150" y="205" text-anchor="middle" fill="#06121f" font-size="12" font-weight="700">Prerequisites</text>
+      <text x="150" y="224" text-anchor="middle" fill="#0f172a" font-size="10">plugin · roles · entitlements</text>
+    </g>
+    <g>
+      <polygon points="265,150 445,150 465,195 445,240 265,240 245,195" fill="url(#chev)" opacity="0.88"/>
+      <text x="355" y="185" text-anchor="middle" fill="#06121f" font-size="12" font-weight="700">GATE 2</text>
+      <text x="355" y="205" text-anchor="middle" fill="#06121f" font-size="12" font-weight="700">Dependency map</text>
+      <text x="355" y="224" text-anchor="middle" fill="#0f172a" font-size="10">release pin · content services</text>
+    </g>
+    <g>
+      <polygon points="470,150 650,150 670,195 650,240 470,240 450,195" fill="url(#chev)" opacity="0.84"/>
+      <text x="560" y="185" text-anchor="middle" fill="#06121f" font-size="12" font-weight="700">GATE 3</text>
+      <text x="560" y="205" text-anchor="middle" fill="#06121f" font-size="12" font-weight="700">Data model</text>
+      <text x="560" y="224" text-anchor="middle" fill="#0f172a" font-size="10">sources · fields · owners</text>
+    </g>
+    <g>
+      <polygon points="675,150 855,150 875,195 855,240 675,240 655,195" fill="url(#chev)" opacity="0.80"/>
+      <text x="765" y="185" text-anchor="middle" fill="#06121f" font-size="12" font-weight="700">GATE 4</text>
+      <text x="765" y="205" text-anchor="middle" fill="#06121f" font-size="12" font-weight="700">Configuration</text>
+      <text x="765" y="224" text-anchor="middle" fill="#0f172a" font-size="10">choices locked &amp; reviewed</text>
+    </g>
+    <g>
+      <polygon points="880,150 1060,150 1080,195 1060,240 880,240 860,195" fill="url(#chev)" opacity="0.76"/>
+      <text x="970" y="185" text-anchor="middle" fill="#06121f" font-size="12" font-weight="700">GATE 5</text>
+      <text x="970" y="205" text-anchor="middle" fill="#06121f" font-size="12" font-weight="700">Process design</text>
+      <text x="970" y="224" text-anchor="middle" fill="#0f172a" font-size="10">flows · exception queues</text>
+    </g>
+  </g>
+
+  <!-- connector down -->
+  <path d="M1080,195 C1180,195 1180,320 1080,320 L200,320 C120,320 120,340 200,340" stroke="#38bdf8" stroke-width="2" fill="none" stroke-dasharray="6 4"/>
+
+  <!-- Row 2: gates 6-10 (right to left) -->
+  <g font-size="12">
+    <g>
+      <polygon points="1080,345 1260,345 1240,390 1260,435 1080,435 1060,390" fill="url(#chev)" opacity="0.72"/>
+      <text x="1170" y="380" text-anchor="middle" fill="#06121f" font-size="12" font-weight="700">GATE 6</text>
+      <text x="1170" y="400" text-anchor="middle" fill="#06121f" font-size="12" font-weight="700">Test cases</text>
+      <text x="1170" y="419" text-anchor="middle" fill="#0f172a" font-size="10">expected results · executed</text>
+    </g>
+    <g>
+      <polygon points="875,345 1055,345 1035,390 1055,435 875,435 855,390" fill="url(#chev)" opacity="0.68"/>
+      <text x="965" y="380" text-anchor="middle" fill="#06121f" font-size="12" font-weight="700">GATE 7</text>
+      <text x="965" y="400" text-anchor="middle" fill="#06121f" font-size="12" font-weight="700">Rollback</text>
+      <text x="965" y="419" text-anchor="middle" fill="#0f172a" font-size="10">rehearsed &amp; documented</text>
+    </g>
+    <g>
+      <polygon points="670,345 850,345 830,390 850,435 670,435 650,390" fill="url(#chev)" opacity="0.64"/>
+      <text x="760" y="380" text-anchor="middle" fill="#06121f" font-size="12" font-weight="700">GATE 8</text>
+      <text x="760" y="400" text-anchor="middle" fill="#06121f" font-size="12" font-weight="700">Consumption</text>
+      <text x="760" y="419" text-anchor="middle" fill="#0f172a" font-size="10">reports · alerts · monitoring</text>
+    </g>
+    <g>
+      <polygon points="465,345 645,345 625,390 645,435 465,435 445,390" fill="url(#chev)" opacity="0.60"/>
+      <text x="555" y="380" text-anchor="middle" fill="#06121f" font-size="12" font-weight="700">GATE 9</text>
+      <text x="555" y="400" text-anchor="middle" fill="#06121f" font-size="12" font-weight="700">Pilot / go-no-go</text>
+      <text x="555" y="419" text-anchor="middle" fill="#0f172a" font-size="10">scope · metrics · sign-off</text>
+    </g>
+    <g>
+      <polygon points="260,345 440,345 420,390 440,435 260,435 240,390" fill="url(#chev)" opacity="0.56"/>
+      <text x="350" y="380" text-anchor="middle" fill="#06121f" font-size="12" font-weight="700">GATE 10</text>
+      <text x="350" y="400" text-anchor="middle" fill="#06121f" font-size="12" font-weight="700">Cutover &amp; hypercare</text>
+      <text x="350" y="419" text-anchor="middle" fill="#0f172a" font-size="10">training · runbooks · owners</text>
+    </g>
+  </g>
+
+  <!-- Feedback loop -->
+  <path d="M260,435 C140,435 140,195 40,195" stroke="#c084fc" stroke-width="2" fill="none" stroke-dasharray="6 4" marker-end="url(#arrowp)"/>
+  <defs>
+    <marker id="arrowp" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#c084fc"/>
+    </marker>
+  </defs>
+  <text x="150" y="490" text-anchor="middle" fill="#d8b4fe" font-size="13" font-weight="700">LESSONS LEARNED → next cycle</text>
+
+  <!-- ELI5 strip -->
+  <rect x="60" y="520" width="1160" height="62" rx="12" fill="#111c33" stroke="#334155"/>
+  <text x="640" y="546" text-anchor="middle" fill="#e5ecf7" font-size="14" font-weight="700">ELI5:</text>
+  <text x="640" y="568" text-anchor="middle" fill="#cbd5e1" font-size="13">Ten gates are like a restaurant opening: check supplies (1–2), design the kitchen and menu (3–5), taste and rehearse emergencies (6–7), confirm guests can order and pay (8), soft-open (9), then open for real with staff who know the playbook (10).</text>
+</svg>

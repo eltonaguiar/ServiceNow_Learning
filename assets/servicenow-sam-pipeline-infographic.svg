@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="820" viewBox="0 0 1280 820" font-family="'Segoe UI',system-ui,-apple-system,Roboto,Helvetica,Arial,sans-serif">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1120"/>
+      <stop offset="0.55" stop-color="#0f1c38"/>
+      <stop offset="1" stop-color="#12264a"/>
+    </linearGradient>
+    <linearGradient id="stage" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1d3a6b"/>
+      <stop offset="1" stop-color="#16294d"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#6366f1"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="820" fill="url(#bg)"/>
+
+  <!-- Header -->
+  <text x="640" y="66" text-anchor="middle" fill="#e5ecf7" font-size="34" font-weight="700">ServiceNow SAM — From Discovery to Renewal</text>
+  <text x="640" y="98" text-anchor="middle" fill="#94a3b8" font-size="16">Software Asset Management pipeline · key tables, decision gates and money-saving loops</text>
+  <line x1="240" y1="116" x2="1040" y2="116" stroke="url(#accent)" stroke-width="2"/>
+
+  <!-- Pipeline stages -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="160" width="200" height="110" rx="14" fill="url(#stage)" stroke="#38bdf8" stroke-width="1.5"/>
+    <rect x="280" y="160" width="200" height="110" rx="14" fill="url(#stage)" stroke="#38bdf8" stroke-width="1.5"/>
+    <rect x="520" y="160" width="200" height="110" rx="14" fill="url(#stage)" stroke="#38bdf8" stroke-width="1.5"/>
+    <rect x="760" y="160" width="200" height="110" rx="14" fill="url(#stage)" stroke="#38bdf8" stroke-width="1.5"/>
+    <rect x="1000" y="160" width="240" height="110" rx="14" fill="url(#stage)" stroke="#6366f1" stroke-width="1.5"/>
+  </g>
+
+  <text x="140" y="196" text-anchor="middle" fill="#7dd3fc" font-size="13" font-weight="600">SOURCES</text>
+  <text x="140" y="222" text-anchor="middle" fill="#e5ecf7" font-size="15" font-weight="600">Discovery · SCCM</text>
+  <text x="140" y="242" text-anchor="middle" fill="#e5ecf7" font-size="15" font-weight="600">SaaS · File Signature</text>
+  <text x="140" y="262" text-anchor="middle" fill="#94a3b8" font-size="11">installs land here</text>
+
+  <text x="380" y="196" text-anchor="middle" fill="#7dd3fc" font-size="13" font-weight="600">INSTALL RECORD</text>
+  <text x="380" y="222" text-anchor="middle" fill="#e5ecf7" font-size="14" font-weight="600">cmdb_sam_sw_install</text>
+  <text x="380" y="242" text-anchor="middle" fill="#94a3b8" font-size="11">one copy on one CI</text>
+
+  <text x="620" y="196" text-anchor="middle" fill="#7dd3fc" font-size="13" font-weight="600">DISCOVERY MODEL</text>
+  <text x="620" y="222" text-anchor="middle" fill="#e5ecf7" font-size="14" font-weight="600">cmdb_sam_sw_discovery_model</text>
+  <text x="620" y="242" text-anchor="middle" fill="#94a3b8" font-size="11">normalize publisher/product/version</text>
+
+  <text x="860" y="196" text-anchor="middle" fill="#7dd3fc" font-size="13" font-weight="600">SOFTWARE MODEL</text>
+  <text x="860" y="222" text-anchor="middle" fill="#e5ecf7" font-size="14" font-weight="600">cmdb_software_product_model</text>
+  <text x="860" y="242" text-anchor="middle" fill="#94a3b8" font-size="11">match · version criteria · suites</text>
+
+  <text x="1120" y="196" text-anchor="middle" fill="#a5b4fc" font-size="13" font-weight="600">RECONCILE (WEEKLY)</text>
+  <text x="1120" y="222" text-anchor="middle" fill="#e5ecf7" font-size="14" font-weight="600">License Position · LMR</text>
+  <text x="1120" y="242" text-anchor="middle" fill="#94a3b8" font-size="11">rights owned vs used</text>
+  <text x="1120" y="262" text-anchor="middle" fill="#94a3b8" font-size="11">three result tiers</text>
+
+  <!-- Arrows -->
+  <g stroke="#38bdf8" stroke-width="3" fill="none" marker-end="url(#arrow)">
+    <line x1="242" y1="215" x2="276" y2="215"/>
+    <line x1="482" y1="215" x2="516" y2="215"/>
+    <line x1="722" y1="215" x2="756" y2="215"/>
+    <line x1="962" y1="215" x2="996" y2="215"/>
+  </g>
+  <defs>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L8,3 L0,6 Z" fill="#38bdf8"/>
+    </marker>
+  </defs>
+
+  <!-- Entitlement side input -->
+  <g filter="url(#shadow)">
+    <rect x="760" y="310" width="200" height="82" rx="12" fill="#132b22" stroke="#34d399" stroke-width="1.5"/>
+  </g>
+  <text x="860" y="342" text-anchor="middle" fill="#6ee7b7" font-size="13" font-weight="600">ENTITLEMENTS</text>
+  <text x="860" y="364" text-anchor="middle" fill="#e5ecf7" font-size="14" font-weight="600">alm_license</text>
+  <text x="860" y="382" text-anchor="middle" fill="#94a3b8" font-size="11">PPN resolves to model</text>
+  <line x1="860" y1="310" x2="860" y2="272" stroke="#34d399" stroke-width="2.5" stroke-dasharray="6 4"/>
+
+  <!-- Outcomes band -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="440" width="380" height="120" rx="14" fill="#2a1a3d" stroke="#c084fc" stroke-width="1.5"/>
+    <rect x="450" y="440" width="380" height="120" rx="14" fill="#2a1a3d" stroke="#c084fc" stroke-width="1.5"/>
+    <rect x="860" y="440" width="380" height="120" rx="14" fill="#2a1a3d" stroke="#c084fc" stroke-width="1.5"/>
+  </g>
+  <text x="230" y="474" text-anchor="middle" fill="#d8b4fe" font-size="14" font-weight="700">REMEDIATE</text>
+  <text x="230" y="498" text-anchor="middle" fill="#e5ecf7" font-size="13">create / remove allocations</text>
+  <text x="230" y="518" text-anchor="middle" fill="#e5ecf7" font-size="13">remove unlicensed installs</text>
+  <text x="230" y="538" text-anchor="middle" fill="#e5ecf7" font-size="13">purchase orders (procurement)</text>
+
+  <text x="640" y="474" text-anchor="middle" fill="#d8b4fe" font-size="14" font-weight="700">RECLAIM — 60–90 SILENT DAYS</text>
+  <text x="640" y="498" text-anchor="middle" fill="#e5ecf7" font-size="13">Total Usage Time · Last Used Date</text>
+  <text x="640" y="518" text-anchor="middle" fill="#e5ecf7" font-size="13">evidence: samp_sw_usage</text>
+  <text x="640" y="538" text-anchor="middle" fill="#94a3b8" font-size="12">owner sign-off required</text>
+
+  <text x="1050" y="474" text-anchor="middle" fill="#d8b4fe" font-size="14" font-weight="700">TRUE-UP · RENEWAL</text>
+  <text x="1050" y="498" text-anchor="middle" fill="#e5ecf7" font-size="13">least rights needed × price</text>
+  <text x="1050" y="518" text-anchor="middle" fill="#e5ecf7" font-size="13">over-license savings</text>
+  <text x="1050" y="538" text-anchor="middle" fill="#94a3b8" font-size="12">renew with reconciled demand</text>
+
+  <!-- IRE four pillars -->
+  <text x="640" y="604" text-anchor="middle" fill="#94a3b8" font-size="14" font-weight="600">CMDB GOVERNANCE GATES (IRE) — every payload passes through these before it can write</text>
+  <g filter="url(#shadow)">
+    <rect x="40" y="622" width="280" height="90" rx="12" fill="#0f2a3d" stroke="#22d3ee" stroke-width="1.5"/>
+    <rect x="350" y="622" width="280" height="90" rx="12" fill="#0f2a3d" stroke="#22d3ee" stroke-width="1.5"/>
+    <rect x="660" y="622" width="280" height="90" rx="12" fill="#0f2a3d" stroke="#22d3ee" stroke-width="1.5"/>
+    <rect x="970" y="622" width="280" height="90" rx="12" fill="#0f2a3d" stroke="#22d3ee" stroke-width="1.5"/>
+  </g>
+  <text x="180" y="652" text-anchor="middle" fill="#67e8f9" font-size="13" font-weight="700">1 · IDENTIFY</text>
+  <text x="180" y="674" text-anchor="middle" fill="#cbd5e1" font-size="12">does the CI already exist?</text>
+  <text x="180" y="694" text-anchor="middle" fill="#64748b" font-size="11">insert if no match</text>
+
+  <text x="490" y="652" text-anchor="middle" fill="#67e8f9" font-size="13" font-weight="700">2 · DATA SOURCE RULE</text>
+  <text x="490" y="674" text-anchor="middle" fill="#cbd5e1" font-size="12">may this source insert?</text>
+  <text x="490" y="694" text-anchor="middle" fill="#64748b" font-size="11">blocked ⇒ INSERT_NOT_ALLOWED_FOR_SOURCE</text>
+
+  <text x="800" y="652" text-anchor="middle" fill="#67e8f9" font-size="13" font-weight="700">3 · RECONCILE ATTRIBUTES</text>
+  <text x="800" y="674" text-anchor="middle" fill="#cbd5e1" font-size="12">who updates which field?</text>
+  <text x="800" y="694" text-anchor="middle" fill="#64748b" font-size="11">specific rule beats all-attributes</text>
+
+  <text x="1110" y="652" text-anchor="middle" fill="#67e8f9" font-size="13" font-weight="700">4 · REFRESH STALE</text>
+  <text x="1110" y="674" text-anchor="middle" fill="#cbd5e1" font-size="12">is the winner stale?</text>
+  <text x="1110" y="694" text-anchor="middle" fill="#64748b" font-size="11">lower-priority source may refresh</text>
+
+  <!-- Callout strip -->
+  <g filter="url(#shadow)">
+    <rect x="40" y="736" width="1210" height="58" rx="12" fill="#111c33" stroke="#334155"/>
+  </g>
+  <text x="640" y="760" text-anchor="middle" fill="#e5ecf7" font-size="14" font-weight="700">💡 REMEMBER · <tspan fill="#7dd3fc">DIN MERR²</tspan> Discover·Install·Normalize·Match·Entitle·Reconcile·Reclaim·Renew &nbsp;|&nbsp; <tspan fill="#7dd3fc">UNC</tspan> Unknown is Never Compliant &nbsp;|&nbsp; <tspan fill="#7dd3fc">APEX</tspan> Auto-create OFF · Published scope · Exclude flag · recon grouX</text>
+  <text x="640" y="782" text-anchor="middle" fill="#64748b" font-size="12">Mnemonics are study aids — verify names/defaults against official product documentation for your release.</text>
+</svg>
